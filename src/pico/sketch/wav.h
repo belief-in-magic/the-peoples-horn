@@ -1,24 +1,29 @@
+#pragma once
 
+#include <SD.h>
+
+#define RIFF_CHUNK_SIZE 12
+#define FMT_CHUNK_SIZE 24
+#define CHUNK_ID_SIZE 4
+#define CHUNK_SIZE_SIZE 4
 
 class Wav {
-    long fileSize;
-    int numChannels;
-    long sampleRate;
-    int bitsPerSample;
 
-    long fmtChunkSize;
-    int audioFormat;
+    uint16_t audioFormat;
+    uint16_t numChannels;
+    uint32_t sampleRate;
+    uint16_t bitsPerSample;
 
-    long dataChunkOffset;
-    long dataChunkSize;
+    uint32_t dataChunkOffset;
+    uint32_t dataChunkSize;
+
+    File file;
 
   public:
+    Wav(const char* path);
+    ~Wav();
+    bool readData(uint8_t* buf, uint32_t size);
 
   private:
-
-  int nextChunk(int currentOffset) {
-  }
-
-  int currentChunkSize(int currentOffset) {
-  }
-}
+    bool seekDataChunk();
+};

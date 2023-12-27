@@ -12,6 +12,8 @@
 #include <SPI.h>
 #include <SD.h>
 
+#include "wav.h"
+
 // Create the I2S port using a PIO state machine
 I2S i2s(OUTPUT);
 
@@ -60,6 +62,24 @@ bool setUpSD() {
     Serial.println("s01.wav doesn't exist.");
   }
 
+  unsigned long t1, t2, t3;
+  uint8_t buf[20000];
+
+  t1 = micros();
+  Wav wav("s01.wav");
+
+  t2 = micros();
+
+  wav.readData(buf, 20000);
+
+  t3 = micros();
+
+  Serial.print("Times: ");
+  Serial.println(t1);
+  Serial.println(t2-t1);
+  Serial.println(t3-t2);
+  /*
+
   Serial.println("s01.wav opening.");
   File wav = SD.open("s01.wav");
 
@@ -72,6 +92,9 @@ bool setUpSD() {
     Serial.println("Failure seeking");
   }
 
+  Serial.print("Current position: ");
+  Serial.println(wav.position());
+
   Serial.println("Reading header from file");
   char hdrBuf[100];
   wav.readBytes(hdrBuf, 100);
@@ -81,18 +104,7 @@ bool setUpSD() {
     Serial.print(" ");
   }
 
-  Serial.println("");
-
-  for (int i=50; i < 100; i++) {
-    Serial.print(hdrBuf[i], HEX);
-    Serial.print(" ");
-  }
-
-  Serial.println("");
-
-
-  wav.close();
-
+  */
   Serial.println("done!");
   return 0;
 }
