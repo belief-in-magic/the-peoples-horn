@@ -23,6 +23,8 @@ class Wav {
     Wav(const char* path);
     ~Wav();
     bool readData(uint8_t* buf, uint32_t size);
+    uint32_t dataSize();
+    uint16_t bytesPerSample();
 
   private:
     bool seekDataChunk();

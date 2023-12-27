@@ -116,6 +116,14 @@ bool Wav::readData(uint8_t* buf, uint32_t size) {
   return true;
 }
 
+uint32_t Wav::dataSize() {
+  return dataChunkBlobSize;
+}
+
+uint16_t Wav::bytePerSample() {
+  return bitsPerSample/8;
+}
+
 Wav::~Wav() {
   file.close();
 }

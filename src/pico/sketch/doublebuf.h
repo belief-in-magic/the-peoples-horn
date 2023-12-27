@@ -7,17 +7,21 @@ class DoubleBuf {
 
   uint8_t buf[2][SINGLE_BUFFER_SIZE];
 
+  uint8_t curReadBuf;  // which buf to read samples from
+  uint8_t curWriteBuf; // which buf to write data to (back buffer)
+
+  uint32_t bytesReadUpTo;
+  uint32_t bytesWriteUpTo;
+
+  bool writeReady;
+
   Wav* currentSource = nullptr;
 
-  uint8_t curReadBuf;
-  uint8_t curWriteBuf;
 
-  uint32_t curWriteBufOffset;
-  uint32_t curWriteBufSize;
-  uint32_t curReadPtr; // can probably be generalized
-  uint32_t curReadBufSize;
+  private:
 
-  bool hasFinishedWritingCurBuf;
+    // Used by first core
+    bool swapBufs();
 
   public:
     DoubleBuf(const char* filename);
@@ -30,7 +34,6 @@ class DoubleBuf {
     uint32_t readNextSample(); // will block if not ready
 
     // Used by second core to write from the WAV file
-    bool writeBufReady();
-    bool readIntoWriteBuf();
+    bool populateWriteBuf();
 
 }

@@ -15,3 +15,11 @@ uint16_t tos(char* bytes) {
 uint32_t tol(char* bytes) {
   return tol((uint8_t*) bytes);
 }
+
+uint32_t min(uint32_t a, uint32_t b) {
+  return a < b ? a: b;
+}
+
+uint32_t max(uint32_t a, uint32_t b) {
+  return a > b ? a: b;
+}
