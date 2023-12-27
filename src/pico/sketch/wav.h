@@ -15,7 +15,7 @@ class Wav {
     uint16_t bitsPerSample;
 
     uint32_t dataChunkOffset;
-    uint32_t dataChunkSize;
+    uint32_t dataChunkBlobSize;
 
     File file;
 

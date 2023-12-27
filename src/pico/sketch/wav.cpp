@@ -3,12 +3,12 @@
 #include "wav.h"
 #include "util.h"
 
-
+// TODO figure out cpp exception handling
 Wav::Wav(const char* filename) {
 
   char hdrBuf[RIFF_CHUNK_SIZE + FMT_CHUNK_SIZE];
 
-  file = SD.open(filename);
+  file = SD.open(filename); // TODO check ownership?
   if (!file) {
     // TODO find thread safe way to print serial
     Serial.print("Cannot open wav file:");
@@ -39,7 +39,23 @@ Wav::Wav(const char* filename) {
   sampleRate =    tol(hdrBuf+24);
   bitsPerSample = tos(hdrBuf+34);
 
-  if (! seekDataChunk()) {
+
+  if (numChannels != 1) {
+    Serial.println("Only single channel wav files are supported.");
+    return;
+  }
+
+  if (sampleRate > 50000) {
+    Serial.println("Sample rates above 50k are not supported.");
+    return;
+  }
+
+  if (bitPerSample > 32) {
+    Serial.println("Bit per sample cannot be above 32.");
+    return;
+  }
+
+  if (!seekDataChunk()) {
     Serial.println("Could not find data chunk");
     return;
   }
@@ -51,13 +67,13 @@ Wav::Wav(const char* filename) {
   Serial.println(sampleRate);
   Serial.println(bitsPerSample);
   Serial.println(dataChunkOffset);
-  Serial.println(dataChunkSize);
+  Serial.println(dataChunkBlobSize);
   Serial.println("End Info");
   */
 
 }
 
-// Seeks the start of the data blob (datachunk start + 8). Populates the dataChunkOffset and dataChunkSize class variables.
+// Seeks the start of the data blob (datachunk start + 8). Populates the dataChunkOffset and dataChunkBlobSize class variables.
 bool Wav::seekDataChunk() {
 
   char hdrBuf[8];
@@ -73,7 +89,7 @@ bool Wav::seekDataChunk() {
 
     if (strncmp(hdrBuf, "data", 4) == 0) {
       dataChunkOffset = curPos;
-      dataChunkSize = curChunkSize;
+      dataChunkBlobSize = curChunkSize;
       return true;
     } else {
       curPos += 8 + curChunkSize;
@@ -91,7 +107,7 @@ bool Wav::readData(uint8_t* buf, uint32_t size) {
     return false;
   }
 
-  if (file.position() + size > dataChunkOffset + dataChunkSize + 8) {
+  if (file.position() + size > dataChunkOffset + dataChunkBlobSize + 8) {
     Serial.print("Attempted to read out of bounds data");
     return false;
   }
