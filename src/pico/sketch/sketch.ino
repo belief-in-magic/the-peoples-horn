@@ -13,6 +13,7 @@
 #include <SD.h>
 
 #include "wav.h"
+#include "doublebuf.h"
 
 // Create the I2S port using a PIO state machine
 I2S i2s(OUTPUT);
@@ -34,15 +35,12 @@ I2S i2s(OUTPUT);
 #define pSD_MOSI 7
 #define pSD_MISO 4
 
-const int frequency = 440; // frequency of square wave in Hz
-const int amplitude = 700; // amplitude of square wave
-const int sampleRate = 16000;
+const int sampleRate = 44100;
 
-const int halfWavelength = (sampleRate / frequency); // half wavelength of square wave
-
-int16_t sample = amplitude; // current sample value
 int count = 0;
 int led = 1;
+
+DoubleBuf* dbuf;
 
 bool setUpSD() {
 
@@ -56,60 +54,9 @@ bool setUpSD() {
     return 1;
   }
 
-  if (SD.exists("s01.wav")) {
-    Serial.println("s01.wav exists.");
-  } else {
-    Serial.println("s01.wav doesn't exist.");
-  }
-
-  unsigned long t1, t2, t3;
-  uint8_t buf[20000];
-
-  t1 = micros();
-  Wav wav("s01.wav");
-
-  t2 = micros();
-
-  wav.readData(buf, 20000);
-
-  t3 = micros();
-
-  Serial.print("Times: ");
-  Serial.println(t1);
-  Serial.println(t2-t1);
-  Serial.println(t3-t2);
-  /*
-
-  Serial.println("s01.wav opening.");
-  File wav = SD.open("s01.wav");
-
-  if (!wav) {
-    Serial.println("Cannot open wav file");
-    return 1;
-  }
-
-  if (wav.seek(0)) {
-    Serial.println("Failure seeking");
-  }
-
-  Serial.print("Current position: ");
-  Serial.println(wav.position());
-
-  Serial.println("Reading header from file");
-  char hdrBuf[100];
-  wav.readBytes(hdrBuf, 100);
-
-  for (int i=0; i < 50; i++) {
-    Serial.print(hdrBuf[i], HEX);
-    Serial.print(" ");
-  }
-
-  */
   Serial.println("done!");
   return 0;
 }
-
-
 
 
 void setup() {
@@ -117,11 +64,12 @@ void setup() {
 
   Serial.begin(115200);
 
-  delay(2000);
-
   Serial.println("Starting");
 
   setUpSD();
+
+  Serial.println("Starting double buffer...");
+  dbuf = new DoubleBuf("s11.wav");
 
   i2s.setBCLK(pBCLK);
   i2s.setDATA(pDOUT);
@@ -134,30 +82,29 @@ void setup() {
   }
 
   digitalWrite(LED_BUILTIN, led);
+
+  rp2040.fifo.push(1);
 }
 
+void setup1() {
+  // wait on first core to finish setup
+  rp2040.fifo.pop();
 
+}
 
 void loop() {
-  if (count % halfWavelength == 0) {
-    // invert the sample every half wavelength count multiple to generate square wave
-    sample = -1 * sample;
+
+  if (!dbuf->isFinished()) {
+    int32_t sample = dbuf->readNextSample();
+    int16_t sampleAdjusted = ((int16_t) sample) / 2;
+
+    i2s.write(sampleAdjusted);
+    i2s.write(sampleAdjusted);
   }
+}
 
-  // TODO: advance tick
-
-  // TODO: calculate sample based on current state
-
-  // write the same sample twice, once for left and once for the right channel
-  i2s.write(sample);
-  i2s.write(sample);
-
-  // increment the counter for the next sample
-  count++;
-
-  if (count % sampleRate == 0) {
-    led = (led+1) % 2;
-    digitalWrite(LED_BUILTIN, led);
-    Serial.println("I2S simple tone heartbeat");
-  }
+void loop1() {
+   if (!dbuf->isFinished()) {
+     dbuf->populateWriteBuf();
+   }
 }

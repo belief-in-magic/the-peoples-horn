@@ -1,4 +1,7 @@
 
+#pragma once
+
+#include "wav.h"
 
 #define SINGLE_BUFFER_SIZE 20000
 
@@ -12,6 +15,8 @@ class DoubleBuf {
 
   uint32_t bytesReadUpTo;
   uint32_t bytesWriteUpTo;
+
+  uint32_t dataSize;
 
   bool writeReady;
 
@@ -31,9 +36,12 @@ class DoubleBuf {
     bool newSource(const char* filename);
     bool closeSource();
     bool isFinished();
-    uint32_t readNextSample(); // will block if not ready
+    int32_t readNextSample(); // will block if not ready
 
     // Used by second core to write from the WAV file
     bool populateWriteBuf();
 
-}
+
+    // temp
+    void dumpState();
+};

@@ -50,7 +50,7 @@ Wav::Wav(const char* filename) {
     return;
   }
 
-  if (bitPerSample > 32) {
+  if (bitsPerSample > 32) {
     Serial.println("Bit per sample cannot be above 32.");
     return;
   }
@@ -120,7 +120,7 @@ uint32_t Wav::dataSize() {
   return dataChunkBlobSize;
 }
 
-uint16_t Wav::bytePerSample() {
+uint16_t Wav::bytesPerSample() {
   return bitsPerSample/8;
 }
 
