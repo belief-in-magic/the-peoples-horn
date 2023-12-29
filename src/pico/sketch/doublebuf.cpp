@@ -41,7 +41,7 @@ bool DoubleBuf::newSource(const char* filename) {
 int32_t DoubleBuf::readNextSample() {
 
   if (isFinished()) {
-    Serial.println("ERROR MODE: trying to read bytes out of range");
+    //Serial.println("ERROR MODE: trying to read bytes out of range");
     return 0;
   }
 

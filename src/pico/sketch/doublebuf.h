@@ -33,14 +33,13 @@ class DoubleBuf {
     ~DoubleBuf();
 
     // Used by the first core to read samples
-    bool newSource(const char* filename);
     bool closeSource();
     bool isFinished();
     int32_t readNextSample(); // will block if not ready
 
     // Used by second core to write from the WAV file
+    bool newSource(const char* filename);
     bool populateWriteBuf();
-
 
     // temp
     void dumpState();

@@ -40,7 +40,8 @@ const int sampleRate = 44100;
 int count = 0;
 int led = 1;
 
-DoubleBuf* dbuf;
+DoubleBuf* dbuf0;
+DoubleBuf* dbuf1;
 
 bool setUpSD() {
 
@@ -63,13 +64,16 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
 
   Serial.begin(115200);
-
+  delay(1000);
   Serial.println("Starting");
 
   setUpSD();
 
-  Serial.println("Starting double buffer...");
-  dbuf = new DoubleBuf("s11.wav");
+  Serial.println("Starting double buffer 1...");
+  dbuf0 = new DoubleBuf("s11.wav");
+
+  Serial.println("Starting double buffer 2...");
+  dbuf1 = new DoubleBuf("s01.wav");
 
   i2s.setBCLK(pBCLK);
   i2s.setDATA(pDOUT);
@@ -94,9 +98,12 @@ void setup1() {
 
 void loop() {
 
-  if (!dbuf->isFinished()) {
-    int32_t sample = dbuf->readNextSample();
-    int16_t sampleAdjusted = ((int16_t) sample) / 2;
+  if (!dbuf0->isFinished() || !dbuf1->isFinished()) {
+    int16_t sample0 = (int16_t)(dbuf0->readNextSample());
+    //int16_t sample0 = 0;
+    int16_t sample1 = (int16_t)(dbuf1->readNextSample());
+
+    int16_t sampleAdjusted = ((int16_t) max(-32766, min(32766, ((int32_t)sample0 + (int32_t)sample1)))) / 2;
 
     i2s.write(sampleAdjusted);
     i2s.write(sampleAdjusted);
@@ -104,7 +111,8 @@ void loop() {
 }
 
 void loop1() {
-   if (!dbuf->isFinished()) {
-     dbuf->populateWriteBuf();
-   }
+  if (!dbuf0->isFinished() || !dbuf1->isFinished()) {
+    dbuf0->populateWriteBuf();
+    dbuf1->populateWriteBuf();
+  }
 }
