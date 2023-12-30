@@ -2,8 +2,8 @@
 #include "doublebuf.h"
 #include "util.h"
 
-DoubleBuf::DoubleBuf(const char* filename) {
-  newSource(filename);
+DoubleBuf::DoubleBuf(uint32_t soundId) {
+  newSource(soundId);
 }
 
 DoubleBuf::~DoubleBuf() {
@@ -11,13 +11,13 @@ DoubleBuf::~DoubleBuf() {
 }
 
 // block first thread while initializing
-bool DoubleBuf::newSource(const char* filename) {
+bool DoubleBuf::newSource(uint32_t soundId) {
 
   Serial.println("Closing any old files");
   closeSource();
 
   Serial.println("Creating new wave file");
-  currentSource = new Wav(filename);
+  currentSource = new Wav(soundId);
 
   curReadBuf = 0;
   curWriteBuf = 1;

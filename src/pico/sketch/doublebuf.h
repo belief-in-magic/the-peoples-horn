@@ -24,12 +24,11 @@ class DoubleBuf {
 
 
   private:
-
     // Used by first core
     bool swapBufs();
 
   public:
-    DoubleBuf(const char* filename);
+    DoubleBuf(uint32_t soundId);
     ~DoubleBuf();
 
     // Used by the first core to read samples
@@ -38,7 +37,7 @@ class DoubleBuf {
     int32_t readNextSample(); // will block if not ready
 
     // Used by second core to write from the WAV file
-    bool newSource(const char* filename);
+    bool newSource(uint32_t soundId);
     bool populateWriteBuf();
 
     // temp

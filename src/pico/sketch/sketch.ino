@@ -14,6 +14,7 @@
 
 #include "wav.h"
 #include "doublebuf.h"
+#include "input.h"
 
 // Create the I2S port using a PIO state machine
 I2S i2s(OUTPUT);
@@ -22,12 +23,6 @@ I2S i2s(OUTPUT);
 #define pBCLK 26
 #define pWS (pBCLK+1)
 #define pDOUT 28
-
-// GPIO pin numbers for main buttons
-#define pB1 12
-#define pB2 13
-#define pB3 14
-#define pB4 15
 
 // GPIO for sd card in spi mode (pico w tested only, you may need to change this depending on hardware)
 #define pSD_CS 5
@@ -40,8 +35,7 @@ const int sampleRate = 44100;
 int count = 0;
 int led = 1;
 
-DoubleBuf* dbuf0;
-DoubleBuf* dbuf1;
+// InputController inputController;
 
 bool setUpSD() {
 
@@ -67,6 +61,8 @@ void setup() {
   delay(1000);
   Serial.println("Starting");
 
+  /*
+
   setUpSD();
 
   Serial.println("Starting double buffer 1...");
@@ -85,6 +81,8 @@ void setup() {
     while (1); // do nothing
   }
 
+  */
+
   digitalWrite(LED_BUILTIN, led);
 
   rp2040.fifo.push(1);
@@ -94,10 +92,12 @@ void setup1() {
   // wait on first core to finish setup
   rp2040.fifo.pop();
 
+  InputController::setup();
+
 }
 
 void loop() {
-
+  /*
   if (!dbuf0->isFinished() || !dbuf1->isFinished()) {
     int16_t sample0 = (int16_t)(dbuf0->readNextSample());
     //int16_t sample0 = 0;
@@ -108,11 +108,37 @@ void loop() {
     i2s.write(sampleAdjusted);
     i2s.write(sampleAdjusted);
   }
+  */
+
+  uint32_t val = rp2040.fifo.pop();
+  Serial.print("Button: ");
+  Serial.print(val);
+  Serial.println(" pressed...");
+
 }
 
 void loop1() {
+  /*
   if (!dbuf0->isFinished() || !dbuf1->isFinished()) {
     dbuf0->populateWriteBuf();
     dbuf1->populateWriteBuf();
   }
+  */
+  Serial.println("Detaching interrupts for 5 seconds...");
+  noInterrupts();
+  delay(5000);
+  Serial.println("Enabling interrupts again..");
+  interrupts();
+
+  while (true) {
+    ;
+  }
+}
+
+void readP1() {
+  rp2040.fifo.push(1);
+}
+
+void readP2() {
+  rp2040.fifo.push(2);
 }

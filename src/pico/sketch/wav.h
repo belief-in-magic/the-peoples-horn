@@ -7,6 +7,8 @@
 #define CHUNK_ID_SIZE 4
 #define CHUNK_SIZE_SIZE 4
 
+#define MAX_FILENAME_LEN 128
+
 class Wav {
 
     uint16_t audioFormat;
@@ -17,10 +19,12 @@ class Wav {
     uint32_t dataChunkOffset;
     uint32_t dataChunkBlobSize;
 
+    char filename[MAX_FILENAME_LEN];
+
     File file;
 
   public:
-    Wav(const char* path);
+    Wav(uint32_t soundId);
     ~Wav();
     bool readData(uint8_t* buf, uint32_t size);
     uint32_t dataSize();
@@ -28,4 +32,5 @@ class Wav {
 
   private:
     bool seekDataChunk();
+    void writeFileName(uint32_t soundId);
 };

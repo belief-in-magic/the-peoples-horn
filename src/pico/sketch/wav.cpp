@@ -4,9 +4,11 @@
 #include "util.h"
 
 // TODO figure out cpp exception handling
-Wav::Wav(const char* filename) {
+Wav::Wav(uint32_t soundId) {
 
   char hdrBuf[RIFF_CHUNK_SIZE + FMT_CHUNK_SIZE];
+
+  writeFileName(soundId);
 
   file = SD.open(filename); // TODO check ownership?
   if (!file) {
@@ -126,4 +128,22 @@ uint16_t Wav::bytesPerSample() {
 
 Wav::~Wav() {
   file.close();
+}
+
+
+void Wav::writeFileName(uint32_t soundId) {
+
+  filename[0] = 's';
+  int i;
+  for (i = 1; i < 5; i++) {
+    if (soundId >> (4-i) == 0) {
+      filename[i] = 0;
+    } else {
+      filename[i] = 1;
+    }
+  }
+  sprintf(filename+i, ".wav");
+
+  Serial.print("FILENAME: ");
+  Serial.println(filename);
 }
