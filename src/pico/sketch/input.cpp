@@ -1,3 +1,4 @@
+/*
 
 #include "input.h"
 #include <Arduino.h>
@@ -9,10 +10,6 @@ InputStream InputController::inputStream;
 
 void InputController::setup() {
 
-  pinMode(SB0, INPUT);
-  pinMode(SB1, INPUT);
-  pinMode(SB2, INPUT);
-  pinMode(SB3, INPUT);
 
   for(int i = 0; i < NUM_SOUND_BUTTONS; i++) {
     soundButtonState[i] = false;
@@ -76,3 +73,4 @@ bool InputController::isBounce(uint64_t currTime, uint64_t previous) {
   return (currTime - previous) <= DEBOUNCE_TIME_MS;
 }
 
+*/

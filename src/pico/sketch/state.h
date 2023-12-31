@@ -1,16 +1,41 @@
 #pragma once
 
+// GPIO pin numbers for the sound buttons
+#define NUM_SOUND_BUTTONS 4
+
+// GPIO pin numbers for main buttons
+#define SB0 12
+#define SB1 13
+#define SB2 14
+#define SB3 15
+
+#define DEBOUNCE_TIME_MS 100
+#define CHORD_WAIT_TIME_MS 70
+
 // This is limited by both memory and compute constraints
 #define MAX_CONCURRENT_SOUNDS 4
 
 // could probably be split into two different classes, one for the player core, and the sd core
 class State {
 
-  uint32_t activeSounds[MAX_CONCURRENT_SOUNDS]; // only modified by the first core, the second core reads this to determine which dbuf to write to
   DoubleBuf* buffers[MAX_CONCURRENT_SOUNDS];
+
+
+  uint32_t activeSounds[MAX_CONCURRENT_SOUNDS]; // only modified by the first core, the second core reads this to determine which dbuf to write to
+
 
   // used only by the first core to keep track of the sounds that have completed preparation
   bool readySounds[MAX_CONCURRENT_SOUNDS];
+
+  // used only by the second core to keep track of which buffers and which sounds have requested to be overwritten.
+  // value of 0 means that the buffer does not need to be overwritten
+  uint32_t nextBufferWrite[MAX_CONCURRENT_SOUNDS];
+
+  uint32_t lastRising[MAX_CONCURRENT_SOUNDS];
+  uint32_t chordStartTime;
+
+  uint32_t core1_stateCounter;
+
 
   private:
 
@@ -18,14 +43,13 @@ class State {
     void core0_setUpI2S();
 
     void core0_handleRequests();
-    void core0_ack(uint32_t reqId);
 
     // used by second core
     void core1_setUpSD();
-    bool core1_prepareSound(uint32_t soundId);
+    void core1_setUpInput();
 
+    void core1_handleInput();
     void core1_handleRequests();
-    void core1_sendRequest(uint32_t reqId);
 
   public:
     State();

@@ -14,7 +14,7 @@
 
 #include "wav.h"
 #include "doublebuf.h"
-#include "input.h"
+#include "state.h"
 
 // Create the I2S port using a PIO state machine
 I2S i2s(OUTPUT);

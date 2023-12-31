@@ -1,5 +1,11 @@
 #include "state.h"
 
+// 0 means disable, 1 means enable
+#define ENABLE_MSG_MASK = 128
+
+#define VAL_MSG_MASK = 127
+
+
 State::State() {
 
  for (int i = 0; i < MAX_CONCURRENT_SOUNDS; i++) {
@@ -29,10 +35,15 @@ State::core1_stateSetup() {
 
  setUpSd();
 
+ core1_stateCounter = 0;
+ chordStartTime = 0;
+
  // Pre-populate the sounds buffers
   for (int i = 0; i < MAX_CONCURRENT_SOUNDS; i++) {
+    lastRising[i] = 0;
+    nextBufferWrite[i] = 0;
+
     activeSounds[i] = i;
-    prepareSound(i);
   }
 }
 
@@ -88,43 +99,95 @@ State::core0_stateLoop() {
 State::core0_handleRequests() {
   // check fifo queue for new requests
 
+  uint32_t msg, val;
+  int messages = rp2040.fifo.available();
 
+  for (int i = 0; i < messages; i++) {
+    msg = rp2040.fifo.pop();
 
+    val = VAL_MSG_MASK & msg;
+
+    // disable requested buffer
+    if (val >= 0 && val <= MAX_CONCURRENT_SOUNDS) {
+      if ((msg & ENABLE_MSG_MASK) > 0) {
+        readySounds[val] = true;
+      } else {
+        readySounds[val] = false;
+        // send ack
+        rp2040.fifo.push(val);
+      }
+    }
+  }
 }
 
+State::core1_setUpInput() {
+  pinMode(SB0, INPUT);
+  pinMode(SB1, INPUT);
+  pinMode(SB2, INPUT);
+  pinMode(SB3, INPUT);
+}
 
 State::core1_stateLoop() {
 
-  // check for any new sound prep requests
-  int soundPreps = numSoundPrepRequests();
+  core1_handleInput();
+  core1_handleRequests();
 
-  for (int i = 0; i < soundPreps; i++) {
-    uint32_t soundIdToPrepare = getSoundRequest();
-    prepareSound(soundIdToPrepare); // blocks
+  // update single buffer if needed:
+  currentBufferToUpdate = core1_stateCounter++ % MAX_CONCURRENT_SOUNDS;
+  if (nextBufferWrite[currentBufferToUpdate] == 0) {
+    (buffers+currentBufferToUpdate)->populateWriteBuf();
   }
-
-  // update all active buffers
-  for (int i = 0; i < MAX_CONCURRENT_SOUNDS; i++) {
-    (buffers+i)->populateWriteBuf();
-  }
-
 }
 
-State::core1_prepareSound(uint32_t soundId) {
+State::core1_handleRequests() {
+  uint32_t msg;
+  uint32_t bufferToWrite;
+  uint32_t reenableMsg;
 
-  int bufferToWrite = -1;
-  for (int i = 0; i < MAX_CONCURRENT_SOUNDS; i++) {
-    if (activeSounds[i] == soundId) {
-      bufferToWrite = i;
-      break;
+  int messages = rp2040.fifo.available();
+
+  for (int i = 0; i < messages; i++) {
+
+    // should only be an ack message
+    msg = rp2040.fifo.pop();
+
+    if (msg >= 0 && msg <= MAX_CONCURRENT_SOUNDS) {
+      // immediately prepare sound for specified buffer
+      bufferToWrite = msg;
+      (buffers+bufferToWrite)->newSource(nextBufferWrite[bufferToWrite]);
+
+      reenableMsg = msg | ENABLE_MSG_MASK;
+      rp2040.fifo.push(reenableMsg);
     }
   }
-  // if sound does not exist in activeSounds, ignore this request as it's stale
-  if (bufferToWrite == -1) {
-    return;
+}
+
+State::core1_handleInput() {
+
+  int gpioPin;
+  uint32_t currMillis = millis();
+
+  if (digitalRead(PB0) == 0) { // test
+    nextBufferWrite[0] = 1; // set first buffer to the s01 sound.
+
+    // send stop message to the first core
+    rp2040.fifo.push(0) // TODO change to NB?
   }
 
-  (buffers+bufferToWrite)->newSource(soundId);
+  /*
+  // check inputs for any changes
+  for (int i = 0; i < MAX_CONCURRENT_SOUNDS; i++) {
+    gpioPin = SB0+i;
 
-  notifySoundPrepared(soundId); // blocks
+    if (digitalRead(gpioPin) == 0) { // low-triggered right now
+
+      if (lastRising[i] != 0 && (currMillis - lastRising[i]) >= CHORD_WAIT_TIME_MS) {
+        // send event
+
+        lastRising[i] = 0;
+      }
+    }
+  }
+  */
+
 }

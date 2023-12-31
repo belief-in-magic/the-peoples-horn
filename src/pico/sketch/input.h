@@ -1,6 +1,7 @@
 
 #pragma once
 
+/*
 #include <cstdint>
 #include "inputStream.h"
 
@@ -34,3 +35,5 @@ class InputController {
 
     static bool isBounce(uint64_t currTimeMillis, uint64_t previousMillis);
 };
+
+*/
