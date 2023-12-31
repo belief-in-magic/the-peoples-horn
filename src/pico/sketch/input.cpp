@@ -1,24 +1,31 @@
 
 #include "input.h"
-
 #include <Arduino.h>
 
 
 bool InputController::soundButtonState[NUM_SOUND_BUTTONS];
 uint64_t InputController::soundButtonLastPressed[NUM_SOUND_BUTTONS];
+InputStream InputController::inputStream;
 
 void InputController::setup() {
+
+  pinMode(SB0, INPUT);
+  pinMode(SB1, INPUT);
+  pinMode(SB2, INPUT);
+  pinMode(SB3, INPUT);
 
   for(int i = 0; i < NUM_SOUND_BUTTONS; i++) {
     soundButtonState[i] = false;
     soundButtonLastPressed[i] = millis();
   }
 
+  inputStream = InputStream();
+
   // TODO might be a better way to do this with macros/first class-like functions
-  attachInterrupt(SB0, soundFallingEventP0, FALLING);
-  attachInterrupt(SB1, soundFallingEventP1, FALLING);
-  attachInterrupt(SB2, soundFallingEventP2, FALLING);
-  attachInterrupt(SB3, soundFallingEventP3, FALLING);
+  attachInterrupt(SB0, soundFallingEventP0, CHANGE);
+  attachInterrupt(SB1, soundFallingEventP1, CHANGE);
+  attachInterrupt(SB2, soundFallingEventP2, CHANGE);
+  attachInterrupt(SB3, soundFallingEventP3, CHANGE);
 }
 
 void InputController::soundFallingEventP0() {
@@ -27,25 +34,21 @@ void InputController::soundFallingEventP0() {
   if (isBounce(currMillis, soundButtonLastPressed[0])) {
     return; // debounce
   }
-  Serial.println("Falling interrupt start p0");
-  delay(5000);
-  Serial.println("Falling interrupt p0");
-  soundButtonState[0] = true;
-  soundButtonLastPressed[0] = currMillis;
+
+  Serial.print("Pushing event: ");
+  Serial.print(SB0_ACTIVE);
+  Serial.print(",");
+  Serial.println(currMillis);
+  InputEvent event;
+  event.timeMillis = currMillis;
+  event.type = SB0_ACTIVE;
+  event.val = 1;
+
+  inputStream.push(event);
 }
 
 void InputController::soundFallingEventP1() {
-  uint64_t currMillis = millis();
-  if (isBounce(currMillis, soundButtonLastPressed[1])) {
-    return; // debounce
-  }
-
-  Serial.println("Falling interrupt start p1");
-    delay(5000);
-    Serial.println("Falling interrupt p1");
-  soundButtonState[1] = true;
-  soundButtonLastPressed[1] = currMillis;
-
+  soundButtonState[1] = digitalRead(SB0);
 }
 
 void InputController::soundFallingEventP2() {
@@ -53,10 +56,6 @@ void InputController::soundFallingEventP2() {
   if (isBounce(currMillis, soundButtonLastPressed[2])) {
     return; // debounce
   }
-
-  Serial.println("Falling interrupt start p2");
-  delay(5000);
-  Serial.println("Falling interrupt p2");
 
   soundButtonState[2] = true;
   soundButtonLastPressed[2] = currMillis;
@@ -68,17 +67,10 @@ void InputController::soundFallingEventP3() {
     return; // debounce
   }
 
-    Serial.println("Falling interrupt start p3");
-    delay(5000);
-    Serial.println("Falling interrupt p3");
-
   soundButtonState[3] = true;
   soundButtonLastPressed[3] = currMillis;
 }
 
-void updateChord(int buttonNum) {
-
-}
 
 bool InputController::isBounce(uint64_t currTime, uint64_t previous) {
   return (currTime - previous) <= DEBOUNCE_TIME_MS;

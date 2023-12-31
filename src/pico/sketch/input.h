@@ -2,6 +2,7 @@
 #pragma once
 
 #include <cstdint>
+#include "inputStream.h"
 
 // GPIO pin numbers for the sound buttons
 #define NUM_SOUND_BUTTONS 4
@@ -21,10 +22,8 @@ class InputController {
   static bool soundButtonState[NUM_SOUND_BUTTONS];
   static uint64_t soundButtonLastPressed[NUM_SOUND_BUTTONS];
 
-  //bool chordStarted;
-  //uint64_t chordStartTime;
-
   public:
+    static InputStream inputStream;
 
     static void setup();
 
@@ -33,10 +32,5 @@ class InputController {
     static void soundFallingEventP2();
     static void soundFallingEventP3();
 
-    static void soundRisingEventP0();
-    //soundRisingEventP1();
-    //soundRisingEventP2();
-    //soundRisingEventP3();
-    static void updateChord(int buttonNum);
     static bool isBounce(uint64_t currTimeMillis, uint64_t previousMillis);
 };

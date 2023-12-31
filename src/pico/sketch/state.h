@@ -5,7 +5,7 @@
 
 // could probably be split into two different classes, one for the player core, and the sd core
 class State {
-  /*
+
   uint32_t activeSounds[MAX_CONCURRENT_SOUNDS]; // only modified by the first core, the second core reads this to determine which dbuf to write to
   DoubleBuf* buffers[MAX_CONCURRENT_SOUNDS];
 
@@ -13,26 +13,27 @@ class State {
   bool readySounds[MAX_CONCURRENT_SOUNDS];
 
   private:
+
     // used by the first core
-    bool sendSoundPrepareRequest(uint32_t soundId);
-    // check if any sound is ready to play
-    bool soundReady();
-    uint32_t getPreparedSound(); // blocks
+    void core0_setUpI2S();
+
+    void core0_handleRequests();
+    void core0_ack(uint32_t reqId);
 
     // used by second core
-    uint32_t numSoundPrepRequests();
-    uint32_t getSoundRequest(); // blocks
-    void notifySoundPrepared(uint32_t soundId);
-    bool prepareSound(uint32_t soundId);
+    void core1_setUpSD();
+    bool core1_prepareSound(uint32_t soundId);
+
+    void core1_handleRequests();
+    void core1_sendRequest(uint32_t reqId);
 
   public:
     State();
     ~State();
-    void core1StateSetup();
-    void core2StateSetup();
+    void core0_stateSetup();
+    void core1_stateSetup();
 
-    void core1StateLoop();
-    void core2StateLoop();
+    void core0_stateLoop();
+    void core1_stateLoop();
 
-    */
 };
