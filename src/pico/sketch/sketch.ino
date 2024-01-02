@@ -1,77 +1,62 @@
-/*
-    bool setBCLK(pin_size_t pin);
-    - This assigns two adjacent pins - the pin after this one (one greater)
-      is the WS (word select) signal, which toggles before the sample for
-      each channel is sent
-
-    bool setDATA(pin_size_t pin);
-    - Sets the DOUT pin, can be any valid GPIO pin
-*/
 
 #include <I2S.h>
 #include <SPI.h>
 #include <SD.h>
 
-#include "wav.h"
-#include "doublebuf.h"
 #include "state.h"
 
-// Create the I2S port using a PIO state machine
-I2S i2s(OUTPUT);
+State state;
 
 // GPIO pin numbers
 #define pBCLK 26
 #define pWS (pBCLK+1)
 #define pDOUT 28
 
-// GPIO for sd card in spi mode (pico w tested only, you may need to change this depending on hardware)
-#define pSD_CS 5
-#define pSD_SCK 6
-#define pSD_MOSI 7
-#define pSD_MISO 4
-
 const int sampleRate = 44100;
 
-void setup() {
-  rp2040.fifo.pop(); // wait for the second core's setup to complete first
+// Create the I2S port using a PIO state machine
+I2S i2s(OUTPUT);
 
+void setup() {
+
+  Serial.begin(115200);
+  delay(2000);
+  Serial.println("BEGIN ****************************************************");
   Serial.println("Starting setup for first core");
 
-  core0StateSetup();
+  rp2040.fifo.push(0);
+  rp2040.fifo.pop(); // wait for the second core's setup to complete first
+
+  Serial.println("Starting setup for first core, waiting done");
+
+  i2s.setBCLK(pBCLK);
+  i2s.setDATA(pDOUT);
+  i2s.setBitsPerSample(16);
+
+  // start I2S at the sample rate with 16-bits per sample
+  if (!i2s.begin(sampleRate)) {
+    Serial.println("Failed to initialize I2S!");
+    while (1); // do nothing
+  }
+
+  state.core0_stateSetup(&i2s);
 }
 
 void setup1() {
-  Serial.begin(115200);
+
+  rp2040.fifo.pop();
   Serial.println("Starting setup for second core");
 
-  core1StateSetup();
+  state.core1_stateSetup();
 
-  rp2040.fifo.push(1);
+  rp2040.fifo.push(0);
 
 }
 
 void loop() {
-  /*
-  if (!dbuf0->isFinished() || !dbuf1->isFinished()) {
-    int16_t sample0 = (int16_t)(dbuf0->readNextSample());
-    //int16_t sample0 = 0;
-    int16_t sample1 = (int16_t)(dbuf1->readNextSample());
-
-    int16_t sampleAdjusted = ((int16_t) max(-32766, min(32766, ((int32_t)sample0 + (int32_t)sample1)))) / 2;
-
-    i2s.write(sampleAdjusted);
-    i2s.write(sampleAdjusted);
-  }
-  */
-
+  state.core0_stateLoop();
 }
 
 void loop1() {
-  /*
-  if (!dbuf0->isFinished() || !dbuf1->isFinished()) {
-    dbuf0->populateWriteBuf();
-    dbuf1->populateWriteBuf();
-  }
-  */
-
+  state.core1_stateLoop();
 }

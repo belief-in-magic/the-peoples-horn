@@ -35,6 +35,8 @@ bool DoubleBuf::newSource(uint32_t soundId) {
   //Serial.println("Swapping bufs");
   swapBufs();
 
+  Serial.println("Completed!");
+
   return true;
 }
 
@@ -52,6 +54,8 @@ int32_t DoubleBuf::readNextSample() {
   while (bytesReadUpTo >= bytesWriteUpTo) {
     Serial.println("KINDA ERROR MODE: reading bytes too early. need to busy wait. returning nothing");
     dumpState();
+
+    while(true) {}
   }
 
   for (int i = 0; i < bytesPerSample; i++) {
@@ -119,7 +123,7 @@ bool DoubleBuf::populateWriteBuf() {
   writeReady = false;
 
   bytesWriteUpTo += numBytesToWrite;
-
+  Serial.println("Populating completed");
   return true;
 }
 

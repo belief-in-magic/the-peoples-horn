@@ -114,7 +114,11 @@ bool Wav::readData(uint8_t* buf, uint32_t size) {
     return false;
   }
 
-  file.read(buf, size);
+  int v = file.read(buf, size);
+
+  if (!v) {
+    Serial.println("WAV Could not read");
+  }
   return true;
 }
 
@@ -133,13 +137,12 @@ Wav::~Wav() {
 
 void Wav::writeFileName(uint32_t soundId) {
 
-  filename[0] = 's';
   int i;
-  for (i = 1; i < 5; i++) {
-    if (soundId >> (4-i) == 0) {
-      filename[i] = 0;
+  for (i = 0; i < 4; i++) {
+    if ((soundId >> (3-i)) & 1 == 1) {
+      filename[i] = '1';
     } else {
-      filename[i] = 1;
+      filename[i] = '0';
     }
   }
   sprintf(filename+i, ".wav");
