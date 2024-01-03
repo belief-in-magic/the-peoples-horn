@@ -117,7 +117,9 @@ bool Wav::readData(uint8_t* buf, uint32_t size) {
   int v = file.read(buf, size);
 
   if (!v) {
-    Serial.println("WAV Could not read");
+    Serial.print("WAV Could not read: ");
+    Serial.println(filename);
+    return false;
   }
   return true;
 }

@@ -38,12 +38,14 @@ void State::core1_stateSetup() {
  // Pre-populate the sounds buffers
   for (int i = 0; i < MAX_CONCURRENT_SOUNDS; i++) {
 
-    readySounds[i] = false; // set to "don't play"
-
     lastRising[i] = 0;
     nextBufferWrite[i] = 0;
 
     buffers[i] = new DoubleBuf(i+1); // set to the first 4 sounds
+
+    readySounds[i] = true; // play/not play
+    // TODO something is wrong with multi sound playback
+
   }
 
   Serial.println("core1 setup end");
@@ -75,6 +77,7 @@ void State::core0_stateLoop() {
   for (int i = 0; i < MAX_CONCURRENT_SOUNDS; i++) {
 
     if (readySounds[i]) {
+
       sum += (int32_t) ((int16_t)((buffers[i])->readNextSample()));
     }
   }
@@ -113,12 +116,13 @@ void State::core0_handleRequests() {
       Serial.print("core0 - enabling due to msg: ");
       Serial.println(msgForBuffer[i]);
       readySounds[i] = true;
-      //Serial.println("core0 - Sending reenable ack message");
+      Serial.println("core0 - Sending reenable ack message");
       rp2040.fifo.push(msgForBuffer[i]);
     } else {
-      //Serial.print("core0 - disabling due to msg: ");
-      //Serial.println(msgForBuffer[i]);
+      Serial.print("core0 - disabling due to msg: ");
+      Serial.println(msgForBuffer[i]);
       readySounds[i] = false;
+      Serial.println("core0 - Sending disable ack message");
       rp2040.fifo.push(msgForBuffer[i]); // ack that the buffer has been disabled
     }
   }
@@ -160,6 +164,8 @@ void State::core1_handleRequests() {
 
   for (int i = 0; i < numMessages; i++) {
     msg = rp2040.fifo.pop();
+    Serial.print("core1 - popping msg:");
+    Serial.println(msg);
     bufferId = VAL_MSG_MASK & msg;
     msgForBuffer[bufferId] = msg; // messages should always just be the buffer id in this case, though
   }
@@ -175,16 +181,20 @@ void State::core1_handleRequests() {
     if ((msgForBuffer[i] & ENABLE_MSG_MASK) > 0) {
       Serial.print("core1 - receiving ack msg for reenabling: ");
       Serial.print(msgForBuffer[i]);
+      Serial.print(", buffer: ");
+      Serial.println(i);
       // set next buffer to write 0, meaning that we don't need to reset this buffer
       nextBufferWrite[bufferToWrite] = 0;
 
     } else {
       Serial.print("core1 - receiving ack msg for disabling: ");
-      Serial.println(msgForBuffer[i]);
+      Serial.print(msgForBuffer[i]);
+      Serial.print(", buffer: ");
+      Serial.println(i);
 
       (buffers[bufferToWrite])->newSource(nextBufferWrite[bufferToWrite]);
 
-      reenableMsg = msg | ENABLE_MSG_MASK;
+      reenableMsg = msgForBuffer[i] | ENABLE_MSG_MASK;
       Serial.println("core1 - sending reenable");
       rp2040.fifo.push(reenableMsg);
     }
@@ -197,19 +207,24 @@ void State::core1_handleInput() {
   int gpioPin;
   uint32_t currMillis = millis();
 
-  if ((digitalRead(SB0) == 0) && (timesRan < 2)) { // test
-    if ((nextBufferWrite[0] == 0) && (nextBufferWrite[1] == 0)) {
+  if ((digitalRead(SB0) == 0) && timesRan < 1) { // test
+    if ((nextBufferWrite[0] == 0) && (nextBufferWrite[1] == 0) && (nextBufferWrite[2] == 0)) {
 
       lastRan = currMillis;
       timesRan++;
 
-      nextBufferWrite[0] = 5;
-      nextBufferWrite[1] = 6;
+      nextBufferWrite[0] = 1;
+      nextBufferWrite[1] = 2;
+      nextBufferWrite[2] = 3;
+      //nextBufferWrite[3] = 8;
 
       // send stop message to the first core
-      Serial.println("Sending initial message to disable 0 and 1");
+
       rp2040.fifo.push(0); // TODO change to NB?
-      rp2040.fifo.push(1); // TODO change to NB?
+      rp2040.fifo.push(1);
+      rp2040.fifo.push(2);
+      //delay(20);
+      //rp2040.fifo.push(3);
     }
   }
 //
