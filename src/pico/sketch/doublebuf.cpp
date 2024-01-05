@@ -50,9 +50,9 @@ int32_t DoubleBuf::readNextSample() {
   int32_t val = 0;
 
   while (bytesReadUpTo >= bytesWriteUpTo) {
-    Serial.println("KINDA ERROR MODE: reading bytes too early. need to busy wait. returning nothing");
+    //Serial.println("KINDA ERROR MODE: reading bytes too early. need to busy wait. returning nothing");
     // dumpState();
-    // while(true) {}
+//    delay(1);
     return 0;
   }
 
@@ -66,6 +66,12 @@ int32_t DoubleBuf::readNextSample() {
     Serial.println("Closing source");
     closeSource();
   } else if (bytesReadUpTo % SINGLE_BUFFER_SIZE == 0) {
+    /*
+    Serial.print("core0 - Swapping bufs: ");
+    Serial.print(bytesReadUpTo);
+    Serial.print("/");
+    Serial.println(dataSize);
+    */
     swapBufs();
   }
 
@@ -73,12 +79,17 @@ int32_t DoubleBuf::readNextSample() {
 }
 
 bool DoubleBuf::isFinished() {
-  return (bytesReadUpTo == dataSize);
+  return (bytesReadUpTo >= dataSize);
 }
 
 
 // called by first core (one that gets the samples), and once by the second core during initialization
 bool DoubleBuf::swapBufs() {
+
+  Serial.print("core0 - swapping buffers. cur read: ");
+  Serial.print(curReadBuf);
+  Serial.print("<->");
+  Serial.println(curWriteBuf);
 
   curReadBuf = (curReadBuf + 1) % 2;
   curWriteBuf = (curWriteBuf + 1) % 2;
@@ -117,13 +128,11 @@ bool DoubleBuf::populateWriteBuf() {
 
   // read from SD and write to the current writeBuf
   bool t = currentSource->readData(buf[curWriteBuf], numBytesToWrite);
-  if (!t) {
-    Serial.println("Something happened with reading from the current write buf");
-  }
+
   writeReady = false;
 
   bytesWriteUpTo += numBytesToWrite;
-  Serial.println("Populating completed");
+
   if (currentSource == nullptr) {
     Serial.println("BRUH");
   }

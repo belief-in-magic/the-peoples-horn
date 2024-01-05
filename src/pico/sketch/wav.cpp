@@ -10,7 +10,7 @@ Wav::Wav(uint32_t soundId) {
 
   writeFileName(soundId);
 
-  file = SD.open(filename); // TODO check ownership?
+  file = SD.open(filename, FILE_READ); // TODO check ownership?
   if (!file) {
     // TODO find thread safe way to print serial
     Serial.print("Cannot open wav file:");
@@ -114,13 +114,21 @@ bool Wav::readData(uint8_t* buf, uint32_t size) {
     return false;
   }
 
+  Serial.print("core1 - Reading SD card. From: ");
+  Serial.println(file.position());
+
   int v = file.read(buf, size);
 
-  if (!v) {
+  if (v == -1) {
     Serial.print("WAV Could not read: ");
     Serial.println(filename);
+
+    Serial.print("File size: ");
+    Serial.println(file.size());
+
     return false;
   }
+
   return true;
 }
 

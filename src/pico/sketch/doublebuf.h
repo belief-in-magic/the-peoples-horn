@@ -28,6 +28,7 @@ class DoubleBuf {
     bool swapBufs();
 
   public:
+    DoubleBuf();
     DoubleBuf(uint32_t soundId);
     ~DoubleBuf();
 

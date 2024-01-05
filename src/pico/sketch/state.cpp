@@ -70,7 +70,7 @@ void State::core1_setUpSD() {
 void State::core0_stateLoop() {
 
   // check for any block/re-enable requests from the second core
-  core0_handleRequests();
+  //core0_handleRequests();
 
   int32_t sum = 0;
   // play sounds from readySounds
@@ -138,11 +138,14 @@ void State::core1_setUpInput() {
 
 void State::core1_stateLoop() {
 
-  core1_handleInput();
-  core1_handleRequests();
+  //core1_handleInput();
+  //core1_handleRequests();
 
   // update single buffer if needed:
-  int currentBufferToUpdate = core1_stateCounter++ % MAX_CONCURRENT_SOUNDS;
+  int currentBufferToUpdate = core1_stateCounter % MAX_CONCURRENT_SOUNDS;
+
+  core1_stateCounter++;
+
   if (nextBufferWrite[currentBufferToUpdate] == 0) {
     (buffers[currentBufferToUpdate])->populateWriteBuf();
   }
@@ -227,6 +230,7 @@ void State::core1_handleInput() {
       //rp2040.fifo.push(3);
     }
   }
+
 //
 //  if (digitalRead(SB1) == 0) { // test
 //    if (nextBufferWrite[1] == 0) {

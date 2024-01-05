@@ -22,12 +22,12 @@ void setup() {
   Serial.begin(115200);
   delay(2000);
   Serial.println("BEGIN ****************************************************");
-  Serial.println("Starting setup for first core");
+  //Serial.println("Starting setup for first core");
 
-  rp2040.fifo.push(0);
-  rp2040.fifo.pop(); // wait for the second core's setup to complete first
+  //rp2040.fifo.push(0);
+  //rp2040.fifo.pop(); // wait for the second core's setup to complete first
 
-  Serial.println("Starting setup for first core, waiting done");
+  //Serial.println("Starting setup for first core, waiting done");
 
   i2s.setBCLK(pBCLK);
   i2s.setDATA(pDOUT);
@@ -39,24 +39,119 @@ void setup() {
     while (1); // do nothing
   }
 
-  state.core0_stateSetup(&i2s);
+  //state.core0_stateSetup(&i2s);
+
+  /*
+  // TEST
+
+    Serial.print("Initializing SD card...");
+    SPI.setRX(pSD_MISO);
+    SPI.setTX(pSD_MOSI);
+    SPI.setSCK(pSD_SCK);
+
+    if (!SD.begin(pSD_CS)) {
+      Serial.println("initialization failed!");
+      return;
+    }
+
+    Serial.println("done!");
+
+  Serial.println("Starting test for sd card read");
+
+  File f[4];
+
+  f[0] = SD.open("0001.wav", FILE_READ);
+  f[1] = SD.open("0010.wav", FILE_READ);
+  f[2] = SD.open("0011.wav", FILE_READ);
+  f[3] = SD.open("0100.wav", FILE_READ);
+
+  uint8_t buf[4][2][20000];
+
+  int c = 0;
+  while (true) {
+    bool stillRead = false;
+    for (int i = 0; i < 4; i++) {
+      Serial.print(i);
+      Serial.print(": Position: ");
+      Serial.print(f[i].position());
+      Serial.print(", out of ");
+      Serial.println(f[i].size());
+
+      uint32_t t1 = millis();
+      f[i].read(buf[i][c], 20000);
+      uint32_t t2 = millis();
+
+      Serial.print("Millis time to read: ");
+      Serial.println(t2-t1);
+
+      if (f[i].position() != f[i].size()) {
+        stillRead = true;
+      } else {
+        f[i].close();
+      }
+    }
+
+    if (stillRead == false) {
+      Serial.println("done all");
+      break;
+    }
+
+    c = (c+1)%2;
+
+
+  }
+  */
+
 }
 
-void setup1() {
 
+void setup1() {
+/*
   rp2040.fifo.pop();
   Serial.println("Starting setup for second core");
 
   state.core1_stateSetup();
 
   rp2040.fifo.push(0);
-
+*/
 }
+
 
 void loop() {
-  state.core0_stateLoop();
+  //state.core0_stateLoop();
+  Serial.println(rp2040.fifo.available());
+  /*
+  int i;
+  uint32_t t1 = millis();
+
+  uint32_t k;
+  for (i = 0; i < 44000; i++) {
+
+    if (rp2040.fifo.push_nb((uint32_t)i) == false) {
+      break;
+    }
+
+  }
+
+  uint32_t t2 = millis();
+
+
+  Serial.print("Total time in millis: ");
+  Serial.println(t2-t1);
+
+  Serial.print("i: ");
+  Serial.println(i);
+
+  Serial.println(rp2040.fifo.available());
+
+  while(true) {}
+  */
 }
 
+
 void loop1() {
-  state.core1_stateLoop();
+
+  //delay(4000);
+  //Serial.println(rp2040.fifo.available());
 }
+
