@@ -42,11 +42,15 @@ class Core1State {
 
   private:
     void setUpSD();
+    void setUpInput();
 
     void prepareNextSector(uint8_t buf);
-    void triggerSound(uint8_t buf, uint32_t sound);
+    void handleInboundMsgs();
 
   public:
+
+    void triggerSound(uint8_t buf, uint32_t sound); // TODO temp add here for testing
+
     Core1State(SharedState* ss);
     void loop();
 };

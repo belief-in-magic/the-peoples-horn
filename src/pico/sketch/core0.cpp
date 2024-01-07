@@ -73,7 +73,7 @@ int16_t Core0State::readBuffers() {
 
     if (proceedToRead(i)) {
       //uint32_t offset = currPointers[i] % DOUBLE_BUFFER_SIZE;
-      uint32_t rawSampleValue = ((sharedState.buffers)[i]).readSample(currPointers[i]);
+      uint32_t rawSampleValue = ((sharedState->buffers)[i]).readSample(currPointers[i]);
 
       sum += (int32_t) ((int16_t) rawSampleValue);
 
