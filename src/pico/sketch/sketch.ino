@@ -4,6 +4,10 @@
 #include <SD.h>
 
 #include "state.h"
+#include "msg.h"
+
+
+using namespace msg;
 
 State state;
 
@@ -38,6 +42,35 @@ void setup() {
     Serial.println("Failed to initialize I2S!");
     while (1); // do nothing
   }
+
+
+  // msg test
+
+  Message m = sectorReadyMsg(3, 127);
+  Serial.print("msg: ");
+  Serial.println(m, BIN);
+  Serial.println(isStop(m));
+  Serial.println(isReady(m));
+  Serial.println(isNoop(m));
+
+  Serial.println(readyMsgGetBuf(m));
+  Serial.println(readyMsgGetSector(m));
+
+  m = stopMsgEmpty();
+  m = stopMsgWithBuf(m,0);
+  m = stopMsgWithBuf(m,3);
+
+  Serial.print("msg: ");
+  Serial.println(m, BIN);
+  Serial.println(isStop(m));
+  Serial.println(isReady(m));
+  Serial.println(isNoop(m));
+
+  Serial.println(stopMsgContainsBuf(m, 0));
+  Serial.println(stopMsgContainsBuf(m, 1));
+  Serial.println(stopMsgContainsBuf(m, 2));
+  Serial.println(stopMsgContainsBuf(m, 3));
+
 
   //state.core0_stateSetup(&i2s);
 
@@ -119,7 +152,7 @@ void setup1() {
 
 void loop() {
   //state.core0_stateLoop();
-  Serial.println(rp2040.fifo.available());
+  //Serial.println(rp2040.fifo.available());
   /*
   int i;
   uint32_t t1 = millis();

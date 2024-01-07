@@ -6,9 +6,6 @@
 #include <SPI.h>
 #include <SD.h>
 
-// GPIO pin numbers for the sound buttons
-#define NUM_SOUND_BUTTONS 4
-
 // GPIO pin numbers for main buttons
 #define SB0 12
 #define SB1 13
@@ -37,7 +34,7 @@ class State {
 
 
   // used only by the first core to keep track of the sounds that have completed preparation
-  bool readySounds[MAX_CONCURRENT_SOUNDS];
+  bool core0_readySounds[MAX_CONCURRENT_SOUNDS];
   I2S* core0_i2s;
 
   // used only by the second core to keep track of which buffers and which sounds have requested to be overwritten.

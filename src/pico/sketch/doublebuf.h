@@ -4,6 +4,7 @@
 #include "wav.h"
 
 #define SINGLE_BUFFER_SIZE 20000
+#define DOUBLE_BUFFER_SIZE (2*SINGLE_BUFFER_SIZE)
 
 // Maybe abstract to stream
 class DoubleBuf {

@@ -43,9 +43,6 @@ void State::core1_stateSetup() {
 
     buffers[i] = new DoubleBuf(i+1); // set to the first 4 sounds
 
-    readySounds[i] = true; // play/not play
-    // TODO something is wrong with multi sound playback
-
   }
 
   Serial.println("core1 setup end");
@@ -77,7 +74,6 @@ void State::core0_stateLoop() {
   for (int i = 0; i < MAX_CONCURRENT_SOUNDS; i++) {
 
     if (readySounds[i]) {
-
       sum += (int32_t) ((int16_t)((buffers[i])->readNextSample()));
     }
   }
@@ -89,8 +85,8 @@ void State::core0_stateLoop() {
 }
 
 void State::core0_handleRequests() {
-  // check fifo queue for new requests
 
+  // check fifo queue for new requests
   uint32_t msg, bufferId;
   int numMessages = rp2040.fifo.available();
 
@@ -115,13 +111,13 @@ void State::core0_handleRequests() {
     if ((msgForBuffer[i] & ENABLE_MSG_MASK) > 0) {
       Serial.print("core0 - enabling due to msg: ");
       Serial.println(msgForBuffer[i]);
-      readySounds[i] = true;
+      core0_readySounds[i] = true;
       Serial.println("core0 - Sending reenable ack message");
       rp2040.fifo.push(msgForBuffer[i]);
     } else {
       Serial.print("core0 - disabling due to msg: ");
       Serial.println(msgForBuffer[i]);
-      readySounds[i] = false;
+      core0_readySounds[i] = false;
       Serial.println("core0 - Sending disable ack message");
       rp2040.fifo.push(msgForBuffer[i]); // ack that the buffer has been disabled
     }
