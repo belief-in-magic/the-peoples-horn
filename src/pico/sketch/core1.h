@@ -37,14 +37,12 @@ class Core1State {
 
   SharedState* sharedState;
 
-  uint32_t highestAckedSector[MAX_CONCURRENT_SOUNDS];
+  uint32_t highestAckedSector[MAX_CONCURRENT_SOUNDS]; // what is this for again?
   bool prepareNext[MAX_CONCURRENT_SOUNDS];
 
   private:
     void setUpSD();
     void setUpInput();
-
-    void prepareNextSector(uint8_t buf);
     void handleInboundMsgs();
 
   public:

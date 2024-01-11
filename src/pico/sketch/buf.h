@@ -8,10 +8,16 @@ class Buf {
 
   uint8_t buf[DOUBLE_BUFFER_SIZE];
   uint32_t dataSize;
+  uint32_t numSectors;
 
   uint32_t sectorsWritten;
 
   Wav* currentSource;
+
+  bool nextSectorReady = false;
+
+  private:
+    void closeSource();
 
   public:
     Buf();
@@ -21,5 +27,8 @@ class Buf {
 
     // following are used by the second core
     bool newSource(uint32_t sound);
-    bool prepareNextSector();
+    bool markNextSectorReady();
+    bool isNextSectorReady();
+    uint32_t prepareNextSector(); // expensive operation, returns the prepared sector num
+
 };

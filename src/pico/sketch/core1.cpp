@@ -15,6 +15,76 @@ Core1State::Core1State(SharedState* ss) {
 
 }
 
+void Core1State::loop() {
+  using namespace msg;
+
+  for (int i = 0; i < MAX_CONCURRENT_SOUNDS; i++) {
+
+    handleInboundMsgs();
+
+    Buf* currBufPtr = ((sharedState->buffers) + i);
+
+    if (currBufPtr->isNextSectorReady()) {
+      uint32_t newSector = currBufPtr->prepareNextSector();
+
+      // send ready message to tell the first core that this sector, for this core, is ready
+      Message readyMsg = sectorReadyMsg(i, newSector);
+
+      if (!pushMsg(readyMsg)) {
+        Serial.println("core1 - ERROR: Cannot push ready msg");
+      }
+
+    }
+
+    // todo check input state
+
+  }
+}
+
+void Core1State::handleInboundMsgs() {
+  using namespace msg;
+
+  uint32_t availableMsgs = numQueuedMsgs();
+
+  for (int i = 0; i < availableMsgs; i++) {
+    Message m = popMsg();
+
+    if (isStop(m)) {
+      // received ack for stopping some buffers, this means that we can start updating them
+      for (int b = 0; b <  MAX_CONCURRENT_SOUNDS; b++) {
+        if (stopMsgContainsBuf(m, b)) {
+          // update buffer b with a new sound
+          ((sharedState->buffers)[b]).newSource(prepareNext[b]);
+
+          // tell the other core that the first sector of a buffer is ready
+          Message readyMsg = sectorReadyMsg(b, 0);
+
+          if (!pushMsg(readyMsg)) {
+            Serial.println("core1 - ERROR: Cannot push ready msg (Starting ready)");
+          }
+
+        }
+      }
+    } else if (isReady(m)) {
+
+      // received ready msg from the first core, for a certain sector. This means that that core has begun
+      // reading from that sector. We can now start updating the next sector for that buffer.
+      uint8_t readyBuffer = stopMsgGetBuf(m);
+      uint32_t sector = stopMsgGetSector(m);
+
+      if (readyBuffer >= MAX_CONCURRENT_SOUNDS) {
+        Serial.println("core1 - Error: received buffer for ready msg is greater than MAX_CONCURRENT_SOUNDS");
+        continue;
+      }
+
+      Buf* bufPtr = ((sharedState->buffers) + readyBuffer);
+      bufPtr->markNextSectorReady(); // mark the sector as ready to be written to
+    } else {
+      Serial.println("core1 - Unrecognized msg");
+    }
+
+  }
+}
 
 void Core1State::setUpInput() {
   pinMode(SB0, INPUT);
@@ -38,9 +108,22 @@ void Core1State::setUpSD() {
 
 }
 
+void Core1State::triggerSound(uint8_t buf, uint32_t sound) {
+  using namespace msg;
 
-void Core1State::prepareNextSector(uint8_t buf) {
+  if (buf >= MAX_CONCURRENT_SOUNDS) {
+    Serial.println("Cannot trigger sound, the provided buffer is too high");
+    return;
+  }
 
-  ((sharedState->buffers)[buf]).prepareNextSector();
+  prepareNext[buf] = sound;
 
+  // send a stop msg
+  Message stopMsg = stopMsgEmpty();
+  stopMsg = stopMsgWithBuf(m, buf);
+
+
+  if (!pushMsg(stopMsg)) {
+    Serial.println("core1 - ERROR cannot push trigger stop message");
+  }
 }

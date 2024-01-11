@@ -44,22 +44,21 @@ void Core0State::handleInboundMsgs() {
       int r = pushMsg(m);
 
       if (r == false) {
-        Serial.println("ERROR: Cannot push stop msg ack.");
+        Serial.println("core0 - ERROR: Cannot push stop msg ack.");
       }
     } else if (isReady(msg)) {
       uint8_t buffer = readyMsgGetBuf(m);
       uint32_t sectorId = readyMsgGetSector(m);
 
       if (!((mostRecentReadySector[buffer] == sectorId) || (mostRecentReadySector[buffer]+1 == sectorId))) {
-        Serial.println("ERROR: Unexpected sector id");
+        Serial.println("core0 - ERROR: Unexpected sector id");
       }
 
       mostRecentReadySector[buffer] = sectorId;
       // we send an ack in proceedRead, when we start actually reading from this sector
 
     } else {
-
-      Serial.println("Unrecognized msg");
+      Serial.println("core0 - Unrecognized msg");
     }
 
   }
@@ -72,8 +71,8 @@ int16_t Core0State::readBuffers() {
   for (int i = 0; i < MAX_CONCURRENT_SOUNDS; i++) {
 
     if (proceedToRead(i)) {
-      //uint32_t offset = currPointers[i] % DOUBLE_BUFFER_SIZE;
-      uint32_t rawSampleValue = ((sharedState->buffers)[i]).readSample(currPointers[i]);
+      uint32_t offset = currPointers[i] % DOUBLE_BUFFER_SIZE;
+      uint32_t rawSampleValue = ((sharedState->buffers)[i]).readSample(offset);
 
       sum += (int32_t) ((int16_t) rawSampleValue);
 
