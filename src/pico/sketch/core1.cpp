@@ -1,18 +1,19 @@
 #include "core1.h"
 #include "sharedState.h"
 
+
 Core1State::Core1State(SharedState* ss) {
-
   sharedState = ss;
+}
 
+void Core1State::setup() {
   for (int i = 0; i < MAX_CONCURRENT_SOUNDS; i++) {
     highestAckedSector[i] = 0;
-    prepareNext[i] = false;
+    prepareNext[i] = 0;
   }
 
   setUpInput();
   setUpSD();
-
 }
 
 void Core1State::loop() {
@@ -25,7 +26,16 @@ void Core1State::loop() {
     Buf* currBufPtr = ((sharedState->buffers) + i);
 
     if (currBufPtr->isNextSectorReady()) {
+
+      Serial.print("core1 - preparing sector for buffer: ");
+      Serial.println(i);
+
       uint32_t newSector = currBufPtr->prepareNextSector();
+
+      Serial.print("core1 - Sending sector ready for buffer/sector: ");
+      Serial.print(i);
+      Serial.print("/");
+      Serial.println(newSector);
 
       // send ready message to tell the first core that this sector, for this core, is ready
       Message readyMsg = sectorReadyMsg(i, newSector);
@@ -53,16 +63,14 @@ void Core1State::handleInboundMsgs() {
       // received ack for stopping some buffers, this means that we can start updating them
       for (int b = 0; b <  MAX_CONCURRENT_SOUNDS; b++) {
         if (stopMsgContainsBuf(m, b)) {
+
+          Serial.print("core1 - receiving stop command (ack) for buffer: ");
+          Serial.println(b);
+
           // update buffer b with a new sound
           ((sharedState->buffers)[b]).newSource(prepareNext[b]);
 
-          // tell the other core that the first sector of a buffer is ready
-          Message readyMsg = sectorReadyMsg(b, 0);
-
-          if (!pushMsg(readyMsg)) {
-            Serial.println("core1 - ERROR: Cannot push ready msg (Starting ready)");
-          }
-
+          prepareNext[b] = 0; // set to null sound
         }
       }
     } else if (isReady(m)) {
@@ -71,6 +79,11 @@ void Core1State::handleInboundMsgs() {
       // reading from that sector. We can now start updating the next sector for that buffer.
       uint8_t readyBuffer = readyMsgGetBuf(m);
       uint32_t sector = readyMsgGetSector(m);
+
+      Serial.print("core1 - receiving ready (ack) for buffer/sector: ");
+      Serial.print(readyBuffer);
+      Serial.print("/");
+      Serial.println(sector);
 
       if (readyBuffer >= MAX_CONCURRENT_SOUNDS) {
         Serial.println("core1 - Error: received buffer for ready msg is greater than MAX_CONCURRENT_SOUNDS");
@@ -109,6 +122,9 @@ void Core1State::setUpSD() {
 }
 
 void Core1State::triggerSound(uint8_t buf, uint32_t sound) {
+
+  Serial.println("core1 - Triggering sound");
+
   using namespace msg;
 
   if (buf >= MAX_CONCURRENT_SOUNDS) {
@@ -122,6 +138,8 @@ void Core1State::triggerSound(uint8_t buf, uint32_t sound) {
   Message stopMsg = stopMsgEmpty();
   stopMsg = stopMsgWithBuf(stopMsg, buf);
 
+  Serial.print("core1 - Sending stop message for buffer: ");
+  Serial.println(buf);
 
   if (!pushMsg(stopMsg)) {
     Serial.println("core1 - ERROR cannot push trigger stop message");

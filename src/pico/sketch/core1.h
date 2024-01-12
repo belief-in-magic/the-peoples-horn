@@ -37,7 +37,7 @@ class Core1State {
   SharedState* sharedState;
 
   uint32_t highestAckedSector[MAX_CONCURRENT_SOUNDS]; // what is this for again?
-  bool prepareNext[MAX_CONCURRENT_SOUNDS];
+  uint32_t prepareNext[MAX_CONCURRENT_SOUNDS];
 
   private:
     void setUpSD();
@@ -45,7 +45,7 @@ class Core1State {
     void handleInboundMsgs();
 
   public:
-
+    void setup();
     void triggerSound(uint8_t buf, uint32_t sound); // TODO temp add here for testing
 
     Core1State(SharedState* ss);

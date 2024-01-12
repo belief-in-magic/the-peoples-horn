@@ -1,16 +1,16 @@
 #include "core0.h"
 
 Core0State::Core0State(SharedState* s, I2S* i) {
+  sharedState = s;
+  i2s = i;
+}
 
+void Core0State::setup() {
   for (int i = 0; i < MAX_CONCURRENT_SOUNDS; i++) {
     activeBuffers[i] = 0;
     currPointers[i] = 0;
     mostRecentReadySector[i] = 0;
   }
-
-  sharedState = s;
-  i2s = i;
-
 }
 
 void Core0State::loop() {
@@ -33,14 +33,21 @@ void Core0State::handleInboundMsgs() {
     Message m = popMsg();
 
     if (isStop(m)) {
+      Serial.print("core0 - receiving stop message: ");
+      Serial.println(m, BIN);
 
       // stop all relevant buffers, and then ack this msg
       for (int b = 0; b <  MAX_CONCURRENT_SOUNDS; b++) {
         if (stopMsgContainsBuf(m, b)) {
+
+          Serial.print("core0 - stopping core: ");
+          Serial.println(b);
+
           activeBuffers[b] = false;
         }
       }
 
+      Serial.println("core0 - sending ack to stop message");
       int r = pushMsg(m);
 
       if (r == false) {
@@ -50,6 +57,16 @@ void Core0State::handleInboundMsgs() {
     } else if (isReady(m)) {
       uint8_t buffer = readyMsgGetBuf(m);
       uint32_t sectorId = readyMsgGetSector(m);
+
+      if (sectorId == 0) {
+        activeBuffers[buffer] = true; // set to active buffer if not so yet
+        currPointers[buffer] = 0;
+      }
+
+      Serial.print("core0 - receiving ready for buffer/sector: ");
+      Serial.print(buffer);
+      Serial.print("/");
+      Serial.println(sectorId);
 
       if (!((mostRecentReadySector[buffer] == sectorId) || (mostRecentReadySector[buffer]+1 == sectorId))) {
         Serial.println("core0 - ERROR: Unexpected sector id");
@@ -89,6 +106,8 @@ int16_t Core0State::readBuffers() {
 
 
 void Core0State::sendI2S(int16_t sample) {
+  //Serial.print("core0 - Sending i2s. Sample: ");
+  //Serial.println(sample);
   i2s->write(sample);
   i2s->write(sample);
 }
@@ -101,13 +120,18 @@ bool Core0State::proceedToRead(uint8_t buffer) {
   uint32_t currentSector = currPointer / SINGLE_BUFFER_SIZE;
   uint32_t readySector = mostRecentReadySector[buffer];
 
-  if (!activeBuffers[buffer]) {
+  if (!activeBuffers[buffer] || currentSector > readySector) {
     return false;
-  } else if (readySector == currentSector+1) {
+  } else if (readySector == currentSector) {
 
-    if (currPointer % SINGLE_BUFFER_SIZE) { // we have started to read from a new buffer
+    if (currPointer % SINGLE_BUFFER_SIZE == 0) { // we have started to read from a new buffer
 
       Message m = sectorReadyMsg(buffer, readySector);
+
+      Serial.print("core0 - Sending message to signal starting to read from a buffer/sector: ");
+      Serial.print(buffer);
+      Serial.print("/");
+      Serial.println(readySector);
 
       int r = pushMsg(m);
 
@@ -117,10 +141,24 @@ bool Core0State::proceedToRead(uint8_t buffer) {
     }
 
     return true;
-  } else if (readySector == currentSector) {
+  } else if (readySector-1 == currentSector) {
+
     return currPointer < (SINGLE_BUFFER_SIZE*(currentSector+1));
+
   } else {
-    Serial.println("Problem with proceed to read");
+    Serial.println("Problem with proceed to read. Dumping...");
+
+    Serial.print("currPointer: ");
+    Serial.println(currPointer);
+
+    Serial.print("currentSector: ");
+    Serial.println(currentSector);
+
+    Serial.print("readySector: ");
+    Serial.println(readySector);
+
+    while (true) {;}
+
   }
 
   return false;

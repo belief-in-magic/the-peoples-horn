@@ -41,5 +41,6 @@ class Core0State {
 
   public:
     Core0State(SharedState* ss, I2S *i2s);
+    void setup();
     void loop();
 };
