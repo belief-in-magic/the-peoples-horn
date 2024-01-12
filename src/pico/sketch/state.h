@@ -1,3 +1,4 @@
+/*
 #pragma once
 
 #include "doublebuf.h"
@@ -73,3 +74,4 @@ class State {
     void core1_stateLoop();
 
 };
+*/

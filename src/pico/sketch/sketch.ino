@@ -3,13 +3,12 @@
 #include <SPI.h>
 #include <SD.h>
 
-#include "state.h"
+
 #include "msg.h"
 
 
 using namespace msg;
 
-State state;
 
 // GPIO pin numbers
 #define pBCLK 26

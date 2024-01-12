@@ -21,6 +21,8 @@ bool Buf::newSource(uint32_t sound) {
     : dataSize/SINGLE_BUFFER_SIZE + 1;
 
   markNextSectorReady();
+
+  return true;
 }
 
 // TODO maybe we can remove the need to pass a pointer?
@@ -42,6 +44,7 @@ int32_t Buf::readSample(uint32_t ptr) {
 
 bool Buf::markNextSectorReady() {
   nextSectorReady = true;
+  return nextSectorReady;
 }
 
 bool Buf::isNextSectorReady() {

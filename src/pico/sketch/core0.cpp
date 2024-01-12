@@ -46,7 +46,8 @@ void Core0State::handleInboundMsgs() {
       if (r == false) {
         Serial.println("core0 - ERROR: Cannot push stop msg ack.");
       }
-    } else if (isReady(msg)) {
+
+    } else if (isReady(m)) {
       uint8_t buffer = readyMsgGetBuf(m);
       uint32_t sectorId = readyMsgGetSector(m);
 
@@ -77,17 +78,17 @@ int16_t Core0State::readBuffers() {
       sum += (int32_t) ((int16_t) rawSampleValue);
 
       // increment pointers
-      currPointers[i] += 2 // increment by 2 bytes ie a 16 bit sample
+      currPointers[i] += 2; // increment by 2 bytes ie a 16 bit sample
     }
   }
 
-  int16_t sampleAdjusted = ((int16_t) max(-32766, min(32766, sum)))/2
+  int16_t sampleAdjusted = ((int16_t) max(-32766, min(32766, sum)))/2 ;
 
   return sampleAdjusted;
 }
 
 
-void sendI2S(int16_t sample) {
+void Core0State::sendI2S(int16_t sample) {
   i2s->write(sample);
   i2s->write(sample);
 }
@@ -96,7 +97,7 @@ void sendI2S(int16_t sample) {
 bool Core0State::proceedToRead(uint8_t buffer) {
   using namespace msg;
 
-  uint32_t currPointer = currPointers[buffer]
+  uint32_t currPointer = currPointers[buffer];
   uint32_t currentSector = currPointer / SINGLE_BUFFER_SIZE;
   uint32_t readySector = mostRecentReadySector[buffer];
 
@@ -117,7 +118,7 @@ bool Core0State::proceedToRead(uint8_t buffer) {
 
     return true;
   } else if (readySector == currentSector) {
-    return currPointer < (SINGLE_BUFFER_SIZE*(currentSector+1))
+    return currPointer < (SINGLE_BUFFER_SIZE*(currentSector+1));
   } else {
     Serial.println("Problem with proceed to read");
   }

@@ -69,8 +69,8 @@ void Core1State::handleInboundMsgs() {
 
       // received ready msg from the first core, for a certain sector. This means that that core has begun
       // reading from that sector. We can now start updating the next sector for that buffer.
-      uint8_t readyBuffer = stopMsgGetBuf(m);
-      uint32_t sector = stopMsgGetSector(m);
+      uint8_t readyBuffer = readyMsgGetBuf(m);
+      uint32_t sector = readyMsgGetSector(m);
 
       if (readyBuffer >= MAX_CONCURRENT_SOUNDS) {
         Serial.println("core1 - Error: received buffer for ready msg is greater than MAX_CONCURRENT_SOUNDS");
@@ -120,7 +120,7 @@ void Core1State::triggerSound(uint8_t buf, uint32_t sound) {
 
   // send a stop msg
   Message stopMsg = stopMsgEmpty();
-  stopMsg = stopMsgWithBuf(m, buf);
+  stopMsg = stopMsgWithBuf(stopMsg, buf);
 
 
   if (!pushMsg(stopMsg)) {

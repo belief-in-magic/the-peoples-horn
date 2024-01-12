@@ -15,8 +15,7 @@ set to around 44khz.
 
 #include <cstdint>
 #include <I2S.h>
-#include "doubleBuf.h"
-#include "shareState.h"
+#include "sharedState.h"
 #include "msg.h"
 
 class Core0State {

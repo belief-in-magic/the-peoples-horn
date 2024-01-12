@@ -1,3 +1,4 @@
+/*
 #include "state.h"
 #include <Arduino.h>
 
@@ -239,7 +240,7 @@ void State::core1_handleInput() {
 //    }
 //  }
 
-  /*
+
   // check inputs for any changes
   for (int i = 0; i < MAX_CONCURRENT_SOUNDS; i++) {
     gpioPin = SB0+i;
@@ -253,6 +254,8 @@ void State::core1_handleInput() {
       }
     }
   }
-  */
+
 
 }
+
+*/

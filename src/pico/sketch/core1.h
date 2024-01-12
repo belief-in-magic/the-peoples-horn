@@ -16,8 +16,7 @@ operation given that we read from the SD card using SPI. For 20kb this takes aro
 #include <cstdint>
 #include <SD.h>
 #include <SPI.h>
-#include "doubleBuf.h"
-#include "shareState.h"
+#include "sharedState.h"
 #include "msg.h"
 
 // GPIO pin numbers for main buttons TODO move this into its own InputState class file
