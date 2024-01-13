@@ -63,7 +63,26 @@ void loop() {
 }
 
 
+bool triggered = false;
+bool triggered1 = false;
+bool triggered2 = false;
 void loop1() {
   core1State.loop();
+
+
+  if (millis() > 6000 && !triggered) {
+    core1State.triggerSound(0, 5);
+    triggered = true;
+  }
+
+  if (millis() > 12000 && !triggered1) {
+    core1State.triggerSound(0, 2);
+    triggered1 = true;
+  }
+
+  if (millis() > 18000 && !triggered2) {
+    core1State.triggerSound(0, 3);
+    triggered2 = true;
+  }
 }
 

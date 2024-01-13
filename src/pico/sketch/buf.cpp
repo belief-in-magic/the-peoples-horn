@@ -15,10 +15,17 @@ bool Buf::newSource(uint32_t sound) {
 
   currentSource = new Wav(sound);
 
+  sectorsWritten = 0;
   dataSize = currentSource->dataSize();
   numSectors = dataSize % SINGLE_BUFFER_SIZE == 0
     ? dataSize/SINGLE_BUFFER_SIZE
     : dataSize/SINGLE_BUFFER_SIZE + 1;
+
+  Serial.print("core1: creating new sound in buffer. Datasize:");
+  Serial.print(dataSize);
+  Serial.print(", sectors: ");
+  Serial.println(numSectors);
+
 
   markNextSectorReady();
 
@@ -30,14 +37,9 @@ int32_t Buf::readSample(uint32_t ptr) {
 
   uint32_t val;
 
-  // sector offset: which of the two sectors we should currently be reading from
-  uint32_t so = ((sectorsWritten+1) % 2) * SINGLE_BUFFER_SIZE;
-
-
   for (int i = 0; i < 2; i++) {
-    val |= (buf[so+i] << (i*8));
+    val |= (buf[ptr+i] << (i*8));
   }
-
 
   return val;
 }
@@ -48,7 +50,7 @@ bool Buf::markNextSectorReady() {
 }
 
 bool Buf::isNextSectorReady() {
-  return nextSectorReady;
+  return nextSectorReady && !(sectorsWritten >= numSectors);
 }
 
 uint32_t Buf::prepareNextSector() {

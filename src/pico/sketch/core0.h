@@ -38,6 +38,7 @@ class Core0State {
     void sendI2S(int16_t sample);
     int16_t readBuffers();
     bool proceedToRead(uint8_t buffer);
+    void resetBuffer(uint8_t buffer);
 
   public:
     Core0State(SharedState* ss, I2S *i2s);

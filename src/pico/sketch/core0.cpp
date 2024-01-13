@@ -7,9 +7,7 @@ Core0State::Core0State(SharedState* s, I2S* i) {
 
 void Core0State::setup() {
   for (int i = 0; i < MAX_CONCURRENT_SOUNDS; i++) {
-    activeBuffers[i] = 0;
-    currPointers[i] = 0;
-    mostRecentReadySector[i] = 0;
+    resetBuffer(i);
   }
 }
 
@@ -43,7 +41,7 @@ void Core0State::handleInboundMsgs() {
           Serial.print("core0 - stopping core: ");
           Serial.println(b);
 
-          activeBuffers[b] = false;
+          resetBuffer(b);
         }
       }
 
@@ -141,9 +139,10 @@ bool Core0State::proceedToRead(uint8_t buffer) {
     }
 
     return true;
-  } else if (readySector-1 == currentSector) {
+  } else if (readySector == currentSector+1) {
 
-    return currPointer < (SINGLE_BUFFER_SIZE*(currentSector+1));
+    //return currPointer < (SINGLE_BUFFER_SIZE*(currentSector+1));
+    return true;
 
   } else {
     Serial.println("Problem with proceed to read. Dumping...");
@@ -162,4 +161,11 @@ bool Core0State::proceedToRead(uint8_t buffer) {
   }
 
   return false;
+}
+
+
+void Core0State::resetBuffer(uint8_t buffer) {
+  activeBuffers[buffer] = false;
+  currPointers[buffer] = 0;
+  mostRecentReadySector[buffer] = 0;
 }
