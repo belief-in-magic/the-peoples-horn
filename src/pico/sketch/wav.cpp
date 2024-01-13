@@ -129,6 +129,18 @@ bool Wav::readData(uint8_t* buf, uint32_t size) {
     Serial.print("File size: ");
     Serial.println(file.size());
 
+    Serial.print("Size to read: ");
+    Serial.println(size);
+
+    Serial.print("Current position: ");
+    Serial.println(file.position());
+
+    Serial.print("Bytes available: ");
+    Serial.println(file.available());
+
+    Serial.print("Testing if can peek: ");
+    Serial.println(file.peek());
+
     return false;
   }
 

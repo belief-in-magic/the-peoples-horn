@@ -32,6 +32,13 @@ void Core1State::loop() {
 
       uint32_t newSector = currBufPtr->prepareNextSector();
 
+      if (newSector == -1) {
+        Serial.print("core1 - Could not prepare buffer: ");
+        Serial.println(i);
+
+        while(true) {;}
+      }
+
       Serial.print("core1 - Sending sector ready for buffer/sector: ");
       Serial.print(i);
       Serial.print("/");

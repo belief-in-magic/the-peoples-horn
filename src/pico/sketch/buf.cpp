@@ -86,7 +86,13 @@ uint32_t Buf::prepareNextSector() {
   if (!res) {
     Serial.println("Error trying to read from SD card");
 
-    while(true) {;}
+    Serial.print("sector offset: ");
+    Serial.println(so);
+
+    Serial.print("bytes to write: ");
+    Serial.println(bytesToWrite);
+
+    return -1;
   }
 
 

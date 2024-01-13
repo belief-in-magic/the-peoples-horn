@@ -24,8 +24,8 @@ void setup() {
 
   Serial.begin(115200);
 
-  delay(2000);
   Serial.println("BEGIN ****************************************************");
+  delay(1000);
 
   Serial.println("core0 - starting setup");
 
@@ -54,7 +54,7 @@ void setup1() {
   core1State.setup();
   rp2040.fifo.push(123);
 
-  core1State.triggerSound(0, 1);
+  //core1State.triggerSound(0, 1);
 }
 
 
@@ -63,19 +63,17 @@ void loop() {
 }
 
 
-bool triggered = false;
-bool triggered1 = false;
-bool triggered2 = false;
+int timesRun = 1;
+
 void loop1() {
   core1State.loop();
 
-
-  if (millis() > 6000 && !triggered) {
-    //core1State.triggerSound(0, 5);
-    //core1State.triggerSound(1, 2);
-    //core1State.triggerSound(2, 3);
-    //core1State.triggerSound(3, 6);
-    triggered = true;
+  if (millis() > timesRun*3000) {
+    core1State.triggerSound(0, 10);
+    core1State.triggerSound(1, 11);
+    core1State.triggerSound(2, 6);
+    core1State.triggerSound(3, 5);
+    timesRun++;
   }
 
 /*
