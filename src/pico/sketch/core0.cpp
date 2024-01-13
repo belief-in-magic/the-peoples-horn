@@ -24,11 +24,12 @@ void Core0State::loop() {
 void Core0State::handleInboundMsgs() {
   using namespace msg;
 
-  uint32_t availableMsgs = numQueuedMsgs();
+  uint32_t availableMsgs = sharedState->availableMessagesCore0();
+
 
   for (int i = 0; i < availableMsgs; i++) {
 
-    Message m = popMsg();
+    Message m = sharedState->popMsgCore0();
 
     if (isStop(m)) {
       Serial.print("core0 - receiving stop message: ");
@@ -46,7 +47,7 @@ void Core0State::handleInboundMsgs() {
       }
 
       Serial.println("core0 - sending ack to stop message");
-      int r = pushMsg(m);
+      bool r = sharedState->sendMsgToCore1(m);
 
       if (r == false) {
         Serial.println("core0 - ERROR: Cannot push stop msg ack.");
@@ -131,7 +132,7 @@ bool Core0State::proceedToRead(uint8_t buffer) {
       Serial.print("/");
       Serial.println(readySector);
 
-      int r = pushMsg(m);
+      bool r = sharedState->sendMsgToCore1(m);
 
       if (r == false) {
         Serial.println("ERROR: Cannot push ready msg ack.");

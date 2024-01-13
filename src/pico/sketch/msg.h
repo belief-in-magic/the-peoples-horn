@@ -42,9 +42,4 @@ uint32_t firstNBits(uint32_t val, uint8_t n);
 uint32_t setFirstNBits(uint8_t n);
 
 
-// Sending/receiving messages
-uint32_t numQueuedMsgs();
-Message popMsg(); // blocking
-bool pushMsg(Message m); // non-blocking, will return false if the queue is full
-
 } // namespace msg

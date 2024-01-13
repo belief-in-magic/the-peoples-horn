@@ -4,7 +4,7 @@
 #include <cstdint>
 #include "wav.h"
 
-#define SINGLE_BUFFER_SIZE 20000
+#define SINGLE_BUFFER_SIZE 10000 // TODO figure out why setting this to 10k doesn't work
 #define DOUBLE_BUFFER_SIZE (2*SINGLE_BUFFER_SIZE)
 
 class Buf {

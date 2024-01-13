@@ -40,7 +40,7 @@ void Core1State::loop() {
       // send ready message to tell the first core that this sector, for this core, is ready
       Message readyMsg = sectorReadyMsg(i, newSector);
 
-      if (!pushMsg(readyMsg)) {
+      if (!(sharedState->sendMsgToCore0(readyMsg))) {
         Serial.println("core1 - ERROR: Cannot push ready msg");
       }
 
@@ -54,10 +54,10 @@ void Core1State::loop() {
 void Core1State::handleInboundMsgs() {
   using namespace msg;
 
-  uint32_t availableMsgs = numQueuedMsgs();
+  uint32_t availableMsgs = sharedState->availableMessagesCore1();
 
   for (int i = 0; i < availableMsgs; i++) {
-    Message m = popMsg();
+    Message m = sharedState->popMsgCore1();
 
     if (isStop(m)) {
       // received ack for stopping some buffers, this means that we can start updating them
@@ -141,7 +141,7 @@ void Core1State::triggerSound(uint8_t buf, uint32_t sound) {
   Serial.print("core1 - Sending stop message for buffer: ");
   Serial.println(buf);
 
-  if (!pushMsg(stopMsg)) {
+  if (!(sharedState->sendMsgToCore0(stopMsg))) {
     Serial.println("core1 - ERROR cannot push trigger stop message");
   }
 }

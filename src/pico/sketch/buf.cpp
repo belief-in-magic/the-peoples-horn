@@ -85,7 +85,11 @@ uint32_t Buf::prepareNextSector() {
 
   if (!res) {
     Serial.println("Error trying to read from SD card");
+
+    while(true) {;}
   }
+
+
 
   sectorsWritten++;
   nextSectorReady = false;

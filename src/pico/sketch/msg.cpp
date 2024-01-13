@@ -61,19 +61,4 @@ uint32_t setFirstNBits(uint8_t n) {
   return (1 << n) - 1;
 }
 
-
-uint32_t numQueuedMsgs() {
-  return rp2040.fifo.available();
-}
-
-Message popMsg() {
-  return rp2040.fifo.pop();
-}
-
-bool pushMsg(Message m) {
-
-  return rp2040.fifo.push_nb(m);
-
-}
-
 } // namespace msg
