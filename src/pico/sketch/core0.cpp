@@ -32,21 +32,21 @@ void Core0State::handleInboundMsgs() {
     Message m = sharedState->popMsgCore0();
 
     if (isStop(m)) {
-      Serial.print("core0 - receiving stop message: ");
-      Serial.println(m, BIN);
+      //Serial.print("core0 - receiving stop message: ");
+      //Serial.println(m, BIN);
 
       // stop all relevant buffers, and then ack this msg
       for (int b = 0; b <  MAX_CONCURRENT_SOUNDS; b++) {
         if (stopMsgContainsBuf(m, b)) {
 
-          Serial.print("core0 - stopping core: ");
-          Serial.println(b);
+          //Serial.print("core0 - stopping core: ");
+          //Serial.println(b);
 
           resetBuffer(b);
         }
       }
 
-      Serial.println("core0 - sending ack to stop message");
+      //Serial.println("core0 - sending ack to stop message");
       bool r = sharedState->sendMsgToCore1(m);
 
       if (r == false) {
@@ -62,10 +62,10 @@ void Core0State::handleInboundMsgs() {
         currPointers[buffer] = 0;
       }
 
-      Serial.print("core0 - receiving ready for buffer/sector: ");
-      Serial.print(buffer);
-      Serial.print("/");
-      Serial.println(sectorId);
+      //Serial.print("core0 - receiving ready for buffer/sector: ");
+      //Serial.print(buffer);
+      //Serial.print("/");
+      //Serial.println(sectorId);
 
       if (!((mostRecentReadySector[buffer] == sectorId) || (mostRecentReadySector[buffer]+1 == sectorId))) {
         Serial.println("core0 - ERROR: Unexpected sector id");
@@ -129,10 +129,10 @@ bool Core0State::proceedToRead(uint8_t buffer) {
 
       Message m = sectorReadyMsg(buffer, readySector);
 
-      Serial.print("core0 - Sending message to signal starting to read from a buffer/sector: ");
-      Serial.print(buffer);
-      Serial.print("/");
-      Serial.println(readySector);
+      //Serial.print("core0 - Sending message to signal starting to read from a buffer/sector: ");
+      //Serial.print(buffer);
+      //Serial.print("/");
+      //Serial.println(readySector);
 
       bool r = sharedState->sendMsgToCore1(m);
 
@@ -144,7 +144,6 @@ bool Core0State::proceedToRead(uint8_t buffer) {
     return true;
   } else if (readySector == currentSector+1) {
 
-    //return currPointer < (SINGLE_BUFFER_SIZE*(currentSector+1));
     return true;
 
   } else {

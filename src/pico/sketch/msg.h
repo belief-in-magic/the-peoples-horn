@@ -21,6 +21,8 @@ enum OpCode {
   NOOP   // TODO
 };
 
+
+// TODO start using bitfields?
 typedef uint32_t Message;
 
 

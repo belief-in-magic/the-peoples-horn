@@ -3,6 +3,8 @@
 #include <SPI.h>
 #include <SD.h>
 
+#include "input.h"
+
 #include "core0.h"
 #include "core1.h"
 
@@ -19,6 +21,8 @@ I2S i2s(OUTPUT);
 SharedState sharedState;
 Core0State core0State(&sharedState, &i2s);
 Core1State core1State(&sharedState);
+
+InputState tInputState;
 
 void setup() {
 
@@ -53,8 +57,6 @@ void setup1() {
   rp2040.fifo.pop();
   core1State.setup();
   rp2040.fifo.push(123);
-
-  //core1State.triggerSound(0, 1);
 }
 
 
@@ -66,8 +68,10 @@ void loop() {
 int timesRun = 1;
 
 void loop1() {
-  core1State.loop();
 
+
+  core1State.loop();
+  /*
   if (millis() > timesRun*3000) {
     core1State.triggerSound(0, 10);
     core1State.triggerSound(1, 11);
@@ -76,16 +80,7 @@ void loop1() {
     timesRun++;
   }
 
-/*
-  if (millis() > 12000 && !triggered1) {
-
-    triggered1 = true;
-  }
-
-  if (millis() > 18000 && !triggered2) {
-    core1State.triggerSound(0, 3);
-    triggered2 = true;
-  }
   */
+
 }
 

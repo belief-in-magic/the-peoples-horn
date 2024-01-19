@@ -17,13 +17,8 @@ operation given that we read from the SD card using SPI. For 20kb this takes aro
 #include <SD.h>
 #include <SPI.h>
 #include "sharedState.h"
+#include "input.h"
 #include "msg.h"
-
-// GPIO pin numbers for main buttons TODO move this into its own InputState class file
-#define SB0 12
-#define SB1 13
-#define SB2 14
-#define SB3 15
 
 // GPIO for sd card in spi mode (pico w tested only, you may need to change this depending on hardware)
 #define pSD_CS 5
@@ -36,12 +31,13 @@ class Core1State {
 
   SharedState* sharedState;
 
+  InputState inputState;
+
   uint32_t highestAckedSector[MAX_CONCURRENT_SOUNDS]; // what is this for again?
   uint32_t prepareNext[MAX_CONCURRENT_SOUNDS];
 
   private:
     void setUpSD();
-    void setUpInput();
     void handleInboundMsgs();
 
   public:

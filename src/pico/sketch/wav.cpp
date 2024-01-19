@@ -114,11 +114,11 @@ bool Wav::readData(uint8_t* buf, uint32_t size) {
     return false;
   }
 
-  Serial.print("core1 - Reading SD card. From: ");
-  Serial.println(file.position());
+  //Serial.print("core1 - Reading SD card. From: ");
+  //Serial.println(file.position());
 
-  Serial.print("core1 - size: ");
-  Serial.println(size);
+  //Serial.print("core1 - size: ");
+  //Serial.println(size);
 
   int v = file.read(buf, size);
 
@@ -144,7 +144,7 @@ bool Wav::readData(uint8_t* buf, uint32_t size) {
     return false;
   }
 
-  Serial.println("core1 - Done reading from sd card");
+  //Serial.println("core1 - Done reading from sd card");
 
   return true;
 }
