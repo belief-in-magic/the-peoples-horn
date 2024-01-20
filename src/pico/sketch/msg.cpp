@@ -20,6 +20,11 @@ bool isNoop(Message m) {
   return getOpCode(m) == NOOP;
 }
 
+bool isDone(Message m) {
+  return getOpCode(m) == DONE;
+}
+
+
 bool stopMsgContainsBuf(Message m, uint8_t bufId) {
   return ((m >> bufId) % 2) == 1;
 }
@@ -60,5 +65,14 @@ uint32_t setFirstNBits(uint8_t n) {
 
   return (1 << n) - 1;
 }
+
+Message doneMsg(uint8_t bufId) {
+  return (DONE << (32 - OP_CODE_LEN)) | ((uint32_t) bufId);
+}
+
+uint8_t doneMsgGetBuf(Message m) {
+  return (m << OP_CODE_LEN) >> OP_CODE_LEN;
+}
+
 
 } // namespace msg

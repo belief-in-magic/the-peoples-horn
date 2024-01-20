@@ -68,7 +68,12 @@ void Core0State::handleInboundMsgs() {
       //Serial.println(sectorId);
 
       if (!((mostRecentReadySector[buffer] == sectorId) || (mostRecentReadySector[buffer]+1 == sectorId))) {
-        Serial.println("core0 - ERROR: Unexpected sector id");
+        Serial.print("core0 - ERROR: Unexpected sector id, buffer/sector: ");
+        Serial.print(buffer);
+        Serial.print("/");
+        Serial.println(sectorId);
+        Serial.print("most recent ready: ");
+        Serial.println(mostRecentReadySector[buffer]);
       }
 
       mostRecentReadySector[buffer] = sectorId;
@@ -100,7 +105,7 @@ int16_t Core0State::readBuffers() {
     }
   }
 
-  int16_t sampleAdjusted = ((int16_t) max(-32766, min(32766, sum)))/2 ;
+  int16_t sampleAdjusted = ((int16_t) max(-32766, min(32766, sum))) / 4 ;
 
   return sampleAdjusted;
 }
@@ -113,17 +118,51 @@ void Core0State::sendI2S(int16_t sample) {
   i2s->write(sample);
 }
 
-
+// TODO remove stateful operations/messaging from this function
 bool Core0State::proceedToRead(uint8_t buffer) {
   using namespace msg;
 
   uint32_t currPointer = currPointers[buffer];
   uint32_t currentSector = currPointer / SINGLE_BUFFER_SIZE;
   uint32_t readySector = mostRecentReadySector[buffer];
+  uint32_t maxSectors = ((sharedState->buffers)[buffer]).getNumSectors();
 
-  if (!activeBuffers[buffer] || currentSector > readySector) {
+  // Buffer is not active
+  if (!activeBuffers[buffer]) {
     return false;
-  } else if (readySector == currentSector) {
+  }
+
+  // Sound has completed, but we have not set this buffer to inactive yet
+  if (currentSector > maxSectors) {
+    activeBuffers[buffer] = false;
+    // send message done message to
+    Message m = doneMsg(buffer);
+    bool r = sharedState->sendMsgToCore1(m);
+
+
+    Serial.print("core0 - Sending done message for buffer/currentSector: ");
+    Serial.print(buffer);
+    Serial.print("/");
+    Serial.println(currentSector);
+
+    if (r == false) {
+      Serial.println("ERROR: Cannot push ready msg ack.");
+    }
+
+    return false;
+  }
+
+  // First core has not completed writing the next sector
+  if (currentSector > readySector) {
+    return false;
+  }
+
+
+  if (readySector == currentSector + 1) {
+      return true;
+  }
+
+  if (readySector == currentSector) {
 
     if (currPointer % SINGLE_BUFFER_SIZE == 0) { // we have started to read from a new buffer
 
@@ -140,9 +179,6 @@ bool Core0State::proceedToRead(uint8_t buffer) {
         Serial.println("ERROR: Cannot push ready msg ack.");
       }
     }
-
-    return true;
-  } else if (readySector == currentSector+1) {
 
     return true;
 

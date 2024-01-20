@@ -96,7 +96,6 @@ uint32_t Buf::prepareNextSector() {
   }
 
 
-
   sectorsWritten++;
   nextSectorReady = false;
 
@@ -112,3 +111,6 @@ void Buf::closeSource() {
 }
 
 
+uint32_t Buf::getNumSectors() {
+  return numSectors;
+}

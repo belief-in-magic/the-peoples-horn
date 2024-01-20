@@ -17,6 +17,7 @@ namespace msg {
 enum OpCode {
   STOP,
   READY,
+  DONE,
   CHANGE, // TODO
   NOOP   // TODO
 };
@@ -30,6 +31,7 @@ OpCode getOpCode(Message m);
 bool isStop(Message m);
 bool isReady(Message m);
 bool isNoop(Message m);
+bool isDone(Message m);
 
 bool stopMsgContainsBuf(Message m, uint8_t bufId);
 Message stopMsgEmpty();
@@ -39,6 +41,9 @@ uint8_t readyMsgGetBuf(Message m);
 uint32_t readyMsgGetSector(Message m);
 
 Message sectorReadyMsg(uint8_t buffer, uint32_t sectorId);
+
+Message doneMsg(uint8_t bufId);
+uint8_t doneMsgGetBuf(Message m);
 
 uint32_t firstNBits(uint32_t val, uint8_t n);
 uint32_t setFirstNBits(uint8_t n);

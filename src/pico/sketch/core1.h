@@ -17,6 +17,7 @@ operation given that we read from the SD card using SPI. For 20kb this takes aro
 #include <SD.h>
 #include <SPI.h>
 #include "sharedState.h"
+#include "soundPolicy.h"
 #include "input.h"
 #include "msg.h"
 
@@ -32,6 +33,7 @@ class Core1State {
   SharedState* sharedState;
 
   InputState inputState;
+  SoundPolicy soundPolicy;
 
   uint32_t highestAckedSector[MAX_CONCURRENT_SOUNDS]; // what is this for again?
   uint32_t prepareNext[MAX_CONCURRENT_SOUNDS];

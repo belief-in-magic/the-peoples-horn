@@ -4,7 +4,7 @@
 #include <cstdint>
 #include "wav.h"
 
-#define SINGLE_BUFFER_SIZE 10000 // TODO figure out why setting this to 10k doesn't work
+#define SINGLE_BUFFER_SIZE 10000
 #define DOUBLE_BUFFER_SIZE (2*SINGLE_BUFFER_SIZE)
 
 class Buf {
@@ -27,6 +27,7 @@ class Buf {
 
     // only used by the first core
     int32_t readSample(uint32_t ptr);
+    uint32_t getNumSectors();
 
     // following are used by the second core
     bool newSource(uint32_t sound);

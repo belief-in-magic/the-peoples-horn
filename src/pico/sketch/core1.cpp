@@ -52,10 +52,16 @@ void Core1State::loop() {
 
     }
 
-    std::optional<uint32_t> v = inputState.tick();
+    std::optional<uint32_t> soundToPlay = inputState.tick();
 
-    if (v) {
-      triggerSound(0, *v);
+    if (soundToPlay) {
+
+      uint8_t bufToPlay = soundPolicy.evictBuffer();
+
+      Serial.print("Evicting to play: ");
+      Serial.println(bufToPlay);
+
+      triggerSound(bufToPlay, *soundToPlay);
     }
 
   }
@@ -102,6 +108,15 @@ void Core1State::handleInboundMsgs() {
 
       Buf* bufPtr = ((sharedState->buffers) + readyBuffer);
       bufPtr->markNextSectorReady(); // mark the sector as ready to be written to
+    } else if (isDone(m)) {
+
+      Serial.print("core1 - Receiving is done message: ");
+      Serial.println(m, BIN);
+
+      uint8_t finishedBuffer = doneMsgGetBuf(m);
+
+      soundPolicy.setComplete(finishedBuffer);
+
     } else {
       Serial.println("core1 - Unrecognized msg");
     }
