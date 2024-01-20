@@ -24,10 +24,8 @@ void Core1State::loop() {
 
     Buf* currBufPtr = ((sharedState->buffers) + i);
 
-    if (currBufPtr->isNextSectorReady()) {
-
-      //Serial.print("core1 - preparing sector for buffer: ");
-      //Serial.println(i);
+    // if the next sector is ready, AND we are not currently waiting for the ack to stop a buffer
+    if (prepareNext[i] == 0 && currBufPtr->isNextSectorReady()) {
 
       uint32_t newSector = currBufPtr->prepareNextSector();
 
@@ -38,10 +36,10 @@ void Core1State::loop() {
         while(true) {;}
       }
 
-      //Serial.print("core1 - Sending sector ready for buffer/sector: ");
-      //Serial.print(i);
-      //Serial.print("/");
-      //Serial.println(newSector);
+      Serial.print("core1 - Sending sector ready for buffer/sector: ");
+      Serial.print(i);
+      Serial.print("/");
+      Serial.println(newSector);
 
       // send ready message to tell the first core that this sector, for this core, is ready
       Message readyMsg = sectorReadyMsg(i, newSector);
@@ -58,7 +56,7 @@ void Core1State::loop() {
 
       uint8_t bufToPlay = soundPolicy.evictBuffer();
 
-      Serial.print("Evicting to play: ");
+      Serial.print("core1 - Evicting to play: ");
       Serial.println(bufToPlay);
 
       triggerSound(bufToPlay, *soundToPlay);
@@ -156,8 +154,8 @@ void Core1State::triggerSound(uint8_t buf, uint32_t sound) {
   Message stopMsg = stopMsgEmpty();
   stopMsg = stopMsgWithBuf(stopMsg, buf);
 
-  //Serial.print("core1 - Sending stop message for buffer: ");
-  //Serial.println(buf);
+  Serial.print("core1 - Sending stop message for buffer: ");
+  Serial.println(buf);
 
   if (!(sharedState->sendMsgToCore0(stopMsg))) {
     Serial.println("core1 - ERROR cannot push trigger stop message");

@@ -1,21 +1,30 @@
-52 49 46 46 -- RIFF
-A4 B0 1 0
-57 41 56 45 -- WAVE
-66 6D 74 20 -- fmt
-10 0 0 0
-1 0
-1 0
-44 AC 0 0
-88 58 1 0
-2 0
-10 0
+core1: creating new sound in buffer. Datasize:110686, sectors: 12               
+Evicting to play: 1                                                             
+FILENAME: 0011.wav                                                              
+core1: creating new sound in buffer. Datasize:368640, sectors: 37               
+Evicting to play: 0                                                             
+FILENAME: 0001.wav                                                              
+core1: creating new sound in buffer. Datasize:110686, sectors: 12               
+Evicting to play: 3                                                             
+FILENAME: 0001.wav                                                              
+core1: creating new sound in buffer. Datasize:110686, sectors: 12               
+Evicting to play: 2                                                             
+FILENAME: 0101.wav                                                              
+core1: creating new sound in buffer. Datasize:1647360, sectors: 165             
+Evicting to play: 1                                                             
+FILENAME: 0001.wav                                                              
+core1: creating new sound in buffer. Datasize:110686, sectors: 12               
+Evicting to play: 0                                                             
+FILENAME: 0010.wav                                                              
+core1: creating new sound in buffer. Datasize:499712, sectors: 50               
+Evicting to play: 3                                                             
+FILENAME: 0001.wav                                                              
+core1: creating new sound in buffer. Datasize:110686, sectors: 12               
+Evicting to play: 2                                                             
+FILENAME: 0011.wav                                                              
+core0 - ERROR: Unexpected sector id, buffer/sector: 2/41                        
+most recent ready: 0                                                            
+core1: creating new sound in buffer. Datasize:368640, sectors: 37               
+core0 - ERROR: Unexpected sector id, buffer/sector: 2/0                         
+most recent ready: 41                                                           
 
-4C 49 53 54 -- LIST
-1A 0 0 0 -- 26 size
-49 4E 46 4F 49 53
-46 54 D 0 0 0 4C 61 76 66 36 30 2E 33 2E 31 30 30 0 0
-
-64 61 74 61 -- DATA
-5E B0 1 0 -- 110686 size
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 ...

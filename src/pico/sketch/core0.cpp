@@ -32,15 +32,15 @@ void Core0State::handleInboundMsgs() {
     Message m = sharedState->popMsgCore0();
 
     if (isStop(m)) {
-      //Serial.print("core0 - receiving stop message: ");
-      //Serial.println(m, BIN);
+      Serial.print("core0 - receiving stop message: ");
+      Serial.println(m, BIN);
 
       // stop all relevant buffers, and then ack this msg
       for (int b = 0; b <  MAX_CONCURRENT_SOUNDS; b++) {
         if (stopMsgContainsBuf(m, b)) {
 
-          //Serial.print("core0 - stopping core: ");
-          //Serial.println(b);
+          Serial.print("core0 - stopping core: ");
+          Serial.println(b);
 
           resetBuffer(b);
         }
@@ -74,6 +74,8 @@ void Core0State::handleInboundMsgs() {
         Serial.println(sectorId);
         Serial.print("most recent ready: ");
         Serial.println(mostRecentReadySector[buffer]);
+
+        while (true) {;}
       }
 
       mostRecentReadySector[buffer] = sectorId;
@@ -133,9 +135,10 @@ bool Core0State::proceedToRead(uint8_t buffer) {
   }
 
   // Sound has completed, but we have not set this buffer to inactive yet
-  if (currentSector > maxSectors) {
+  if (currentSector >= maxSectors) {
     activeBuffers[buffer] = false;
     // send message done message to
+
     Message m = doneMsg(buffer);
     bool r = sharedState->sendMsgToCore1(m);
 
