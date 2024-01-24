@@ -10,10 +10,11 @@
 class SoundPolicy {
 
   uint8_t bufferOrder[MAX_CONCURRENT_SOUNDS];
+  uint32_t currentPlaying[MAX_CONCURRENT_SOUNDS];
 
   public:
     SoundPolicy();
 
     void setComplete(uint8_t bufferId);
-    uint8_t evictBuffer();
+    uint8_t evictBuffer(uint32_t soundToPlay);
 };

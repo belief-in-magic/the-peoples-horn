@@ -32,15 +32,15 @@ void Core0State::handleInboundMsgs() {
     Message m = sharedState->popMsgCore0();
 
     if (isStop(m)) {
-      Serial.print("core0 - receiving stop message: ");
-      Serial.println(m, BIN);
+      //Serial.print("core0 - receiving stop message: ");
+      //Serial.println(m, BIN);
 
       // stop all relevant buffers, and then ack this msg
       for (int b = 0; b <  MAX_CONCURRENT_SOUNDS; b++) {
         if (stopMsgContainsBuf(m, b)) {
 
-          Serial.print("core0 - stopping core: ");
-          Serial.println(b);
+          //Serial.print("core0 - stopping core: ");
+          //Serial.println(b);
 
           resetBuffer(b);
         }
@@ -143,10 +143,10 @@ bool Core0State::proceedToRead(uint8_t buffer) {
     bool r = sharedState->sendMsgToCore1(m);
 
 
-    Serial.print("core0 - Sending done message for buffer/currentSector: ");
-    Serial.print(buffer);
-    Serial.print("/");
-    Serial.println(currentSector);
+    //Serial.print("core0 - Sending done message for buffer/currentSector: ");
+    //Serial.print(buffer);
+    //Serial.print("/");
+    //Serial.println(currentSector);
 
     if (r == false) {
       Serial.println("ERROR: Cannot push ready msg ack.");

@@ -21,10 +21,10 @@ bool Buf::newSource(uint32_t sound) {
     ? dataSize/SINGLE_BUFFER_SIZE
     : dataSize/SINGLE_BUFFER_SIZE + 1;
 
-  Serial.print("core1: creating new sound in buffer. Datasize:");
-  Serial.print(dataSize);
-  Serial.print(", sectors: ");
-  Serial.println(numSectors);
+  //Serial.print("core1: creating new sound in buffer. Datasize:");
+  //Serial.print(dataSize);
+  //Serial.print(", sectors: ");
+  //Serial.println(numSectors);
 
 
   markNextSectorReady();

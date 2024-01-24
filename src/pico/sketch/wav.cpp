@@ -174,6 +174,6 @@ void Wav::writeFileName(uint32_t soundId) {
   }
   sprintf(filename+i, ".wav");
 
-  Serial.print("FILENAME: ");
-  Serial.println(filename);
+  //Serial.print("FILENAME: ");
+  //Serial.println(filename);
 }
