@@ -62,10 +62,10 @@ void Core0State::handleInboundMsgs() {
         currPointers[buffer] = 0;
       }
 
-      //Serial.print("core0 - receiving ready for buffer/sector: ");
-      //Serial.print(buffer);
-      //Serial.print("/");
-      //Serial.println(sectorId);
+      Serial.print("core0 - receiving ready for buffer/sector: ");
+      Serial.print(buffer);
+      Serial.print("/");
+      Serial.println(sectorId);
 
       if (!((mostRecentReadySector[buffer] == sectorId) || (mostRecentReadySector[buffer]+1 == sectorId))) {
         Serial.print("core0 - ERROR: Unexpected sector id, buffer/sector: ");
@@ -98,7 +98,6 @@ int16_t Core0State::readBuffers() {
       uint32_t offset = currPointers[i] % DOUBLE_BUFFER_SIZE;
       uint32_t rawSampleValue = ((sharedState->buffers)[i]).readSample(offset);
 
-      //rawSampleValue = 0;
 
       sum += (int32_t) ((int16_t) rawSampleValue);
 
