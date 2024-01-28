@@ -18,10 +18,13 @@
 
 // GPIO pin numbers for main buttons
 #define NUM_SOUND_BUTTONS 4
-#define SB0 12
-//#define SB1 13
-//#define SB2 14
-//#define SB3 15
+#define SOUND_B0 12
+//#define SOUND_B1 13
+//#define SOUND_B2 14
+//#define SOUND_B3 15
+
+#define MUTE_B 16
+
 
 
 class InputState {
@@ -33,6 +36,8 @@ class InputState {
     bool isActive[NUM_SOUND_BUTTONS];
 
     uint64_t lastChordStart;
+    uint64_t lastMuted;
+
     bool chordStarted;
     uint32_t currentChord;
 
@@ -40,9 +45,11 @@ class InputState {
 
     uint32_t pollSoundButtonsWithInactiveCooldown();
 
+    bool pollMuteButton();
+
 
   public:
     InputState();
-    std::optional<uint32_t> tick(); // potentially returns soundId
-
+    std::optional<uint32_t> getNextSound();
+    bool isMuted();
 };

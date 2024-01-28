@@ -50,7 +50,12 @@ void Core1State::loop() {
 
     }
 
-    std::optional<uint32_t> soundToPlay = inputState.tick();
+    //if (inputState.isMuted()) {
+    //  Serial.println("Muting");
+    // isMuted = true;
+    //}
+
+    std::optional<uint32_t> soundToPlay = inputState.getNextSound();
 
     if (soundToPlay) {
 

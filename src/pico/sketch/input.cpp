@@ -6,12 +6,12 @@ InputState::InputState() {
   for (int i = 0; i < NUM_SOUND_BUTTONS; i++) {
     isActive[i] = false;
     lastChange[i] = 0;
-
   }
 
   lastChordStart = 0;
   chordStarted = false;
   currentChord = 0;
+  lastMuted = 0;
 
   setUpInputIO();
 }
@@ -19,7 +19,7 @@ InputState::InputState() {
 void InputState::setUpInputIO() {
 
   for (int i = 0; i < NUM_SOUND_BUTTONS; i++) {
-    pinMode(SB0+i, INPUT);
+    pinMode(SOUND_B0+i, INPUT);
   }
 
 }
@@ -31,11 +31,22 @@ uint32_t InputState::pollSoundButtonsWithInactiveCooldown() {
   uint64_t currentTime = millis();
 
   for (int i = 0; i < NUM_SOUND_BUTTONS; i++) {
-    pinIsActive = digitalRead(SB0+i) == SOUND_BUTTON_ACTIVE;
+    pinIsActive = digitalRead(SOUND_B0+i) == SOUND_BUTTON_ACTIVE;
 
-    if ((pinIsActive != isActive[i]) && (currentTime - lastChange[i]) > DEBOUNCE_MS) {
+    if ((currentTime - lastChange[i]) > DEBOUNCE_MS) {
 
-       lastChange[i] = currentTime;
+       if (isActive[i] != pinIsActive) {
+         lastChange[i] = currentTime;
+         isActive[i] = pinIsActive;
+
+         // start chord if not already started
+         if (pinIsActive && !chordStarted) {
+           chordStarted = true;
+           lastChordStart = currentTime;
+           currentChord = 0;
+         }
+
+       }
 
        if (pinIsActive) {
          v |= (1 << i);
@@ -50,7 +61,28 @@ uint32_t InputState::pollSoundButtonsWithInactiveCooldown() {
   return v;
 }
 
-std::optional<uint32_t> InputState::tick() {
+
+bool InputState::pollMuteButton() {
+
+  return digitalRead(MUTE_B);
+}
+
+bool InputState::isMuted() {
+
+  uint64_t currentTime = millis();
+
+  bool muteCapture = pollMuteButton();
+
+  if (muteCapture && (currentTime-lastMuted) > DEBOUNCE_MS) {
+    lastMuted = currentTime;
+    return true;
+  }
+
+  return false;
+}
+
+// TODO tidy up this
+std::optional<uint32_t> InputState::getNextSound() {
 
   uint64_t currentTime = millis();
 
@@ -67,14 +99,6 @@ std::optional<uint32_t> InputState::tick() {
       lastChordStart = currentTime;
 
       return currentChord;
-    }
-  } else { // otherwise check for any new chords
-
-    if (buttonCapture > 0) {
-      chordStarted = true;
-      lastChordStart = currentTime;
-      currentChord = buttonCapture;
-
     }
   }
 
