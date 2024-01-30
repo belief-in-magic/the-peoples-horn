@@ -12,6 +12,7 @@ InputState::InputState() {
   chordStarted = false;
   currentChord = 0;
   lastMuted = 0;
+  muteState = false;
 
   setUpInputIO();
 }
@@ -21,6 +22,8 @@ void InputState::setUpInputIO() {
   for (int i = 0; i < NUM_SOUND_BUTTONS; i++) {
     pinMode(SOUND_B0+i, INPUT);
   }
+
+  pinMode(MUTE_B, INPUT);
 
 }
 
@@ -63,8 +66,7 @@ uint32_t InputState::pollSoundButtonsWithInactiveCooldown() {
 
 
 bool InputState::pollMuteButton() {
-
-  return digitalRead(MUTE_B);
+  return digitalRead(MUTE_B) == SOUND_BUTTON_ACTIVE;
 }
 
 bool InputState::isMuted() {
@@ -73,12 +75,13 @@ bool InputState::isMuted() {
 
   bool muteCapture = pollMuteButton();
 
-  if (muteCapture && (currentTime-lastMuted) > DEBOUNCE_MS) {
+  if ((currentTime-lastMuted) > DEBOUNCE_MS) {
     lastMuted = currentTime;
-    return true;
+    muteState = muteCapture;
+    return muteCapture;
   }
 
-  return false;
+  return muteState;
 }
 
 // TODO tidy up this

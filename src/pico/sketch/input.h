@@ -23,7 +23,7 @@
 //#define SOUND_B2 14
 //#define SOUND_B3 15
 
-#define MUTE_B 16
+#define MUTE_B 11
 
 
 
@@ -37,6 +37,7 @@ class InputState {
 
     uint64_t lastChordStart;
     uint64_t lastMuted;
+    bool muteState;
 
     bool chordStarted;
     uint32_t currentChord;

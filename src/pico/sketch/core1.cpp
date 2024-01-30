@@ -7,6 +7,9 @@ Core1State::Core1State(SharedState* ss) {
 }
 
 void Core1State::setup() {
+
+  isMuted = false;
+
   for (int i = 0; i < MAX_CONCURRENT_SOUNDS; i++) {
     highestAckedSector[i] = 0;
     prepareNext[i] = 0;
@@ -21,6 +24,35 @@ void Core1State::loop() {
   for (int i = 0; i < MAX_CONCURRENT_SOUNDS; i++) {
 
     handleInboundMsgs();
+
+
+    if (inputState.isMuted() && !isMuted) {
+      Serial.println("Muting");
+      isMuted = true;
+
+      // send message to stop all active buffers
+      Message stopMsg = stopMsgEmpty();
+
+      for (int b = 0; b < MAX_CONCURRENT_SOUNDS; b++) {
+        prepareNext[b] = 0; // set to null sound
+        stopMsg = stopMsgWithBuf(stopMsg, b);
+      }
+
+      if (!(sharedState->sendMsgToCore0(stopMsg))) {
+        Serial.println("core1 - ERROR cannot push trigger MUTE stop message");
+      }
+
+    }
+
+    if (!inputState.isMuted() && isMuted) {
+      Serial.println("Unmuting");
+      isMuted = false;
+
+      // flush any messages
+    }
+
+    if (isMuted) continue;
+
 
     Buf* currBufPtr = ((sharedState->buffers) + i);
 
@@ -50,19 +82,14 @@ void Core1State::loop() {
 
     }
 
-    //if (inputState.isMuted()) {
-    //  Serial.println("Muting");
-    // isMuted = true;
-    //}
-
     std::optional<uint32_t> soundToPlay = inputState.getNextSound();
 
-    if (soundToPlay) {
+    if (soundToPlay && !isMuted) {
 
       uint8_t bufToPlay = soundPolicy.evictBuffer(*soundToPlay);
 
-      //Serial.print("core1 - Evicting to play: ");
-      //Serial.println(bufToPlay);
+      Serial.print("core1 - Evicting to play: ");
+      Serial.println(bufToPlay);
 
       triggerSound(bufToPlay, *soundToPlay);
     }
@@ -81,7 +108,7 @@ void Core1State::handleInboundMsgs() {
     if (isStop(m)) {
       // received ack for stopping some buffers, this means that we can start updating them
       for (int b = 0; b < MAX_CONCURRENT_SOUNDS; b++) {
-        if (stopMsgContainsBuf(m, b)) {
+        if (stopMsgContainsBuf(m, b) && (prepareNext[b] != 0)) {
 
           //Serial.print("core1 - receiving stop command (ack) for buffer: ");
           //Serial.println(b);
@@ -159,8 +186,8 @@ void Core1State::triggerSound(uint8_t buf, uint32_t sound) {
   Message stopMsg = stopMsgEmpty();
   stopMsg = stopMsgWithBuf(stopMsg, buf);
 
-  //Serial.print("core1 - Sending stop message for buffer: ");
-  //Serial.println(buf);
+  Serial.print("core1 - Sending stop message for buffer: ");
+  Serial.println(buf);
 
   if (!(sharedState->sendMsgToCore0(stopMsg))) {
     Serial.println("core1 - ERROR cannot push trigger stop message");

@@ -34,6 +34,7 @@ class Core1State {
 
   InputState inputState;
   SoundPolicy soundPolicy;
+  bool isMuted;
 
   uint32_t highestAckedSector[MAX_CONCURRENT_SOUNDS]; // what is this for again?
   uint32_t prepareNext[MAX_CONCURRENT_SOUNDS];

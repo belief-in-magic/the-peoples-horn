@@ -4,7 +4,7 @@
 // This is limited by both memory and compute constraints
 #define MAX_CONCURRENT_SOUNDS 4
 
-#define FIFO_LENGTH 32
+#define FIFO_LENGTH 64
 
 #include <cstdint>
 #include "buf.h"
@@ -24,7 +24,7 @@ class SharedState {
 
     // will return false if failed to add (queue is full)
     bool sendMsgToCore0(msg::Message m);
-    bool sendMsgToCore1(msg::Message m);
+    bool sendMsgToCore1(msg::Message m);]
 
     uint32_t availableMessagesCore0();
     uint32_t availableMessagesCore1();
