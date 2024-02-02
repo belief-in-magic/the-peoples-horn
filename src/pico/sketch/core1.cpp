@@ -51,8 +51,19 @@ void Core1State::loop() {
       // flush any messages
     }
 
-    if (isMuted) continue;
+    std::optional<uint32_t> soundToPlay = inputState.getNextSound();
 
+    if (soundToPlay && !isMuted) {
+
+      uint8_t bufToPlay = soundPolicy.evictBuffer(*soundToPlay);
+
+      Serial.print("core1 - Evicting to play: ");
+      Serial.println(bufToPlay);
+
+      triggerSound(bufToPlay, *soundToPlay);
+    }
+
+    if (isMuted) continue;
 
     Buf* currBufPtr = ((sharedState->buffers) + i);
 
@@ -80,18 +91,6 @@ void Core1State::loop() {
         Serial.println("core1 - ERROR: Cannot push ready msg");
       }
 
-    }
-
-    std::optional<uint32_t> soundToPlay = inputState.getNextSound();
-
-    if (soundToPlay && !isMuted) {
-
-      uint8_t bufToPlay = soundPolicy.evictBuffer(*soundToPlay);
-
-      Serial.print("core1 - Evicting to play: ");
-      Serial.println(bufToPlay);
-
-      triggerSound(bufToPlay, *soundToPlay);
     }
 
   }

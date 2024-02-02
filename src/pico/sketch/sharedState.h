@@ -24,7 +24,7 @@ class SharedState {
 
     // will return false if failed to add (queue is full)
     bool sendMsgToCore0(msg::Message m);
-    bool sendMsgToCore1(msg::Message m);]
+    bool sendMsgToCore1(msg::Message m);
 
     uint32_t availableMessagesCore0();
     uint32_t availableMessagesCore1();
