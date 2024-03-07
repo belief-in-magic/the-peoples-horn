@@ -124,7 +124,13 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      "power_pin_not_driven|838200|1562100|0d018a83-e4be-480a-9a50-f1b68b70e92d|00000000-0000-0000-0000-000000000000",
+      "power_pin_not_driven|838200|1562100|5dec219f-51b8-4801-97dd-5f3ac9027126|00000000-0000-0000-0000-000000000000",
+      "power_pin_not_driven|952500|419100|fa196e73-3a61-4b17-98eb-1f8dd73a9ae8|00000000-0000-0000-0000-000000000000",
+      "power_pin_not_driven|952500|444500|b2b1a641-ceeb-491f-b322-8f4694cb3bbb|00000000-0000-0000-0000-000000000000",
+      "power_pin_not_driven|952500|520700|0225e66c-005b-4641-9f6f-ae9499dd1ab5|00000000-0000-0000-0000-000000000000"
+    ],
     "meta": {
       "version": 0
     },
@@ -416,12 +422,12 @@
       ""
     ],
     [
-      "e16ea95c-086b-4535-9d1d-26407e7d1c16",
-      "Power"
-    ],
-    [
       "792c0ba8-28d7-4e30-aff1-9f3fa34c73f6",
       "Input"
+    ],
+    [
+      "4532e7a8-aa46-45fe-9bdb-5c2c6a438547",
+      "Power2"
     ]
   ],
   "text_variables": {}
