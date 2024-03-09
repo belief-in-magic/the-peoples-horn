@@ -85,6 +85,10 @@
         (name "GND" (effects (font (size 1.27 1.27))))
         (number "11" (effects (font (size 1.27 1.27))))
       )
+      (pin power_in line (at -11.43 -11.43 0) (length 2.54) hide
+        (name "THERMAL" (effects (font (size 1.27 1.27))))
+        (number "17" (effects (font (size 1.27 1.27))))
+      )
       (pin bidirectional line (at 11.43 -8.89 180) (length 2.54)
         (name "GAIN" (effects (font (size 1.27 1.27))))
         (number "2" (effects (font (size 1.27 1.27))))
@@ -96,10 +100,6 @@
       (pin output line (at 11.43 6.35 180) (length 2.54)
         (name "OUTP" (effects (font (size 1.27 1.27))))
         (number "9" (effects (font (size 1.27 1.27))))
-      )
-      (pin power_in line (at -11.43 -11.43 0) (length 2.54) hide
-        (name "GND" (effects (font (size 1.27 1.27))))
-        (number "THERMAL" (effects (font (size 1.27 1.27))))
       )
     )
     (symbol "MAX98357_1_1"
