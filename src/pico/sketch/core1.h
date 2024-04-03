@@ -4,7 +4,7 @@ Main class for the second core
 
 Tasks include:
   - Reading from the SD card, into the buffers
-  - Sending command messages to the first core, as well as receiving acks
+  - Sending command messages to the first core, as well as receiving Acks
   - Handling user IO, which includes managing the SharedState
 
 The bottleneck for the main loop is reading sectors from the SD card. This is actually quite an expensive

@@ -1,6 +1,5 @@
 #include "input.h"
 
-
 InputState::InputState() {
 
   for (int i = 0; i < NUM_SOUND_BUTTONS; i++) {
@@ -72,6 +71,8 @@ bool InputState::pollMuteButton() {
 bool InputState::isMuted() {
 
   uint64_t currentTime = millis();
+
+  return false;
 
   bool muteCapture = pollMuteButton();
 

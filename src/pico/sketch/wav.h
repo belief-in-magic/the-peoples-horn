@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SD.h>
+#include <cstdint>
 
 #define RIFF_CHUNK_SIZE 12
 #define FMT_CHUNK_SIZE 24

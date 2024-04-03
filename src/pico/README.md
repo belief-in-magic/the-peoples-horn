@@ -34,3 +34,14 @@ You can start a serial connection with minicom:
 ```
 minicom -D /dev/ttyACM0 -b 115200
 ```
+
+
+## Language Server
+
+```
+./arduino-language-server \
+ -clangd /usr/bin/clangd \
+ -cli ../arduino-cli \
+ -cli-config $HOME/.arduino15/arduino-cli.yaml \
+ -fqbn rp2040:rp2040:rpipicow sketch
+```

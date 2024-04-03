@@ -1,5 +1,4 @@
 #include "msg.h"
-#include <Arduino.h>
 
 namespace msg {
 

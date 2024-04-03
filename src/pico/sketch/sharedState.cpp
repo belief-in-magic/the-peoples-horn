@@ -41,11 +41,3 @@ msg::Message SharedState::popMsgCore1() {
   queue_remove_blocking(&core1Fifo, &m);
   return m;
 }
-
-clemence:
-old: 00000000000000000000000000000001
-new: CDB99E52000000000000000000000000
-
-jack:
-old: A5133EF2000000000000000000000000
-new:

@@ -79,10 +79,10 @@ void Core1State::loop() {
         while(true) {;}
       }
 
-      //Serial.print("core1 - Sending sector ready for buffer/sector: ");
-      //Serial.print(i);
-      //Serial.print("/");
-      //Serial.println(newSector);
+      Serial.print("core1 - Sending sector ready for buffer/sector: ");
+      Serial.print(i);
+      Serial.print("/");
+      Serial.println(newSector);
 
       // send ready message to tell the first core that this sector, for this core, is ready
       Message readyMsg = sectorReadyMsg(i, newSector);
@@ -109,8 +109,8 @@ void Core1State::handleInboundMsgs() {
       for (int b = 0; b < MAX_CONCURRENT_SOUNDS; b++) {
         if (stopMsgContainsBuf(m, b) && (prepareNext[b] != 0)) {
 
-          //Serial.print("core1 - receiving stop command (ack) for buffer: ");
-          //Serial.println(b);
+          Serial.print("core1 - receiving stop command (ack) for buffer: ");
+          Serial.println(b);
 
           // update buffer b with a new sound
           ((sharedState->buffers)[b]).newSource(prepareNext[b]);
@@ -125,10 +125,10 @@ void Core1State::handleInboundMsgs() {
       uint8_t readyBuffer = readyMsgGetBuf(m);
       uint32_t sector = readyMsgGetSector(m);
 
-      //Serial.print("core1 - receiving ready (ack) for buffer/sector: ");
-      //Serial.print(readyBuffer);
-      //Serial.print("/");
-      //Serial.println(sector);
+      Serial.print("core1 - receiving ready (ack) for buffer/sector: ");
+      Serial.print(readyBuffer);
+      Serial.print("/");
+      Serial.println(sector);
 
       if (readyBuffer >= MAX_CONCURRENT_SOUNDS) {
         Serial.println("core1 - Error: received buffer for ready msg is greater than MAX_CONCURRENT_SOUNDS");

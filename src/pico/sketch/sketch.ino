@@ -1,4 +1,3 @@
-
 #include <I2S.h>
 #include <SPI.h>
 #include <SD.h>
@@ -28,8 +27,9 @@ void setup() {
 
   Serial.begin(115200);
 
+
+  delay(3000);
   Serial.println("BEGIN ****************************************************");
-  delay(1000);
 
   Serial.println("core0 - starting setup");
 
@@ -65,22 +65,17 @@ void loop() {
 }
 
 
-int timesRun = 1;
-
+int timesRun = 0;
 void loop1() {
 
-
   core1State.loop();
-  /*
-  if (millis() > timesRun*3000) {
-    core1State.triggerSound(0, 10);
-    core1State.triggerSound(1, 11);
-    core1State.triggerSound(2, 6);
-    core1State.triggerSound(3, 5);
+
+  if (millis() > 5000 && timesRun == 0) {
+    Serial.println("Triggering sound");
+    core1State.triggerSound(2, 2);
+    //core1State.triggerSound(3, 5);
     timesRun++;
   }
-
-  */
-
+  
 }
 
