@@ -1119,6 +1119,11 @@
     (uuid fa72a91b-1040-4270-9a88-0af4918c4111)
   )
 
+  (text "TODO: the buttons are crossed\nB1 should be for SW2\nB2 shoudl be for SW4"
+    (at 184.15 34.29 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 0f57fbe7-a300-45e0-8c40-e7b575ba45a1)
+  )
   (text "todo: make local?\n" (at 133.985 134.62 0)
     (effects (font (size 1.27 1.27) italic) (justify left bottom))
     (uuid 4fcce4d7-9c95-46c8-baf0-1507dbba1472)

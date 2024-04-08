@@ -57,6 +57,7 @@ void setup1() {
   rp2040.fifo.pop();
   core1State.setup();
   rp2040.fifo.push(123);
+
 }
 
 
@@ -67,8 +68,9 @@ void loop() {
 
 int timesRun = 0;
 void loop1() {
-
+  
   core1State.loop();
+  /*
 
   if (millis() > 5000 && timesRun == 0) {
     Serial.println("Triggering sound");
@@ -76,6 +78,8 @@ void loop1() {
     //core1State.triggerSound(3, 5);
     timesRun++;
   }
+
+  */
   
 }
 

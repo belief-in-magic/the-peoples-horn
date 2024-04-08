@@ -18,11 +18,10 @@ InputState::InputState() {
 
 void InputState::setUpInputIO() {
 
-  for (int i = 0; i < NUM_SOUND_BUTTONS; i++) {
-    pinMode(SOUND_B0+i, INPUT);
-  }
-
-  pinMode(MUTE_B, INPUT);
+  pinMode(SOUND_S0, OUTPUT);
+  pinMode(SOUND_S1, OUTPUT);
+  pinMode(SOUND_S2, OUTPUT);
+  pinMode(SOUND_A, INPUT);
 
 }
 
@@ -33,9 +32,9 @@ uint32_t InputState::pollSoundButtonsWithInactiveCooldown() {
   uint64_t currentTime = millis();
 
   for (int i = 0; i < NUM_SOUND_BUTTONS; i++) {
-    pinIsActive = digitalRead(SOUND_B0+i) == SOUND_BUTTON_ACTIVE;
-
-    if ((currentTime - lastChange[i]) > DEBOUNCE_MS) {
+      pinIsActive = pollSoundButton(i);
+      
+      if ((currentTime - lastChange[i]) > DEBOUNCE_MS) {
 
        if (isActive[i] != pinIsActive) {
          lastChange[i] = currentTime;
@@ -63,16 +62,46 @@ uint32_t InputState::pollSoundButtonsWithInactiveCooldown() {
   return v;
 }
 
+bool InputState::pollSoundButton(int button) {
+    
+    if (button == 0) {
+        digitalWrite(SOUND_S0, HIGH);
+        digitalWrite(SOUND_S1, LOW);
+        digitalWrite(SOUND_S2, LOW);
+    } else if (button == 1) {
+        digitalWrite(SOUND_S0, HIGH); // button 1 and 2 are swapped in the hardware, this is a bug
+        digitalWrite(SOUND_S1, HIGH);
+        digitalWrite(SOUND_S2, LOW);
+    } else if (button == 2) {
+        digitalWrite(SOUND_S0, LOW);
+        digitalWrite(SOUND_S1, HIGH);
+        digitalWrite(SOUND_S2, LOW);
+    } else if (button == 3) {
+        digitalWrite(SOUND_S0, LOW);
+        digitalWrite(SOUND_S1, LOW);
+        digitalWrite(SOUND_S2, HIGH);
+    }
+
+    delay(2);
+
+    return digitalRead(SOUND_A) == SOUND_ACTIVE;
+}
+
 
 bool InputState::pollMuteButton() {
-  return digitalRead(MUTE_B) == SOUND_BUTTON_ACTIVE;
+
+    digitalWrite(SOUND_S0, HIGH);
+    digitalWrite(SOUND_S1, HIGH);
+    digitalWrite(SOUND_S2, HIGH);
+    delay(2);
+
+    
+    return digitalRead(SOUND_A) == SOUND_ACTIVE;
 }
 
 bool InputState::isMuted() {
 
   uint64_t currentTime = millis();
-
-  return false;
 
   bool muteCapture = pollMuteButton();
 

@@ -14,17 +14,13 @@
 
 #define DEBOUNCE_MS 40
 
-#define SOUND_BUTTON_ACTIVE 0
-
-// GPIO pin numbers for main buttons
 #define NUM_SOUND_BUTTONS 4
-#define SOUND_B0 12
-//#define SOUND_B1 13
-//#define SOUND_B2 14
-//#define SOUND_B3 15
 
-#define MUTE_B 11
-
+#define SOUND_S0 12
+#define SOUND_S1 13
+#define SOUND_S2 14
+#define SOUND_A 15
+#define SOUND_ACTIVE 1
 
 
 class InputState {
@@ -45,6 +41,8 @@ class InputState {
     void setUpInputIO();
 
     uint32_t pollSoundButtonsWithInactiveCooldown();
+
+    bool pollSoundButton(int button);    
 
     bool pollMuteButton();
 

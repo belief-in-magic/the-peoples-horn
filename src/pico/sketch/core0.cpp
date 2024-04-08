@@ -106,7 +106,7 @@ int16_t Core0State::readBuffers() {
     }
   }
 
-  int16_t sampleAdjusted = ((int16_t) max(-32766, min(32766, sum))) / 4 ;
+  int16_t sampleAdjusted = ((int16_t) max(-32766, min(32766, sum))) / 2 ;
 
   return sampleAdjusted;
 }

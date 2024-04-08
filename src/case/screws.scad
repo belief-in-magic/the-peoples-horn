@@ -80,20 +80,20 @@ module hexNut(screwType, center=true) {
     translate(v = [0, 0,-m3HexNutThickness/2])
     difference() {
       cylinder(r=m3HexNutWidthAcrossCorners/2, h=m3HexNutThickness, $fn=6);
-      cylinder(r=m3Radius,h=inf10, center=true);
+      cylinder(r=m3Radius,h=inf, center=true);
     }
   } else if (screwType == "m4") {
     translate(v = [0, 0,-m4HexNutThickness/2])
     difference() {
       cylinder(r=m4HexNutWidthAcrossCorners/2, h=m4HexNutThickness, $fn=6);
-      cylinder(r=m4Radius,h=inf10, center=true);
+      cylinder(r=m4Radius,h=inf, center=true);
     }
   } else {
     error("Unsupported screw type");
   }
 }
 
-module hexNutPocket_N(screwType, openSide=true, backSpace=inf10, bridgeFront=false, bridgeBack=false ) {
+module hexNutPocket_N(screwType, openSide=false, backSpace=inf, bridgeFront=false, bridgeBack=false ) {
 
   heightSlack = bridgeFront || bridgeBack ? overhangSlack: xySlack;
 
@@ -106,61 +106,61 @@ module hexNutPocket_N(screwType, openSide=true, backSpace=inf10, bridgeFront=fal
   }
 }
 
-// module hexNutPocketHelper_N(innerRadius, widthAcrossCorners, thickness, openSide=true, backSpace=inf10, bridgeFront=false, bridgeBack=false) {
+module hexNutPocketHelper_N(innerRadius, widthAcrossCorners, thickness, openSide=true, backSpace=inf, bridgeFront=false, bridgeBack=false) {
 
-//   assert (!(bridgeFront && bridgeBack));
-//   assert (!(openSide && bridgeFront));
+  assert (!(bridgeFront && bridgeBack));
+  assert (!(openSide && bridgeFront));
 
-//   union() {
-//     hull() {
-//       // hexagonal prism representing where the nut should fit
-//       cylinder(r = widthAcrossCorners, h = thickness, center = true, $fn = 6);
+  union() {
+    hull() {
+      // hexagonal prism representing where the nut should fit
+      cylinder(r = widthAcrossCorners, h = thickness, center = true, $fn = 6);
 
-//       // negative volume for sliding in the nut
-//       translate(v = [inf50, 0, 0])
-//       cylinder(r = widthAcrossCorners, h = thickness, center = true, $fn = 6);
-//     }
+      // negative volume for sliding in the nut
+      translate(v = [inf, 0, 0])
+      cylinder(r = widthAcrossCorners, h = thickness, center = true, $fn = 6);
+    }
 
-//     // negative volume for screw
-//     union() {
-//       // screw lead spacing
-//       translate(v = [0, 0, -backSpace])
-//       cylinder(r = innerRadius, h = backSpace, $fn = 32);
+    // negative volume for screw
+    union() {
+      // screw lead spacing
+      translate(v = [0, 0, -backSpace])
+      cylinder(r = innerRadius, h = backSpace, $fn = 32);
 
-//       cylinder(r=innerRadius, h=inf50, $fn=32);
+      cylinder(r=innerRadius, h=inf, $fn=32);
 
-//       if (bridgeFront) {
-//         union() {
-//           // first bridge layer
-//           translate(v=[0,0,thickness/2 + defaultLayerHeight/2])
-//           cube(size=[2*innerRadius, GtoF(widthAcrossCorners)*2, defaultLayerHeight], center=true);
-//           // second bridge layer
-//           translate(v=[0,0,thickness/2 + defaultLayerHeight])
-//           cube(size=[2*innerRadius, 2*innerRadius, defaultLayerHeight], center=true);
-//         }
-//       }
+      if (bridgeFront) {
+        union() {
+          // first bridge layer
+          translate(v=[0,0,thickness/2 + defaultLayerHeight/2])
+          cube(size=[2*innerRadius, GtoF(widthAcrossCorners)*2, defaultLayerHeight], center=true);
+          // second bridge layer
+          translate(v=[0,0,thickness/2 + defaultLayerHeight])
+          cube(size=[2*innerRadius, 2*innerRadius, defaultLayerHeight], center=true);
+        }
+      }
 
-//       if (bridgeBack) {
-//         union() {
-//           // first bridge layer
-//           translate(v=[0,0,-(thickness/2 + defaultLayerHeight/2)])
-//           cube(size=[2*innerRadius, GtoF(widthAcrossCorners)*2, defaultLayerHeight], center=true);
-//           // second bridge layer
-//           translate(v=[0,0,-(thickness/2 + defaultLayerHeight)])
-//           cube(size=[2*innerRadius, 2*innerRadius, defaultLayerHeight], center=true);
-//         }
-//       }
-//     }
+      if (bridgeBack) {
+        union() {
+          // first bridge layer
+          translate(v=[0,0,-(thickness/2 + defaultLayerHeight/2)])
+          cube(size=[2*innerRadius, GtoF(widthAcrossCorners)*2, defaultLayerHeight], center=true);
+          // second bridge layer
+          translate(v=[0,0,-(thickness/2 + defaultLayerHeight)])
+          cube(size=[2*innerRadius, 2*innerRadius, defaultLayerHeight], center=true);
+        }
+      }
+    }
 
-//     if (openSide) {
-//       hull() {
-//         translate(v = [inf50, 0, 0])
-//         cylinder(r = innerRadius, h = inf50, $fn = 32);
-//         cylinder(r = innerRadius, h = inf50, $fn = 32);
-//       }
-//     }
-//   }
-
+    if (openSide) {
+      hull() {
+        translate(v = [inf, 0, 0])
+        cylinder(r = innerRadius, h = inf, $fn = 32);
+        cylinder(r = innerRadius, h = inf, $fn = 32);
+      }
+    }
+  }
+}
 
 
 // Convert a regular hexagon widthAcrossFlats to widthAcrossCorners

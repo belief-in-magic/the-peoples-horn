@@ -19,11 +19,15 @@ module ioBoard(negative=false) {
 
                     translate(v=[buttonCutoutDx, 0, pcbThickness])
                         cube(size=[buttonCutoutX, ioBoardY, 50]);
+
+
+                    mirror4XY(p=[pcbMountHoleDist,pcbMountHoleDist,0], dx=ioBoardScrewHoleDx, dy=ioBoardScrewHoleDy)
+                        cylinder(r=m3RadiusSlacked, h=inf);
                 }
         }
 
         mirror4XY(p=[pcbMountHoleDist,pcbMountHoleDist,0], dx=ioBoardScrewHoleDx, dy=ioBoardScrewHoleDy)
-            cylinder(r=m3Radius, h=inf);
+            cylinder(r=m3Radius, h=pcbThickness);
 
             
     }
