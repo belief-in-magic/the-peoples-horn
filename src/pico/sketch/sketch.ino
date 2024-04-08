@@ -28,7 +28,6 @@ void setup() {
   Serial.begin(115200);
 
 
-  delay(3000);
   Serial.println("BEGIN ****************************************************");
 
   Serial.println("core0 - starting setup");
@@ -38,7 +37,7 @@ void setup() {
 
   core0State.setup();
 
-  Serial.println("core0 - setup for first core, waiting done");
+  Serial.println("core0 - waiting on other core done");
 
   i2s.setBCLK(pBCLK);
   i2s.setDATA(pDOUT);
@@ -50,12 +49,17 @@ void setup() {
     while (1); // do nothing
   }
 
+    Serial.println("core0 - setup done");
+
 }
 
 
 void setup1() {
   rp2040.fifo.pop();
+  Serial.println("core1 - starting setup");
   core1State.setup();
+  Serial.println("core1 - setup done");
+
   rp2040.fifo.push(123);
 
 }
@@ -66,20 +70,7 @@ void loop() {
 }
 
 
-int timesRun = 0;
-void loop1() {
-  
+void loop1() {  
   core1State.loop();
-  /*
-
-  if (millis() > 5000 && timesRun == 0) {
-    Serial.println("Triggering sound");
-    core1State.triggerSound(2, 2);
-    //core1State.triggerSound(3, 5);
-    timesRun++;
-  }
-
-  */
-  
 }
 
