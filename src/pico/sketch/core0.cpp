@@ -75,7 +75,9 @@ void Core0State::handleInboundMsgs() {
         Serial.print("most recent ready: ");
         Serial.println(mostRecentReadySector[buffer]);
 
-        while (true) {;}
+        //while (true) {;}
+        // TODO
+        continue;
       }
 
       mostRecentReadySector[buffer] = sectorId;

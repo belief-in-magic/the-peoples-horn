@@ -27,15 +27,22 @@ module topLid() {
                 translate(v=[wallThickness+xySlack/2,wallThickness+xySlack/2,wallThickness])
                     cube(size=[bottomCaseX-xySlack, bottomCaseY-xySlack, wallThickness]);
 
-                translate(v=[wallThickness*2,wallThickness*2,wallThickness])
+                translate(v=[wallThickness,wallThickness*2,wallThickness])
                     cube(size=[bottomCaseX-wallThickness*2, bottomCaseY-wallThickness*2, wallThickness]);
             }
         }
 
+        for (i = [0:8]) {
+            translate(v=[13,i*8 + 30,0])
+            hull(){
+                cylinder(h=inf, r=2);
 
-        // apply mounting holes
-        mirror4XY(p=[0,0,0], dx=mainBoardScrewHoleDx, dy=mainBoardScrewHoleDy)
-            cylinder(r=3, h=inf);
+                translate(v=[50,0, -2])
+                cylinder(h=inf, r=2);
+                
+            }
+        }
+
     }
 }
 

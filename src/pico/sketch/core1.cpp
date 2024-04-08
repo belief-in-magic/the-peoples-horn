@@ -112,8 +112,13 @@ void Core1State::handleInboundMsgs() {
           Serial.print("core1 - receiving stop command (ack) for buffer: ");
           Serial.println(b);
 
+          
           // update buffer b with a new sound
-          ((sharedState->buffers)[b]).newSource(prepareNext[b]);
+          bool fileStatus = ((sharedState->buffers)[b]).newSource(prepareNext[b]);             
+          if (!fileStatus) {
+              // silently ignore?
+              continue;
+          }
 
           prepareNext[b] = 0; // set to null sound
         }

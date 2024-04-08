@@ -1,7 +1,6 @@
 
 #include "buf.h"
 
-
 Buf::Buf() {
   sectorsWritten = 0;
   numSectors = 0;
@@ -14,7 +13,12 @@ bool Buf::newSource(uint32_t sound) {
   // close the current source, if needed
   closeSource();
 
+
   currentSource = new Wav(sound);
+
+  if (!currentSource->isSuccessOpen()) {
+      return false;
+  }
 
   sectorsWritten = 0;
   dataSize = currentSource->dataSize();

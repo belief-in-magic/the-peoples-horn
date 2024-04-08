@@ -6,6 +6,8 @@
 // TODO figure out cpp exception handling
 Wav::Wav(uint32_t soundId) {
 
+    success = false;
+    
   char hdrBuf[RIFF_CHUNK_SIZE + FMT_CHUNK_SIZE];
 
   writeFileName(soundId);
@@ -72,6 +74,8 @@ Wav::Wav(uint32_t soundId) {
   Serial.println(dataChunkBlobSize);
   Serial.println("End Info");
   */
+
+  success = true;
 
 }
 
@@ -176,4 +180,8 @@ void Wav::writeFileName(uint32_t soundId) {
 
   //Serial.print("FILENAME: ");
   //Serial.println(filename);
+}
+
+bool Wav::isSuccessOpen() {
+    return success;
 }

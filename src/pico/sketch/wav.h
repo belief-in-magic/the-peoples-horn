@@ -21,6 +21,7 @@ class Wav {
     uint32_t dataChunkBlobSize;
 
     char filename[MAX_FILENAME_LEN];
+    bool success;
 
     File file;
 
@@ -30,6 +31,7 @@ class Wav {
     bool readData(uint8_t* buf, uint32_t size);
     uint32_t dataSize();
     uint16_t bytesPerSample();
+    bool isSuccessOpen();
 
   private:
     bool seekDataChunk();
