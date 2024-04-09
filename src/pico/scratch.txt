@@ -28,3 +28,5 @@ core1: creating new sound in buffer. Datasize:368640, sectors: 37
 core0 - ERROR: Unexpected sector id, buffer/sector: 2/0                         
 most recent ready: 41                                                           
 
+
+test addition 2
