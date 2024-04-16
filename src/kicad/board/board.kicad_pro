@@ -426,6 +426,10 @@
     [
       "d540bb9b-d45f-4ddd-b651-2c00d8abffca",
       "Sound"
+    ],
+    [
+      "bba6a71e-e6a7-4a32-9e47-687c86a163dc",
+      "rp2040"
     ]
   ],
   "text_variables": {}
