@@ -1,0 +1,166 @@
+Board Name                                 FQBN                                       Platform ID              
+0xCB Helios                                rp2040:rp2040:0xcb_helios                  rp2040:rp2040            
+Adafruit Circuit Playground                arduino:avr:circuitplay32u4cat             arduino:avr              
+Adafruit Circuit Playground Express                                                   arduino:samd             
+Adafruit Feather RP2040                    rp2040:rp2040:adafruit_feather             rp2040:rp2040            
+Adafruit Feather RP2040 CAN                rp2040:rp2040:adafruit_feather_can         rp2040:rp2040            
+Adafruit Feather RP2040 DVI                rp2040:rp2040:adafruit_feather_dvi         rp2040:rp2040            
+Adafruit Feather RP2040 Prop-Maker         rp2040:rp2040:adafruit_feather_prop_maker  rp2040:rp2040            
+Adafruit Feather RP2040 RFM                rp2040:rp2040:adafruit_feather_rfm         rp2040:rp2040            
+Adafruit Feather RP2040 SCORPIO            rp2040:rp2040:adafruit_feather_scorpio     rp2040:rp2040            
+Adafruit Feather RP2040 ThinkINK           rp2040:rp2040:adafruit_feather_thinkink    rp2040:rp2040            
+Adafruit Feather RP2040 USB Host           rp2040:rp2040:adafruit_feather_usb_host    rp2040:rp2040            
+Adafruit ItsyBitsy RP2040                  rp2040:rp2040:adafruit_itsybitsy           rp2040:rp2040            
+Adafruit KB2040                            rp2040:rp2040:adafruit_kb2040              rp2040:rp2040            
+Adafruit MacroPad RP2040                   rp2040:rp2040:adafruit_macropad2040        rp2040:rp2040            
+Adafruit Metro RP2040                      rp2040:rp2040:adafruit_metro               rp2040:rp2040            
+Adafruit QT Py RP2040                      rp2040:rp2040:adafruit_qtpy                rp2040:rp2040            
+Adafruit STEMMA Friend RP2040              rp2040:rp2040:adafruit_stemmafriend        rp2040:rp2040            
+Adafruit Trinkey RP2040 QT                 rp2040:rp2040:adafruit_trinkeyrp2040qt     rp2040:rp2040            
+Analog ADI                                                                            Arrow:samd               
+Arduino 101                                                                           Intel:arc32              
+Arduino BT                                 arduino:avr:bt                             arduino:avr              
+Arduino Due                                                                           arduino:sam              
+Arduino Duemilanove or Diecimila           arduino:avr:diecimila                      arduino:avr              
+Arduino Edge Control                                                                  arduino:mbed             
+Arduino Edge Control                                                                  arduino:mbed_edge        
+Arduino Esplora                            arduino:avr:esplora                        arduino:avr              
+Arduino Ethernet                           arduino:avr:ethernet                       arduino:avr              
+Arduino Finder Opta                                                                   arduino:mbed_opta        
+Arduino Fio                                arduino:avr:fio                            arduino:avr              
+Arduino Gemma                              arduino:avr:gemma                          arduino:avr              
+Arduino Giga                                                                          arduino:mbed_giga        
+Arduino Industrial 101                     arduino:avr:chiwawa                        arduino:avr              
+Arduino Leonardo                           arduino:avr:leonardo                       arduino:avr              
+Arduino Leonardo ETH                       arduino:avr:leonardoeth                    arduino:avr              
+Arduino M0                                                                            arduino:samd             
+Arduino M0 Pro                                                                        arduino:samd             
+Arduino MKR 1000                                                                      arduino:samd             
+Arduino MKR FOX 1200                                                                  arduino:samd             
+Arduino MKR GSM 1400                                                                  arduino:samd             
+Arduino MKR NB 1500                                                                   arduino:samd             
+Arduino MKR Vidor 4000                                                                arduino:samd             
+Arduino MKR WAN 1300                                                                  arduino:samd             
+Arduino MKR WAN 1310                                                                  arduino:samd             
+Arduino MKR WiFi 1010                                                                 arduino:samd             
+Arduino MKR Zero                                                                      arduino:samd             
+Arduino Mega ADK                           arduino:avr:megaADK                        arduino:avr              
+Arduino Mega or Mega 2560                  arduino:avr:mega                           arduino:avr              
+Arduino Micro                              arduino:avr:micro                          arduino:avr              
+Arduino Mini                               arduino:avr:mini                           arduino:avr              
+Arduino NG or older                        arduino:avr:atmegang                       arduino:avr              
+Arduino Nano                               arduino:avr:nano                           arduino:avr              
+Arduino Nano 33 BLE                                                                   arduino:mbed             
+Arduino Nano 33 BLE                                                                   arduino:mbed_nano        
+Arduino Nano 33 BLE Sense                                                             arduino:mbed             
+Arduino Nano 33 BLE Sense                                                             arduino:mbed_nano        
+Arduino Nano 33 IoT                                                                   arduino:samd             
+Arduino Nano ESP32                                                                    arduino:esp32            
+Arduino Nano Every                                                                    arduino:megaavr          
+Arduino Nano RP2040 Connect                                                           arduino:mbed             
+Arduino Nano RP2040 Connect                                                           arduino:mbed_nano        
+Arduino Nano RP2040 Connect                rp2040:rp2040:arduino_nano_connect         rp2040:rp2040            
+Arduino Nicla Sense ME                                                                arduino:mbed             
+Arduino Nicla Vision                                                                  arduino:mbed             
+Arduino Portenta C33                                                                  arduino:renesas_portenta 
+Arduino Portenta H7                                                                   arduino:mbed             
+Arduino Portenta H7                                                                   arduino:mbed_portenta    
+Arduino Portenta X8                                                                   arduino:mbed_portenta    
+Arduino Primo                                                                         arduino:nrf52            
+Arduino Primo Core                                                                    arduino:nrf52            
+Arduino Pro or Pro Mini                    arduino:avr:pro                            arduino:avr              
+Arduino Robot Control                      arduino:avr:robotControl                   arduino:avr              
+Arduino Robot Motor                        arduino:avr:robotMotor                     arduino:avr              
+Arduino Tian                                                                          arduino:samd             
+Arduino UNO R4 Minima                                                                 arduino:renesas_uno      
+Arduino UNO R4 WiFi                                                                   arduino:renesas_uno      
+Arduino UNO WiFi Rev2                                                                 arduino:megaavr          
+Arduino Uno                                arduino:avr:uno                            arduino:avr              
+Arduino Uno Mini                           arduino:avr:unomini                        arduino:avr              
+Arduino Uno WiFi                           arduino:avr:unowifi                        arduino:avr              
+Arduino Yún                                arduino:avr:yun                            arduino:avr              
+Arduino Yún Mini                           arduino:avr:yunmini                        arduino:avr              
+Arduino Zero                                                                          arduino:samd             
+ArtronShop RP2 Nano                        rp2040:rp2040:artronshop_rp2_nano          rp2040:rp2040            
+BridgeTek IDM2040-7A                       rp2040:rp2040:bridgetek_idm2040-7a         rp2040:rp2040            
+Cytron Maker Nano RP2040                   rp2040:rp2040:cytron_maker_nano_rp2040     rp2040:rp2040            
+Cytron Maker Pi RP2040                     rp2040:rp2040:cytron_maker_pi_rp2040       rp2040:rp2040            
+Cytron Maker UNO RP2040                    rp2040:rp2040:cytron_maker_uno_rp2040      rp2040:rp2040            
+DFRobot Beetle RP2040                      rp2040:rp2040:dfrobot_beetle_rp2040        rp2040:rp2040            
+DatanoiseTV PicoADK                        rp2040:rp2040:datanoisetv_picoadk          rp2040:rp2040            
+DeRuiLab FlyBoard2040Core                  rp2040:rp2040:flyboard2040_core            rp2040:rp2040            
+Degz Robotics Suibo RP2040                 rp2040:rp2040:degz_suibo                   rp2040:rp2040            
+EMoRo 2560. Board based on ATmega 2560 MCU                                            emoro:avr                
+ESP32 Dev Board                                                                       esp32:esp32              
+ESP32-C3 Dev Board                                                                    esp32:esp32              
+ESP32-S2 Dev Board                                                                    esp32:esp32              
+ESP32-S3 Dev Board                                                                    esp32:esp32              
+Edison                                                                                Intel:i686               
+ElectronicCats HunterCat NFC RP2040        rp2040:rp2040:electroniccats_huntercat_nfc rp2040:rp2040            
+ExtremeElectronics RC2040                  rp2040:rp2040:extelec_rc2040               rp2040:rp2040            
+Galileo                                                                               Intel:i586               
+Generic RP2040                             rp2040:rp2040:generic                      rp2040:rp2040            
+Generic Sea-Picro                          rp2040:rp2040:sea_picro                    rp2040:rp2040            
+Industruino D21G                                                                      industruino:samd         
+LilyPad Arduino                            arduino:avr:lilypad                        arduino:avr              
+LilyPad Arduino USB                        arduino:avr:LilyPadUSB                     arduino:avr              
+Linino One                                 arduino:avr:one                            arduino:avr              
+Melopero Cookie RP2040                     rp2040:rp2040:melopero_cookie_rp2040       rp2040:rp2040            
+Melopero Shake RP2040                      rp2040:rp2040:melopero_shake_rp2040        rp2040:rp2040            
+Neko Systems BL2040 Mini                   rp2040:rp2040:nekosystems_bl2040_mini      rp2040:rp2040            
+Nicla Sense ME                                                                        arduino:mbed_nicla       
+Nicla Vision                                                                          arduino:mbed_nicla       
+Nicla Voice                                                                           arduino:mbed_nicla       
+Pimoroni PGA2040                           rp2040:rp2040:pimoroni_pga2040             rp2040:rp2040            
+Pimoroni Plasma2040                        rp2040:rp2040:pimoroni_plasma2040          rp2040:rp2040            
+Pimoroni Tiny2040                          rp2040:rp2040:pimoroni_tiny2040            rp2040:rp2040            
+RAKwireless RAK11300                       rp2040:rp2040:rakwireless_rak11300         rp2040:rp2040            
+RL78/G22 Fast Prototyping Board                                                       renesas:rl78g22_fpb      
+RL78/G23-64p Fast Prototyping Board                                                   renesas:rl78g23_fpb_p64  
+Raspberry Pi Pico                                                                     arduino:mbed             
+Raspberry Pi Pico                                                                     arduino:mbed_rp2040      
+Raspberry Pi Pico                          rp2040:rp2040:rpipico                      rp2040:rp2040            
+Raspberry Pi Pico W                        rp2040:rp2040:rpipicow                     rp2040:rp2040            
+Seeed INDICATOR RP2040                     rp2040:rp2040:seeed_indicator_rp2040       rp2040:rp2040            
+Seeed XIAO RP2040                          rp2040:rp2040:seeed_xiao_rp2040            rp2040:rp2040            
+Silicognition RP2040-Shim                  rp2040:rp2040:silicognition_rp2040_shim    rp2040:rp2040            
+SmartEverything Dragonfly                                                             Arrow:samd               
+SmartEverything Fox                                                                   Arrow:samd               
+SmartEverything Fox3                                                                  Arrow:samd               
+SmartEverything Lion                                                                  Arrow:samd               
+SmartTutto                                                                            Arrow:samd               
+Solder Party RP2040 Stamp                  rp2040:rp2040:solderparty_rp2040_stamp     rp2040:rp2040            
+SparkFun ProMicro RP2040                   rp2040:rp2040:sparkfun_promicrorp2040      rp2040:rp2040            
+SparkFun Thing Plus RP2040                 rp2040:rp2040:sparkfun_thingplusrp2040     rp2040:rp2040            
+VCC-GND YD RP2040                          rp2040:rp2040:vccgnd_yd_rp2040             rp2040:rp2040            
+Viyalab Mizu RP2040                        rp2040:rp2040:viyalab_mizu                 rp2040:rp2040            
+WIZnet W5100S-EVB-Pico                     rp2040:rp2040:wiznet_5100s_evb_pico        rp2040:rp2040            
+WIZnet W5500-EVB-Pico                      rp2040:rp2040:wiznet_5500_evb_pico         rp2040:rp2040            
+WIZnet WizFi360-EVB-Pico                   rp2040:rp2040:wiznet_wizfi360_evb_pico     rp2040:rp2040            
+Waveshare RP2040 LCD 0.96                  rp2040:rp2040:waveshare_rp2040_lcd_0_96    rp2040:rp2040            
+Waveshare RP2040 LCD 1.28                  rp2040:rp2040:waveshare_rp2040_lcd_1_28    rp2040:rp2040            
+Waveshare RP2040 One                       rp2040:rp2040:waveshare_rp2040_one         rp2040:rp2040            
+Waveshare RP2040 Plus 16MB                 rp2040:rp2040:waveshare_rp2040_plus_16mb   rp2040:rp2040            
+Waveshare RP2040 Plus 4MB                  rp2040:rp2040:waveshare_rp2040_plus_4mb    rp2040:rp2040            
+Waveshare RP2040 Zero                      rp2040:rp2040:waveshare_rp2040_zero        rp2040:rp2040            
+Windows 10 IoT Core                                                                   Microsoft:win10          
+atmega168pb-xmini                                                                     atmel-avr-xminis:avr     
+atmega328p-xmini                                                                      atmel-avr-xminis:avr     
+atmega328pb-xmini                                                                     atmel-avr-xminis:avr     
+iLabs Challenger 2040 LTE                  rp2040:rp2040:challenger_2040_lte          rp2040:rp2040            
+iLabs Challenger 2040 LoRa                 rp2040:rp2040:challenger_2040_lora         rp2040:rp2040            
+iLabs Challenger 2040 NFC                  rp2040:rp2040:challenger_2040_nfc          rp2040:rp2040            
+iLabs Challenger 2040 SD/RTC               rp2040:rp2040:challenger_2040_sdrtc        rp2040:rp2040            
+iLabs Challenger 2040 SubGHz               rp2040:rp2040:challenger_2040_subghz       rp2040:rp2040            
+iLabs Challenger 2040 UWB                  rp2040:rp2040:challenger_2040_uwb          rp2040:rp2040            
+iLabs Challenger 2040 WiFi                 rp2040:rp2040:challenger_2040_wifi         rp2040:rp2040            
+iLabs Challenger 2040 WiFi/BLE             rp2040:rp2040:challenger_2040_wifi_ble     rp2040:rp2040            
+iLabs Challenger 2040 WiFi6/BLE            rp2040:rp2040:challenger_2040_wifi6_ble    rp2040:rp2040            
+iLabs Challenger NB 2040 WiFi              rp2040:rp2040:challenger_nb_2040_wifi      rp2040:rp2040            
+iLabs RPICO32                              rp2040:rp2040:ilabs_rpico32                rp2040:rp2040            
+littleBits w6 Arduino module                                                          littleBits:avr           
+nullbits Bit-C PRO                         rp2040:rp2040:nullbits_bit_c_pro           rp2040:rp2040            
+redscorp RP2040-Eins                       rp2040:rp2040:redscorp_rp2040_eins         rp2040:rp2040            
+redscorp RP2040-ProMini                    rp2040:rp2040:redscorp_rp2040_promini      rp2040:rp2040            
+uPesy RP2040 DevKit                        rp2040:rp2040:upesy_rp2040_devkit          rp2040:rp2040            
+
