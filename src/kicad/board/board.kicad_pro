@@ -45,7 +45,7 @@
         "silk_text_upright": false,
         "zones": {
           "45_degree_only": false,
-          "min_clearance": 0.508
+          "min_clearance": 0.0
         }
       },
       "diff_pair_dimensions": [],
@@ -124,11 +124,7 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [
-      "power_pin_not_driven|1181100|1244600|0b65674b-48fc-4831-9851-05021abb6ba7|00000000-0000-0000-0000-000000000000",
-      "power_pin_not_driven|1181100|685800|b0d83913-451d-462c-8275-7727d952632d|00000000-0000-0000-0000-000000000000",
-      "power_pin_not_driven|1308100|1143000|89e1508d-242b-46c7-9a76-0bc8e03be466|00000000-0000-0000-0000-000000000000"
-    ],
+    "erc_exclusions": [],
     "meta": {
       "version": 0
     },

@@ -444,7 +444,6 @@
     )
   )
 
-
   (junction (at 99.06 114.3) (diameter 0) (color 0 0 0 0)
     (uuid 16bd3ba2-c31a-45c8-bb3a-a5589e595fdf)
   )
@@ -834,13 +833,13 @@
     (property "Value" "100nF" (id 1) (at 102.87 63.4999 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (id 2) (at 100.0252 66.04 0)
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (id 2) (at 100.0252 66.04 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 99.06 62.23 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Vendor" "C14663" (id 4) (at 99.06 62.23 0)
+    (property "Vendor" "C307331" (id 4) (at 99.06 62.23 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 0e2b9031-1415-4866-adba-9f9f5176a91b))
