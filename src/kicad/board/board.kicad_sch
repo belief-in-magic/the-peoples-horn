@@ -2069,7 +2069,7 @@
     (property "Sheet name" "Power" (id 0) (at 212.09 46.2784 0)
       (effects (font (size 1.27 1.27)) (justify left bottom))
     )
-    (property "Sheet file" "power2.kicad_sch" (id 1) (at 212.09 62.8146 0)
+    (property "Sheet file" "power.kicad_sch" (id 1) (at 212.09 62.8146 0)
       (effects (font (size 1.27 1.27)) (justify left top))
     )
     (pin "3.3V_OUT" output (at 212.09 57.15 180)
@@ -2300,18 +2300,6 @@
     (path "/9da36daf-9118-4e9b-896f-a0c3b35805b4"
       (reference "#PWR010") (unit 1) (value "GND") (footprint "")
     )
-    (path "/4532e7a8-aa46-45fe-9bdb-5c2c6a438547/8d634ab3-a294-443d-bb98-407e3f0e217e"
-      (reference "#PWR011") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/4532e7a8-aa46-45fe-9bdb-5c2c6a438547/16745edd-e0ff-436e-8a35-1dee71f99778"
-      (reference "#PWR012") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/4532e7a8-aa46-45fe-9bdb-5c2c6a438547/5c05b0ff-52ac-4cbb-a560-b7ac16182c58"
-      (reference "#PWR013") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/4532e7a8-aa46-45fe-9bdb-5c2c6a438547/9ef619b9-7f98-4f18-8e00-4d178f04922b"
-      (reference "#PWR014") (unit 1) (value "GND") (footprint "")
-    )
     (path "/d540bb9b-d45f-4ddd-b651-2c00d8abffca/dd82f178-553c-4d6c-ab4b-61ab073f61bb"
       (reference "#PWR015") (unit 1) (value "GND") (footprint "")
     )
@@ -2359,6 +2347,18 @@
     )
     (path "/38f31a5a-a233-4a6e-bfd1-8472ab55dbb5"
       (reference "#PWR0101") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/4532e7a8-aa46-45fe-9bdb-5c2c6a438547/9ef619b9-7f98-4f18-8e00-4d178f04922b"
+      (reference "#PWR0102") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/4532e7a8-aa46-45fe-9bdb-5c2c6a438547/5c05b0ff-52ac-4cbb-a560-b7ac16182c58"
+      (reference "#PWR0103") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/4532e7a8-aa46-45fe-9bdb-5c2c6a438547/16745edd-e0ff-436e-8a35-1dee71f99778"
+      (reference "#PWR0104") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/4532e7a8-aa46-45fe-9bdb-5c2c6a438547/8d634ab3-a294-443d-bb98-407e3f0e217e"
+      (reference "#PWR0105") (unit 1) (value "GND") (footprint "")
     )
     (path "/4532e7a8-aa46-45fe-9bdb-5c2c6a438547/a4cb6c9b-4536-4020-a9fc-ab93b2a586b8"
       (reference "BT1") (unit 1) (value "3 cell NiMH") (footprint "Battery:BatteryHolder_Keystone_2462_2xAA")
