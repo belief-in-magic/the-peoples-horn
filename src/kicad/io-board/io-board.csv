@@ -1,0 +1,4 @@
+Comment,Designator,Footprint,LCSC
+"100nF","C1","Capacitor_SMD:C_0402_1005Metric","C307331"
+"Conn_01x05_Male","J1","Connector_JST:JST_PH_B5B-PH-SM4-TB_1x05-1MP_P2.00mm_Vertical","C265085"
+"MCP23017_ML","U1","Package_DFN_QFN:QFN-28-1EP_6x6mm_P0.65mm_EP4.25x4.25mm","C629439"

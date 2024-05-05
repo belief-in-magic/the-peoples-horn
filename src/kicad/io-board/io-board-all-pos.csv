@@ -1,0 +1,4 @@
+Designator,Val,Package,Mid X,Mid Y,Rotation,Layer
+"C1","100nF","C_0402_1005Metric",164.250000,-95.750000,-90.000000,top
+"J1","Conn_01x05_Male","JST_PH_B5B-PH-SM4-TB_1x05-1MP_P2.00mm_Vertical",153.750000,-94.000000,180.000000,top
+"U1","MCP23017_ML","QFN-28-1EP_6x6mm_P0.65mm_EP4.25x4.25mm",168.452598,-94.630000,0.000000,top

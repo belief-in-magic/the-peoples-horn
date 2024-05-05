@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>/home/zhao/Documents/tarhorn/src/kicad/io-board/io-board.kicad_sch</source>
+    <date>Sun 05 May 2024 05:06:54 PM</date>
+    <tool>Eeschema 6.0.11-2627ca5db0~126~ubuntu22.04.1</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>io-board.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="C1">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Vendor">C307331</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Vendor" value="C307331"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ef950b3d-cc17-4cf2-a52f-66f6596cac2c</tstamps>
+    </comp>
+    <comp ref="H1">
+      <value>MountingHole</value>
+      <footprint>MountingHole:MountingHole_3.2mm_M3_DIN965_Pad</footprint>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c9738634-53e5-4116-b065-d0d842fed11b</tstamps>
+    </comp>
+    <comp ref="H2">
+      <value>MountingHole</value>
+      <footprint>MountingHole:MountingHole_3.2mm_M3_DIN965_Pad</footprint>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b14bf892-ea82-4f24-a22a-c9411859baf7</tstamps>
+    </comp>
+    <comp ref="J1">
+      <value>Conn_01x05_Male</value>
+      <footprint>Connector_JST:JST_PH_B5B-PH-SM4-TB_1x05-1MP_P2.00mm_Vertical</footprint>
+      <fields>
+        <field name="Vendor">C265085</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_01x05_Male" description="Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Vendor" value="C265085"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>fbe8cbf6-5f1e-42b6-af38-3c8e9ec50a16</tstamps>
+    </comp>
+    <comp ref="SW1">
+      <value>SW_Keyboard</value>
+      <footprint>Library:Kailh_socket_MX</footprint>
+      <fields>
+        <field name="Vendor">C5156480</field>
+      </fields>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <property name="Vendor" value="C5156480"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>38d62497-788e-4ff6-8fcf-2d3156dab531</tstamps>
+    </comp>
+    <comp ref="SW2">
+      <value>SW_Keyboard</value>
+      <footprint>Library:Kailh_socket_MX</footprint>
+      <fields>
+        <field name="Vendor">C5156480</field>
+      </fields>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <property name="Vendor" value="C5156480"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0904299e-addd-41f7-b087-37c7d5d4d25c</tstamps>
+    </comp>
+    <comp ref="SW3">
+      <value>RotEncoder_S</value>
+      <footprint>Rotary_Encoder:RotaryEncoder_Bourns_Vertical_PEC12R-3xxxF-Sxxxx</footprint>
+      <libsource lib="Device" part="RotaryEncoder_Switch" description="Rotary encoder, dual channel, incremental quadrate outputs, with switch"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b0319775-902d-430c-adb5-99ce41a419be</tstamps>
+    </comp>
+    <comp ref="SW4">
+      <value>SW_Keyboard</value>
+      <footprint>Library:Kailh_socket_MX</footprint>
+      <fields>
+        <field name="Vendor">C5156480</field>
+      </fields>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <property name="Vendor" value="C5156480"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>53e68fbf-6c77-43ee-a781-dcdeeb9859d1</tstamps>
+    </comp>
+    <comp ref="SW5">
+      <value>SW_Keyboard</value>
+      <footprint>Library:Kailh_socket_MX</footprint>
+      <fields>
+        <field name="Vendor">C5156480</field>
+      </fields>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <property name="Vendor" value="C5156480"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0a6f416c-01fa-4a9c-bf19-9ccb29c102f6</tstamps>
+    </comp>
+    <comp ref="U1">
+      <value>MCP23017_ML</value>
+      <footprint>Package_DFN_QFN:QFN-28-1EP_6x6mm_P0.65mm_EP4.25x4.25mm</footprint>
+      <datasheet>http://ww1.microchip.com/downloads/en/DeviceDoc/20001952C.pdf</datasheet>
+      <fields>
+        <field name="Vendor">C629439</field>
+      </fields>
+      <libsource lib="Interface_Expansion" part="MCP23017_ML" description="16-bit I/O expander, I2C, interrupts, w pull-ups, QFN-28"/>
+      <property name="Vendor" value="C629439"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>166cff32-c1ba-4296-9dde-75e01fb4e6b3</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Connector" part="Conn_01x05_Male">
+      <description>Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x05_Male</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C">
+      <description>Unpolarized capacitor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="RotaryEncoder_Switch">
+      <description>Rotary encoder, dual channel, incremental quadrate outputs, with switch</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>RotaryEncoder*Switch*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">RotaryEncoder_Switch</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="A" name="A" type="passive"/>
+        <pin num="B" name="B" type="passive"/>
+        <pin num="C" name="C" type="passive"/>
+        <pin num="S1" name="S1" type="passive"/>
+        <pin num="S2" name="S2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Interface_Expansion" part="MCP23017_ML">
+      <description>16-bit I/O expander, I2C, interrupts, w pull-ups, QFN-28</description>
+      <docs>http://ww1.microchip.com/downloads/en/DeviceDoc/20001952C.pdf</docs>
+      <footprints>
+        <fp>QFN*6x6mm*P0.65mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MCP23017_ML</field>
+        <field name="Footprint">Package_DFN_QFN:QFN-28-1EP_6x6mm_P0.65mm_EP4.25x4.25mm</field>
+        <field name="Datasheet">http://ww1.microchip.com/downloads/en/DeviceDoc/20001952C.pdf</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GPB4" type="bidirectional"/>
+        <pin num="2" name="GPB5" type="bidirectional"/>
+        <pin num="3" name="GPB6" type="bidirectional"/>
+        <pin num="4" name="GPB7" type="bidirectional"/>
+        <pin num="5" name="VDD" type="power_in"/>
+        <pin num="6" name="VSS" type="power_in"/>
+        <pin num="7" name="NC" type="no_connect"/>
+        <pin num="8" name="SCK" type="input"/>
+        <pin num="9" name="SDA" type="bidirectional"/>
+        <pin num="10" name="NC" type="no_connect"/>
+        <pin num="11" name="A0" type="input"/>
+        <pin num="12" name="A1" type="input"/>
+        <pin num="13" name="A2" type="input"/>
+        <pin num="14" name="~{RESET}" type="input"/>
+        <pin num="15" name="INTB" type="tri_state"/>
+        <pin num="16" name="INTA" type="tri_state"/>
+        <pin num="17" name="GPA0" type="bidirectional"/>
+        <pin num="18" name="GPA1" type="bidirectional"/>
+        <pin num="19" name="GPA2" type="bidirectional"/>
+        <pin num="20" name="GPA3" type="bidirectional"/>
+        <pin num="21" name="GPA4" type="bidirectional"/>
+        <pin num="22" name="GPA5" type="bidirectional"/>
+        <pin num="23" name="GPA6" type="bidirectional"/>
+        <pin num="24" name="GPA7" type="bidirectional"/>
+        <pin num="25" name="GPB0" type="bidirectional"/>
+        <pin num="26" name="GPB1" type="bidirectional"/>
+        <pin num="27" name="GPB2" type="bidirectional"/>
+        <pin num="28" name="GPB3" type="bidirectional"/>
+        <pin num="29" name="EP" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Mechanical" part="MountingHole">
+      <description>Mounting Hole without connection</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>MountingHole*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">H</field>
+        <field name="Value">MountingHole</field>
+        <field name="Datasheet">~</field>
+      </fields>
+    </libpart>
+    <libpart lib="Switch" part="SW_Push">
+      <description>Push button switch, generic, two pins</description>
+      <docs>~</docs>
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">SW_Push</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Connector">
+      <uri>/usr/share/kicad/symbols//Connector.kicad_sym</uri>
+    </library>
+    <library logical="Device">
+      <uri>/usr/share/kicad/symbols//Device.kicad_sym</uri>
+    </library>
+    <library logical="Interface_Expansion">
+      <uri>/usr/share/kicad/symbols//Interface_Expansion.kicad_sym</uri>
+    </library>
+    <library logical="Mechanical">
+      <uri>/usr/share/kicad/symbols//Mechanical.kicad_sym</uri>
+    </library>
+    <library logical="Switch">
+      <uri>/usr/share/kicad/symbols//Switch.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="+3.3V">
+      <node ref="C1" pin="1" pintype="passive"/>
+      <node ref="J1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="U1" pin="14" pinfunction="~{RESET}" pintype="input"/>
+      <node ref="U1" pin="5" pinfunction="VDD" pintype="power_in"/>
+    </net>
+    <net code="2" name="/INT">
+      <node ref="J1" pin="3" pinfunction="Pin_3" pintype="passive"/>
+      <node ref="U1" pin="15" pinfunction="INTB" pintype="tri_state"/>
+    </net>
+    <net code="3" name="/SCK">
+      <node ref="J1" pin="5" pinfunction="Pin_5" pintype="passive"/>
+      <node ref="U1" pin="8" pinfunction="SCK" pintype="input"/>
+    </net>
+    <net code="4" name="/SDA">
+      <node ref="J1" pin="4" pinfunction="Pin_4" pintype="passive"/>
+      <node ref="U1" pin="9" pinfunction="SDA" pintype="bidirectional"/>
+    </net>
+    <net code="5" name="B0">
+      <node ref="SW1" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="25" pinfunction="GPB0" pintype="bidirectional"/>
+    </net>
+    <net code="6" name="B1">
+      <node ref="SW2" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="26" pinfunction="GPB1" pintype="bidirectional"/>
+    </net>
+    <net code="7" name="B2">
+      <node ref="SW4" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="27" pinfunction="GPB2" pintype="bidirectional"/>
+    </net>
+    <net code="8" name="B3">
+      <node ref="SW5" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="28" pinfunction="GPB3" pintype="bidirectional"/>
+    </net>
+    <net code="9" name="B4">
+      <node ref="SW3" pin="A" pinfunction="A" pintype="passive"/>
+      <node ref="U1" pin="1" pinfunction="GPB4" pintype="bidirectional"/>
+    </net>
+    <net code="10" name="B5">
+      <node ref="SW3" pin="B" pinfunction="B" pintype="passive"/>
+      <node ref="U1" pin="2" pinfunction="GPB5" pintype="bidirectional"/>
+    </net>
+    <net code="11" name="B6">
+      <node ref="SW3" pin="S2" pinfunction="S2" pintype="passive"/>
+      <node ref="U1" pin="3" pinfunction="GPB6" pintype="bidirectional"/>
+    </net>
+    <net code="12" name="GND">
+      <node ref="C1" pin="2" pintype="passive"/>
+      <node ref="J1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="SW1" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="SW2" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="SW3" pin="C" pinfunction="C" pintype="passive"/>
+      <node ref="SW3" pin="S1" pinfunction="S1" pintype="passive"/>
+      <node ref="SW4" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="SW5" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="U1" pin="11" pinfunction="A0" pintype="input"/>
+      <node ref="U1" pin="12" pinfunction="A1" pintype="input"/>
+      <node ref="U1" pin="13" pinfunction="A2" pintype="input"/>
+      <node ref="U1" pin="29" pinfunction="EP" pintype="passive"/>
+      <node ref="U1" pin="6" pinfunction="VSS" pintype="power_in"/>
+    </net>
+    <net code="13" name="unconnected-(U1-Pad4)">
+      <node ref="U1" pin="4" pinfunction="GPB7" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="14" name="unconnected-(U1-Pad7)">
+      <node ref="U1" pin="7" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="15" name="unconnected-(U1-Pad10)">
+      <node ref="U1" pin="10" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="16" name="unconnected-(U1-Pad16)">
+      <node ref="U1" pin="16" pinfunction="INTA" pintype="tri_state+no_connect"/>
+    </net>
+    <net code="17" name="unconnected-(U1-Pad17)">
+      <node ref="U1" pin="17" pinfunction="GPA0" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="18" name="unconnected-(U1-Pad18)">
+      <node ref="U1" pin="18" pinfunction="GPA1" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="19" name="unconnected-(U1-Pad19)">
+      <node ref="U1" pin="19" pinfunction="GPA2" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="20" name="unconnected-(U1-Pad20)">
+      <node ref="U1" pin="20" pinfunction="GPA3" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="21" name="unconnected-(U1-Pad21)">
+      <node ref="U1" pin="21" pinfunction="GPA4" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="22" name="unconnected-(U1-Pad22)">
+      <node ref="U1" pin="22" pinfunction="GPA5" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="23" name="unconnected-(U1-Pad23)">
+      <node ref="U1" pin="23" pinfunction="GPA6" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="24" name="unconnected-(U1-Pad24)">
+      <node ref="U1" pin="24" pinfunction="GPA7" pintype="bidirectional+no_connect"/>
+    </net>
+  </nets>
+</export>
