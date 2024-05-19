@@ -35,9 +35,11 @@ class InputState {
     uint64_t lastMuted;
     bool muteState;
 
+    bool disable;
+
     bool chordStarted;
     uint32_t currentChord;
-
+    
     void setUpInputIO();
 
     uint32_t pollSoundButtonsWithInactiveCooldown();
@@ -51,4 +53,6 @@ class InputState {
     InputState();
     std::optional<uint32_t> getNextSound();
     bool isMuted();
+
+    void disableInput();
 };

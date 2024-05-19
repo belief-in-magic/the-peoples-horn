@@ -7,10 +7,10 @@
 #include "core0.h"
 #include "core1.h"
 
-// GPIO pin numbers
-#define pBCLK 26
+// GPIO for speakers (I2S)
+#define pBCLK 18
 #define pWS (pBCLK+1)
-#define pDOUT 28
+#define pDOUT 20
 
 const int sampleRate = 44100;
 
@@ -20,8 +20,6 @@ I2S i2s(OUTPUT);
 SharedState sharedState;
 Core0State core0State(&sharedState, &i2s);
 Core1State core1State(&sharedState);
-
-InputState tInputState;
 
 void setup() {
 

@@ -2,64 +2,74 @@
 
 InputState::InputState() {
 
-  for (int i = 0; i < NUM_SOUND_BUTTONS; i++) {
-    isActive[i] = false;
-    lastChange[i] = 0;
-  }
+    for (int i = 0; i < NUM_SOUND_BUTTONS; i++) {
+        isActive[i] = false;
+        lastChange[i] = 0;
+    }
 
-  lastChordStart = 0;
-  chordStarted = false;
-  currentChord = 0;
-  lastMuted = 0;
-  muteState = false;
+    lastChordStart = 0;
+    chordStarted = false;
+    currentChord = 0;
+    lastMuted = 0;
+    muteState = false;
+    disable = false;
 
-  setUpInputIO();
+    setUpInputIO();
 }
 
 void InputState::setUpInputIO() {
 
-  pinMode(SOUND_S0, OUTPUT);
-  pinMode(SOUND_S1, OUTPUT);
-  pinMode(SOUND_S2, OUTPUT);
-  pinMode(SOUND_A, INPUT);
+    pinMode(SOUND_S0, OUTPUT);
+    pinMode(SOUND_S1, OUTPUT);
+    pinMode(SOUND_S2, OUTPUT);
+    pinMode(SOUND_A, INPUT);
 
+}
+
+void InputState::disableInput() {
+
+    disable = true;
 }
 
 uint32_t InputState::pollSoundButtonsWithInactiveCooldown() {
 
-  uint32_t v = 0;
-  bool pinIsActive;
-  uint64_t currentTime = millis();
-
-  for (int i = 0; i < NUM_SOUND_BUTTONS; i++) {
-      pinIsActive = pollSoundButton(i);
-      
-      if ((currentTime - lastChange[i]) > DEBOUNCE_MS) {
-
-       if (isActive[i] != pinIsActive) {
-         lastChange[i] = currentTime;
-         isActive[i] = pinIsActive;
-
-         // start chord if not already started
-         if (pinIsActive && !chordStarted) {
-           chordStarted = true;
-           lastChordStart = currentTime;
-           currentChord = 0;
-         }
-
-       }
-
-       if (pinIsActive) {
-         v |= (1 << i);
-         isActive[i] = true;
-       } else {
-         isActive[i] = false;
-       }
-
+    if (disable) {
+        return 0;
     }
-  }
 
-  return v;
+    uint32_t v = 0;
+    bool pinIsActive;
+    uint64_t currentTime = millis();
+
+    for (int i = 0; i < NUM_SOUND_BUTTONS; i++) {
+        pinIsActive = pollSoundButton(i);
+      
+        if ((currentTime - lastChange[i]) > DEBOUNCE_MS) {
+
+            if (isActive[i] != pinIsActive) {
+                lastChange[i] = currentTime;
+                isActive[i] = pinIsActive;
+
+                // start chord if not already started
+                if (pinIsActive && !chordStarted) {
+                    chordStarted = true;
+                    lastChordStart = currentTime;
+                    currentChord = 0;
+                }
+
+            }
+
+            if (pinIsActive) {
+                v |= (1 << i);
+                isActive[i] = true;
+            } else {
+                isActive[i] = false;
+            }
+
+        }
+    }
+
+    return v;
 }
 
 bool InputState::pollSoundButton(int button) {
@@ -90,6 +100,7 @@ bool InputState::pollSoundButton(int button) {
 
 bool InputState::pollMuteButton() {
 
+
     digitalWrite(SOUND_S0, HIGH);
     digitalWrite(SOUND_S1, HIGH);
     digitalWrite(SOUND_S2, HIGH);
@@ -101,40 +112,50 @@ bool InputState::pollMuteButton() {
 
 bool InputState::isMuted() {
 
-  uint64_t currentTime = millis();
+    if (disable) {
 
-  bool muteCapture = pollMuteButton();
+        return false;
+    }
 
-  if ((currentTime-lastMuted) > DEBOUNCE_MS) {
-    lastMuted = currentTime;
-    muteState = muteCapture;
-    return muteCapture;
-  }
+    uint64_t currentTime = millis();
 
-  return muteState;
+    bool muteCapture = pollMuteButton();
+
+    if ((currentTime-lastMuted) > DEBOUNCE_MS) {
+        lastMuted = currentTime;
+        muteState = muteCapture;
+        return muteCapture;
+    }
+
+    return muteState;
 }
 
 // TODO tidy up this
 std::optional<uint32_t> InputState::getNextSound() {
 
-  uint64_t currentTime = millis();
-
-  uint32_t buttonCapture = pollSoundButtonsWithInactiveCooldown();
-
-  if (chordStarted) {
-
-    currentChord |= buttonCapture;
-
-    // check if the chord wait time has elapsed, if so then we can commit to a sound and buffer
-    if ((currentTime - lastChordStart) > CHORD_WAIT_TIME_MS) {
-
-      chordStarted = false;
-      lastChordStart = currentTime;
-
-      return currentChord;
+    if (disable) {
+        return {};
     }
-  }
+      
 
-  return {};
+    uint64_t currentTime = millis();
+
+    uint32_t buttonCapture = pollSoundButtonsWithInactiveCooldown();
+
+    if (chordStarted) {
+
+        currentChord |= buttonCapture;
+
+        // check if the chord wait time has elapsed, if so then we can commit to a sound and buffer
+        if ((currentTime - lastChordStart) > CHORD_WAIT_TIME_MS) {
+
+            chordStarted = false;
+            lastChordStart = currentTime;
+
+            return currentChord;
+        }
+    }
+
+    return {};
 
 }

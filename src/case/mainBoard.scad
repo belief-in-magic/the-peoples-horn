@@ -38,4 +38,4 @@ module mainBoard(negative=false) {
 }
 
 
-mainBoard(negative=false);
+mainBoard(negative=true);

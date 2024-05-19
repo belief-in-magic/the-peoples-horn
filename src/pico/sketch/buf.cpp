@@ -1,5 +1,6 @@
 
 #include "buf.h"
+#include "wav.h"
 
 Buf::Buf() {
   sectorsWritten = 0;

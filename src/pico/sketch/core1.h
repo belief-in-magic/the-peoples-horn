@@ -22,10 +22,10 @@ operation given that we read from the SD card using SPI. For 20kb this takes aro
 #include "msg.h"
 
 // GPIO for sd card in spi mode (pico w tested only, you may need to change this depending on hardware)
-#define pSD_CS 5
-#define pSD_SCK 6
-#define pSD_MOSI 7
-#define pSD_MISO 4
+#define pSD_CS 25
+#define pSD_SCK 26
+#define pSD_MOSI 27
+#define pSD_MISO 24
 
 
 class Core1State {
