@@ -1375,6 +1375,11 @@
     (effects (font (size 1.27 1.27) italic) (justify left bottom))
     (uuid 409da346-51b1-4958-86fc-388fce09ff1e)
   )
+  (text "make sure these pins correspond with these pins:\nhttps://datasheets.raspberrypi.com/rp2040/rp2040-datasheet.pdf#%5B%7B%22num%22%3A16%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C115%2C625.392%2Cnull%5D"
+    (at -6.35 213.36 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 56f1f717-822c-4f97-b14a-8bddb048dce9)
+  )
   (text "https://cdn-learn.adafruit.com/downloads/pdf/adafruit-microsd-spi-sdio.pdf"
     (at 49.53 191.77 0)
     (effects (font (size 1.27 1.27) italic) (justify left bottom))

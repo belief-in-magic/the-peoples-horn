@@ -159,23 +159,24 @@ void Core1State::handleInboundMsgs() {
 }
 
 void Core1State::setUpSD() {
-  Serial.print("Initializing SD card...");
-  SPI.setRX(pSD_MISO);
-  SPI.setTX(pSD_MOSI);
-  SPI.setSCK(pSD_SCK);
+    Serial.println("Initializing SD card...");
 
-  if (!SD.begin(pSD_CS)) {
-    Serial.println("initialization failed!");
-    return;
-  }
+    SPI1.setSCK(pSD_SCK);
+    SPI1.setRX(pSD_MISO);
+    SPI1.setTX(pSD_MOSI);
 
-  Serial.println("done!");
+    if (!SD.begin(pSD_CS, SPI1)) {
+        Serial.println("initialization failed!");
+        return;
+    }
+
+    Serial.println("done!");
 
 }
 
 void Core1State::triggerSound(uint8_t buf, uint32_t sound) {
 
-  //Serial.println("core1 - Triggering sound");
+  Serial.println("core1 - Triggering sound");
 
   using namespace msg;
 
