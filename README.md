@@ -6,7 +6,7 @@ A whimsical device, for whimsical people. Make sounds with buttons. Pollute your
 
 ## Loading files
 
-Current limitations in the hardware require that the sound files to be in a certain format. Notably they need to be in `.wav` format, with a mono 44.1kHz sampling rate.
+Sound files are stored in an external uSD card. Current limitations in the hardware require that the sound files to be in a certain format. Notably they need to be in `.wav` format, with a mono 44.1kHz sampling rate.
 
 
 Here is a nice ffmpeg command to convert an example file `0001.mp3` into a compliant `wav` file:
