@@ -1,6 +1,6 @@
-# Raspberry Pi Pico source
+# Firmware source code
 
-This builds the binaries for a raspberry pi pico. It uses the arduino-pico core and some related libraries.
+This builds the firmware binaries. It uses the arduino-pico core and some related libraries.
 
 ## Install:
 Run this within the containing directory:
@@ -15,16 +15,15 @@ curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.
 ```
 
 ### Compiling:
-You might need to change the rpipicow (Raspberry PI Pico W) core to something else
+
 ```
-./arduino-cli compile --fqbn rp2040:rp2040:rpipicow sketch
+./arduino-cli compile --fqbn rp2040:rp2040:rpipico sketch
 ```
 
 ### Uploading:
 
-Make sure that the board is discoverable. (Hold down BOOTSEL before plugging in Pico)
 ```
-./arduino-cli upload -p /dev/ttyACM0 --fqbn rp2040:rp2040:rpipicow sketch
+./arduino-cli upload -p /dev/ttyACM0 --fqbn rp2040:rp2040:rpipico sketch
 ```
 
 ## Serial debugging:
@@ -38,10 +37,12 @@ minicom -D /dev/ttyACM0 -b 115200
 
 ## Language Server
 
+TODO: I can't get this fucking thing to work
+
 ```
 ./arduino-language-server \
  -clangd /usr/bin/clangd \
  -cli ../arduino-cli \
  -cli-config $HOME/.arduino15/arduino-cli.yaml \
- -fqbn rp2040:rp2040:rpipicow sketch
+ -fqbn rp2040:rp2040:rpipico sketch
 ```
