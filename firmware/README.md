@@ -1,6 +1,7 @@
 # Firmware source code
 
-This builds the firmware binaries. It uses the arduino-pico core and some related libraries.
+Arduino sketch for main board. We use the arduino-cli and an open-source rp2040 core.
+Arduino was chose here for its ease of use and the breadth of its peripheral libraries.
 
 ## Install:
 Run this within the containing directory:
@@ -8,7 +9,7 @@ Run this within the containing directory:
 # Install arduino-cli in local directory
 curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=$PWD sh
 
-# Install arduino-pico core 
+# Install arduino rp2040 core 
 ./arduino-cli config add board_manager.additional_urls  https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
 ./arduino-cli core update-index
 ./arduino-cli core install rp2040:rp2040
@@ -17,13 +18,13 @@ curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.
 ### Compiling:
 
 ```
-./arduino-cli compile --fqbn rp2040:rp2040:rpipico sketch
+./arduino-cli compile --fqbn rp2040:rp2040:rpipico main
 ```
 
 ### Uploading:
 
 ```
-./arduino-cli upload -p /dev/ttyACM0 --fqbn rp2040:rp2040:rpipico sketch
+./arduino-cli upload -p /dev/ttyACM0 --fqbn rp2040:rp2040:rpipico main
 ```
 
 ## Serial debugging:
@@ -44,5 +45,5 @@ TODO: I can't get this fucking thing to work
  -clangd /usr/bin/clangd \
  -cli ../arduino-cli \
  -cli-config $HOME/.arduino15/arduino-cli.yaml \
- -fqbn rp2040:rp2040:rpipico sketch
+ -fqbn rp2040:rp2040:rpipico main
 ```
