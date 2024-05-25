@@ -5,3 +5,5 @@
 
 **/board-backups
 **/io-board-backups
+
+**/.dir-local.el
