@@ -1,8 +1,6 @@
 # The People's Horn
 
-A whimsical device, for whimsical people. Make sounds with buttons. Pollute your environment with noise.
-
-
+A whimsical device, for whimsical people. Make sounds with buttons.
 
 ## Loading files
 
