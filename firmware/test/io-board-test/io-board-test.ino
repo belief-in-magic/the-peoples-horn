@@ -7,24 +7,30 @@
 
 #define MCP23017_I2C_ADDRESS 0x20
 
-#define SDA_PIN 4
-#define SCL_PIN 5
+// GPIO Pins
+#define RP2040_SDA_PIN 21
+#define RP2040_SCL_PIN 22
+// TODO: NOOOOO these are incorrect, they don't match with the default i2c interfaces
+
+#define RP2040_INT_PIN 23
 
 #define S1 8
 #define S2 9
 #define S3 10
 #define S4 11
 
+#define PICO_I2C_INSTANCE   i2c1
+
 Adafruit_MCP23X17 mcp;
 
 
 void setup() {
 
-  
     Serial.begin(115200);
     delay(4000);
-    //while (!Serial);
-    Serial.println("MCP23017 test");
+        
+    Serial.println("Starting MCP23017 Test");
+    
 
     if (!mcp.begin_I2C()) {
       Serial.println("Error init mcp");

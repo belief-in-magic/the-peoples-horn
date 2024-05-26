@@ -1,5 +1,8 @@
 # Demo script to test with keyboard
 
+Python script to test basic UX for chorded sounds. Just a demo. Not used in any
+way in the main project.
+
 Needs pygame:
 ```
 pip3 install pygame
