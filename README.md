@@ -30,6 +30,6 @@ press in order to play it. The lowest order bit represents the button closest to
 
 - [PCB/v0.2]: The I2C pins are not connected correctly. The SDA and SCL pins use different RP2040 I2C buses. This can be circumvented 
   with software (by using bit banging, or the RP2040 PIOs), in the meantime.
-- [PCB/v0.2][Awaiting PROD confirmation]: Current main board seems to not work directly on USB power. If the battery is not connected but the USB port is,
-the board should power on. This might be caused by the main inductor backdriving (?). This is hopefully fixed with the new diode placement.
-- [PCB/v0.2][Awaiting PROD confirmation]: The charge IC gets pretty hot to the touch. Maybe reduce charge current? Increase trace widths?
+- [PCB/v0.2][Awaiting fix confirmation]: Current main board seems to not work directly on USB power. If the battery is not connected but the USB port is,
+the board should power on. This is not the case with v0.2. This might be caused by the main inductor backdriving (?). This is hopefully fixed with the new diode placement.
+- [PCB/v0.2][Awaiting fix confirmation]: The charge IC gets pretty hot to the touch. Maybe reduce charge current? Increase trace widths?
