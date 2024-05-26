@@ -7,9 +7,11 @@ A whimsical device, for whimsical people. Make sounds with buttons.
 
 - On the main board (the one with the RP2040, uSD slot, and USB-C connector), there should be a power jumper (POWER_EN)
 This needs to be shorted for the board to power on.
-- Slot in the microSD card with sound files loaded. The format and naming of said sound files are explained below.
+- Slot in the microSD card with sound files stored inside. The format and naming of said sound files are explained below.
+- Insert the speaker leads into the green terminal block. Note the polarity of the leads. ([PCB/v0.2 only] There aren't any signifiers for the polarity of the leads on the PCB. The one 
+soldered to the square pad on the PCB is the positive one.)
+- Connect the IO board with the main board using the JST connector.
 - Compile and upload the firmware. This is described in the firmware directory README.
-
 
 ## Loading files
 
