@@ -33,3 +33,17 @@ press in order to play it. The lowest order bit represents the button closest to
 - [PCB/v0.2][Awaiting fix confirmation]: Current main board seems to not work directly on USB power. If the battery is not connected but the USB port is,
 the board should power on. This is not the case with v0.2. This might be caused by the main inductor backdriving (?). This is hopefully fixed with the new diode placement.
 - [PCB/v0.2][Awaiting fix confirmation]: The charge IC gets pretty hot to the touch. Maybe reduce charge current? Increase trace widths?
+
+
+## TODO + Possible Improvements:
+
+- [PCB/v0.2]: Power usage testing. Test low power mode for the rp2040. 
+  - How long does it take to fully charge? 
+  - How long does a charge last idle?
+  - Does using the rp2040 lower power mode make sense?
+- [PCB/v0.2]: Separate 3.3V and 5V converters from battery. Currently we use a 3.3V LDO regulator on the boosted 5V source, this isn't the most
+efficient. If we have a separate 3.3V SMPS from battery, we could also disable the 5V converter during lower power situations, allowing for
+even more energy savings.
+- [PCB/v0.2]: Better charge handling. Maybe connect an RP2040 ADC pin to monitor it? and a regular GPIO pin to disable/enable charging? 
+- [PCB/v0.2]: Move charge LED to side of PCB, so we can it see from outside the case.
+- [PCB/v0.2]: Depending on power usage testing, we might need to have a manual on-off switch.
