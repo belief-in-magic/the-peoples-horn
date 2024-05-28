@@ -69,13 +69,8 @@ void loop() {
   core0State.loop();
 }
 
-int t = 0;
+
 void loop1() {  
   core1State.loop();
-
-  if (t == 0) {
-    t++;
-    core1State.triggerSound(0, 3);
-  }
 }
 

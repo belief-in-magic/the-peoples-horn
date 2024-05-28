@@ -2,40 +2,70 @@ include <dimensions.scad>
 include <math.scad>
 include <screws.scad>
 
+
 module mainBoard(negative=false) {
-
+    
     difference() {
-
+        
         union() {
-            color(c=[0.1,0.6,0.1]) // pcb green
-                cube(size=[mainBoardX, mainBoardY, pcbThickness]);
+            pcb();
+            batteryHolder();
 
-            color(c=[1,0,0])
-                if (negative) {
-
-                    usbCutoutDx = 16;
-                    usbCutoutX = 16;
-                    usbCutoutZ = 10;
-
-                    sdCutoutDx = 38;
-                    sdCutoutX = 15;
-                    sdCutoutZ = 10;
-
-                    translate(v=[usbCutoutDx, mainBoardY, pcbThickness])
-                        cube(size=[usbCutoutX, 25, usbCutoutZ]);
-
-                    translate(v=[sdCutoutDx, mainBoardY, pcbThickness])
-                        cube(size=[sdCutoutX, 25, sdCutoutZ]);
-                
-                }
+            if (negative) cutouts();
         }
 
-        mirror4XY(p=[pcbMountHoleDist,pcbMountHoleDist,0], dx=mainBoardScrewHoleDx, dy=mainBoardScrewHoleDy)
+        for (hole = mainBoardHoles) {
+            translate(v=[hole[0],hole[1],-inf/2])
             cylinder(r=m3Radius, h=inf);
-
+        }
     }
-    
-}
 
+
+    module pcb() {
+        translate(v=[pcbR, pcbR, 0])
+            color(c=pcbColor) // pcb green
+            minkowski() {
+            cube(size=[mainBoardX-pcbR*2, mainBoardY-pcbR*2, pcbThickness]);
+            cylinder(h=eps, r=pcbR);
+        }
+    }
+
+    module batteryHolder() {
+        batteryY = 60.00;
+        batteryX = mainBoardX;
+        batteryZ = 16.50;
+
+        batteryDy = 9.80;
+
+        mirror(v=[0,0,1])
+        translate(v=[0,batteryDy,0])
+        cube(size=[batteryX, batteryY, batteryZ]);
+    }
+
+    module cutouts() {
+
+        usbCutoutX = 10.00;
+        usbCutoutZ = 3.50;
+
+        usbCutoutDx = mainBoardX - 12.70; // from edge of PCB to midpoint of USB cutout
+        usbCutoutDy = 0.00;
+
+        sdCutoutX = 12.50;
+        sdCutoutZ = 3.00;
+
+        sdCutoutDx = mainBoardX - 26.70;  // from edge of PCB to midpoint of SD card cutout
+        sdCutoutDy = 0.00;
+
+        color(c=[1,0,0]) {
+
+            translate(v=[-usbCutoutX/2 + usbCutoutDx, -inf + usbCutoutDy, pcbThickness])
+                cube(size=[usbCutoutX, inf, usbCutoutZ]);
+
+            translate(v=[-sdCutoutX/2 + sdCutoutDx, -inf + sdCutoutDy, pcbThickness])
+                cube(size=[sdCutoutX, inf, sdCutoutZ]);
+        }
+    }
+
+}
 
 mainBoard(negative=true);
