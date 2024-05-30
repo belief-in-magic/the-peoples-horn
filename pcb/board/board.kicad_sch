@@ -2577,6 +2577,9 @@
     (path "/d540bb9b-d45f-4ddd-b651-2c00d8abffca/d8757b13-5fcb-40e0-8b42-9b760e31dbf2"
       (reference "J7") (unit 1) (value "Screw_Terminal_Speaker") (footprint "TerminalBlock:TerminalBlock_bornier-2_P5.08mm")
     )
+    (path "/4532e7a8-aa46-45fe-9bdb-5c2c6a438547/7f29da18-812e-4dc0-bc8b-123d659729b8"
+      (reference "JP1") (unit 1) (value "CHG_LED_EN") (footprint "Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm")
+    )
     (path "/4532e7a8-aa46-45fe-9bdb-5c2c6a438547/8bcac4c9-d137-406f-b55f-d51989477373"
       (reference "L1") (unit 1) (value "2.2uH") (footprint "Inductor_SMD:L_Sunlord_MWSA05xxS")
     )
