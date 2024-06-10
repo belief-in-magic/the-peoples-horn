@@ -1,4 +1,10 @@
 Comment,Designator,Footprint,LCSC
 "100nF","C1","Capacitor_SMD:C_0402_1005Metric","C307331"
+"LED","D1,D2,D3,D4,D5,D6,D7,D8","LED_SMD:LED_0805_2012Metric","C2297"
+"MountingHole","H1,H2","MountingHole:MountingHole_3.2mm_M3_DIN965_Pad",""
 "Conn_01x05_Male","J1","Connector_JST:JST_PH_B5B-PH-SM4-TB_1x05-1MP_P2.00mm_Vertical","C265085"
+"Jumper_2_Bridged","JP1,JP2,JP3,JP4,JP5,JP6,JP7,JP8","Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm",""
+"2K7","R1,R2,R3,R4,R5,R6,R7,R8","Resistor_SMD:R_0603_1608Metric","C13167"
+"SW_Keyboard","SW1,SW2,SW4,SW5","Library:Kailh_socket_MX","C5156480"
+"RotEncoder_S","SW3","Rotary_Encoder:RotaryEncoder_Bourns_Vertical_PEC12R-3xxxF-Sxxxx",""
 "MCP23017_ML","U1","Package_DFN_QFN:QFN-28-1EP_6x6mm_P0.65mm_EP4.25x4.25mm","C629439"

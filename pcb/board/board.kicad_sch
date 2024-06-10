@@ -2591,6 +2591,9 @@
     (path "/4532e7a8-aa46-45fe-9bdb-5c2c6a438547/bd0cf246-0851-4690-887b-6cdfad658467"
       (reference "JP3") (unit 1) (value "V_SENSE_EN") (footprint "Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm")
     )
+    (path "/4532e7a8-aa46-45fe-9bdb-5c2c6a438547/0c9b1600-ec33-4c62-bee0-8271b6cd66ac"
+      (reference "JP4") (unit 1) (value "Jumper_2_Bridged") (footprint "Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm")
+    )
     (path "/4532e7a8-aa46-45fe-9bdb-5c2c6a438547/8bcac4c9-d137-406f-b55f-d51989477373"
       (reference "L1") (unit 1) (value "2.2uH") (footprint "Inductor_SMD:L_Sunlord_MWSA05xxS")
     )

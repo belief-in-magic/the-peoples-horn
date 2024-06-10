@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="E">
   <design>
-    <source>/home/zhao/Documents/tarhorn/src/kicad/io-board/io-board.kicad_sch</source>
-    <date>Sun 05 May 2024 05:06:54 PM</date>
+    <source>/home/zhao/Documents/the-peoples-horn/pcb/io-board/io-board.kicad_sch</source>
+    <date>Mon 10 Jun 2024 04:06:41 PM</date>
     <tool>Eeschema 6.0.11-2627ca5db0~126~ubuntu22.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -37,6 +37,110 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamps>ef950b3d-cc17-4cf2-a52f-66f6596cac2c</tstamps>
     </comp>
+    <comp ref="D1">
+      <value>LED</value>
+      <footprint>LED_SMD:LED_0805_2012Metric</footprint>
+      <fields>
+        <field name="Vendor">C2297</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Vendor" value="C2297"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>713f429c-fc96-4dee-b5fb-768a8accd458</tstamps>
+    </comp>
+    <comp ref="D2">
+      <value>LED</value>
+      <footprint>LED_SMD:LED_0805_2012Metric</footprint>
+      <fields>
+        <field name="Vendor">C2297</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Vendor" value="C2297"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d71f55f2-cdde-4a34-961b-abc8449e990e</tstamps>
+    </comp>
+    <comp ref="D3">
+      <value>LED</value>
+      <footprint>LED_SMD:LED_0805_2012Metric</footprint>
+      <fields>
+        <field name="Vendor">C2297</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Vendor" value="C2297"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>da126210-79bd-44f9-acdb-098c15d0c249</tstamps>
+    </comp>
+    <comp ref="D4">
+      <value>LED</value>
+      <footprint>LED_SMD:LED_0805_2012Metric</footprint>
+      <fields>
+        <field name="Vendor">C2297</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Vendor" value="C2297"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>91d3ab39-b59b-4b7c-a04e-0b5b3b20410b</tstamps>
+    </comp>
+    <comp ref="D5">
+      <value>LED</value>
+      <footprint>LED_SMD:LED_0805_2012Metric</footprint>
+      <fields>
+        <field name="Vendor">C2297</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Vendor" value="C2297"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>14aff03f-f132-434c-8d17-4cbf476c86b4</tstamps>
+    </comp>
+    <comp ref="D6">
+      <value>LED</value>
+      <footprint>LED_SMD:LED_0805_2012Metric</footprint>
+      <fields>
+        <field name="Vendor">C2297</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Vendor" value="C2297"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>baf25a43-3fa7-4081-9c79-e5e771872f11</tstamps>
+    </comp>
+    <comp ref="D7">
+      <value>LED</value>
+      <footprint>LED_SMD:LED_0805_2012Metric</footprint>
+      <fields>
+        <field name="Vendor">C2297</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Vendor" value="C2297"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0fa992f3-399e-4cee-b17d-dde8a897f383</tstamps>
+    </comp>
+    <comp ref="D8">
+      <value>LED</value>
+      <footprint>LED_SMD:LED_0805_2012Metric</footprint>
+      <fields>
+        <field name="Vendor">C2297</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Vendor" value="C2297"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>360ac271-1d9f-4dba-bc0e-e308143a1814</tstamps>
+    </comp>
     <comp ref="H1">
       <value>MountingHole</value>
       <footprint>MountingHole:MountingHole_3.2mm_M3_DIN965_Pad</footprint>
@@ -67,6 +171,182 @@
       <property name="Sheetfile" value="io-board.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>fbe8cbf6-5f1e-42b6-af38-3c8e9ec50a16</tstamps>
+    </comp>
+    <comp ref="JP1">
+      <value>Jumper_2_Bridged</value>
+      <footprint>Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm</footprint>
+      <libsource lib="Jumper" part="Jumper_2_Bridged" description="Jumper, 2-pole, closed/bridged"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8f016101-1167-462e-aee1-b0c385ef72a7</tstamps>
+    </comp>
+    <comp ref="JP2">
+      <value>Jumper_2_Bridged</value>
+      <footprint>Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm</footprint>
+      <libsource lib="Jumper" part="Jumper_2_Bridged" description="Jumper, 2-pole, closed/bridged"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d867228f-af2e-4f56-9061-4819aa91bda5</tstamps>
+    </comp>
+    <comp ref="JP3">
+      <value>Jumper_2_Bridged</value>
+      <footprint>Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm</footprint>
+      <libsource lib="Jumper" part="Jumper_2_Bridged" description="Jumper, 2-pole, closed/bridged"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>72d52d1e-9d0f-443f-86c4-4e938889dbbf</tstamps>
+    </comp>
+    <comp ref="JP4">
+      <value>Jumper_2_Bridged</value>
+      <footprint>Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm</footprint>
+      <libsource lib="Jumper" part="Jumper_2_Bridged" description="Jumper, 2-pole, closed/bridged"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ead59597-34a2-47ab-b04c-fa36d24a3663</tstamps>
+    </comp>
+    <comp ref="JP5">
+      <value>Jumper_2_Bridged</value>
+      <footprint>Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm</footprint>
+      <libsource lib="Jumper" part="Jumper_2_Bridged" description="Jumper, 2-pole, closed/bridged"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c5dc73e7-84ac-4890-b791-d0fca15d4ebc</tstamps>
+    </comp>
+    <comp ref="JP6">
+      <value>Jumper_2_Bridged</value>
+      <footprint>Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm</footprint>
+      <libsource lib="Jumper" part="Jumper_2_Bridged" description="Jumper, 2-pole, closed/bridged"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1036b931-6804-404b-aaed-d0af4569ab76</tstamps>
+    </comp>
+    <comp ref="JP7">
+      <value>Jumper_2_Bridged</value>
+      <footprint>Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm</footprint>
+      <libsource lib="Jumper" part="Jumper_2_Bridged" description="Jumper, 2-pole, closed/bridged"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>81f2d334-b43e-4a8c-a65f-560c1f701fa5</tstamps>
+    </comp>
+    <comp ref="JP8">
+      <value>Jumper_2_Bridged</value>
+      <footprint>Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm</footprint>
+      <libsource lib="Jumper" part="Jumper_2_Bridged" description="Jumper, 2-pole, closed/bridged"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>76ece2c3-3672-4e9e-aa8f-246b89b6c4a2</tstamps>
+    </comp>
+    <comp ref="R1">
+      <value>2K7</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Vendor">C13167</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Vendor" value="C13167"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d3f3816b-180c-4c48-9847-ca74f66e740f</tstamps>
+    </comp>
+    <comp ref="R2">
+      <value>2K7</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Vendor">C13167</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Vendor" value="C13167"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>87408572-953c-4427-bad0-57f7075ee2b5</tstamps>
+    </comp>
+    <comp ref="R3">
+      <value>2K7</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Vendor">C13167</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Vendor" value="C13167"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e74563e9-759d-469d-9a60-b4932b12ebc0</tstamps>
+    </comp>
+    <comp ref="R4">
+      <value>2K7</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Vendor">C13167</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Vendor" value="C13167"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>cb9c093f-121b-4b1e-85ba-b3ea0de1b96d</tstamps>
+    </comp>
+    <comp ref="R5">
+      <value>2K7</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Vendor">C13167</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Vendor" value="C13167"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b8cca363-f2fd-46a4-9e19-1cc0395e2676</tstamps>
+    </comp>
+    <comp ref="R6">
+      <value>2K7</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Vendor">C13167</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Vendor" value="C13167"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>71745481-614f-4272-90e8-1425c0d83f9c</tstamps>
+    </comp>
+    <comp ref="R7">
+      <value>2K7</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Vendor">C13167</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Vendor" value="C13167"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0cca3ef0-ebc4-49ae-b62f-2f7ec0ccaa08</tstamps>
+    </comp>
+    <comp ref="R8">
+      <value>2K7</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Vendor">C13167</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Vendor" value="C13167"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="io-board.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5d37d2e7-47e8-4d06-9486-85df8234dbc4</tstamps>
     </comp>
     <comp ref="SW1">
       <value>SW_Keyboard</value>
@@ -180,6 +460,40 @@
         <pin num="2" name="" type="passive"/>
       </pins>
     </libpart>
+    <libpart lib="Device" part="LED">
+      <description>Light emitting diode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>LED*</fp>
+        <fp>LED_SMD:*</fp>
+        <fp>LED_THT:*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R">
+      <description>Resistor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
     <libpart lib="Device" part="RotaryEncoder_Switch">
       <description>Rotary encoder, dual channel, incremental quadrate outputs, with switch</description>
       <docs>~</docs>
@@ -243,6 +557,24 @@
         <pin num="29" name="EP" type="passive"/>
       </pins>
     </libpart>
+    <libpart lib="Jumper" part="Jumper_2_Bridged">
+      <description>Jumper, 2-pole, closed/bridged</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Jumper*</fp>
+        <fp>TestPoint*2Pads*</fp>
+        <fp>TestPoint*Bridge*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">JP</field>
+        <field name="Value">Jumper_2_Bridged</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="passive"/>
+        <pin num="2" name="B" type="passive"/>
+      </pins>
+    </libpart>
     <libpart lib="Mechanical" part="MountingHole">
       <description>Mounting Hole without connection</description>
       <docs>~</docs>
@@ -278,6 +610,9 @@
     </library>
     <library logical="Interface_Expansion">
       <uri>/usr/share/kicad/symbols//Interface_Expansion.kicad_sym</uri>
+    </library>
+    <library logical="Jumper">
+      <uri>/usr/share/kicad/symbols//Jumper.kicad_sym</uri>
     </library>
     <library logical="Mechanical">
       <uri>/usr/share/kicad/symbols//Mechanical.kicad_sym</uri>
@@ -335,6 +670,14 @@
     </net>
     <net code="12" name="GND">
       <node ref="C1" pin="2" pintype="passive"/>
+      <node ref="D1" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="D2" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="D3" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="D4" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="D5" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="D6" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="D7" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="D8" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="J1" pin="1" pinfunction="Pin_1" pintype="passive"/>
       <node ref="SW1" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="SW2" pin="2" pinfunction="2" pintype="passive"/>
@@ -348,41 +691,113 @@
       <node ref="U1" pin="29" pinfunction="EP" pintype="passive"/>
       <node ref="U1" pin="6" pinfunction="VSS" pintype="power_in"/>
     </net>
-    <net code="13" name="unconnected-(U1-Pad4)">
+    <net code="13" name="Net-(D1-Pad2)">
+      <node ref="D1" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="R1" pin="2" pintype="passive"/>
+    </net>
+    <net code="14" name="Net-(D2-Pad2)">
+      <node ref="D2" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="R2" pin="2" pintype="passive"/>
+    </net>
+    <net code="15" name="Net-(D3-Pad2)">
+      <node ref="D3" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="R3" pin="2" pintype="passive"/>
+    </net>
+    <net code="16" name="Net-(D4-Pad2)">
+      <node ref="D4" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="R4" pin="2" pintype="passive"/>
+    </net>
+    <net code="17" name="Net-(D5-Pad2)">
+      <node ref="D5" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="R5" pin="2" pintype="passive"/>
+    </net>
+    <net code="18" name="Net-(D6-Pad2)">
+      <node ref="D6" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="R6" pin="2" pintype="passive"/>
+    </net>
+    <net code="19" name="Net-(D7-Pad2)">
+      <node ref="D7" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="R7" pin="2" pintype="passive"/>
+    </net>
+    <net code="20" name="Net-(D8-Pad2)">
+      <node ref="D8" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="R8" pin="2" pintype="passive"/>
+    </net>
+    <net code="21" name="Net-(JP1-Pad1)">
+      <node ref="JP1" pin="1" pinfunction="A" pintype="passive"/>
+      <node ref="R1" pin="1" pintype="passive"/>
+    </net>
+    <net code="22" name="Net-(JP1-Pad2)">
+      <node ref="JP1" pin="2" pinfunction="B" pintype="passive"/>
+      <node ref="U1" pin="24" pinfunction="GPA7" pintype="bidirectional"/>
+    </net>
+    <net code="23" name="Net-(JP2-Pad1)">
+      <node ref="JP2" pin="1" pinfunction="A" pintype="passive"/>
+      <node ref="R2" pin="1" pintype="passive"/>
+    </net>
+    <net code="24" name="Net-(JP2-Pad2)">
+      <node ref="JP2" pin="2" pinfunction="B" pintype="passive"/>
+      <node ref="U1" pin="23" pinfunction="GPA6" pintype="bidirectional"/>
+    </net>
+    <net code="25" name="Net-(JP3-Pad1)">
+      <node ref="JP3" pin="1" pinfunction="A" pintype="passive"/>
+      <node ref="R3" pin="1" pintype="passive"/>
+    </net>
+    <net code="26" name="Net-(JP3-Pad2)">
+      <node ref="JP3" pin="2" pinfunction="B" pintype="passive"/>
+      <node ref="U1" pin="22" pinfunction="GPA5" pintype="bidirectional"/>
+    </net>
+    <net code="27" name="Net-(JP4-Pad1)">
+      <node ref="JP4" pin="1" pinfunction="A" pintype="passive"/>
+      <node ref="R4" pin="1" pintype="passive"/>
+    </net>
+    <net code="28" name="Net-(JP4-Pad2)">
+      <node ref="JP4" pin="2" pinfunction="B" pintype="passive"/>
+      <node ref="U1" pin="21" pinfunction="GPA4" pintype="bidirectional"/>
+    </net>
+    <net code="29" name="Net-(JP5-Pad1)">
+      <node ref="JP5" pin="1" pinfunction="A" pintype="passive"/>
+      <node ref="R5" pin="1" pintype="passive"/>
+    </net>
+    <net code="30" name="Net-(JP5-Pad2)">
+      <node ref="JP5" pin="2" pinfunction="B" pintype="passive"/>
+      <node ref="U1" pin="20" pinfunction="GPA3" pintype="bidirectional"/>
+    </net>
+    <net code="31" name="Net-(JP6-Pad1)">
+      <node ref="JP6" pin="1" pinfunction="A" pintype="passive"/>
+      <node ref="R6" pin="1" pintype="passive"/>
+    </net>
+    <net code="32" name="Net-(JP6-Pad2)">
+      <node ref="JP6" pin="2" pinfunction="B" pintype="passive"/>
+      <node ref="U1" pin="19" pinfunction="GPA2" pintype="bidirectional"/>
+    </net>
+    <net code="33" name="Net-(JP7-Pad1)">
+      <node ref="JP7" pin="1" pinfunction="A" pintype="passive"/>
+      <node ref="R7" pin="1" pintype="passive"/>
+    </net>
+    <net code="34" name="Net-(JP7-Pad2)">
+      <node ref="JP7" pin="2" pinfunction="B" pintype="passive"/>
+      <node ref="U1" pin="18" pinfunction="GPA1" pintype="bidirectional"/>
+    </net>
+    <net code="35" name="Net-(JP8-Pad1)">
+      <node ref="JP8" pin="1" pinfunction="A" pintype="passive"/>
+      <node ref="R8" pin="1" pintype="passive"/>
+    </net>
+    <net code="36" name="Net-(JP8-Pad2)">
+      <node ref="JP8" pin="2" pinfunction="B" pintype="passive"/>
+      <node ref="U1" pin="17" pinfunction="GPA0" pintype="bidirectional"/>
+    </net>
+    <net code="37" name="unconnected-(U1-Pad4)">
       <node ref="U1" pin="4" pinfunction="GPB7" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="14" name="unconnected-(U1-Pad7)">
+    <net code="38" name="unconnected-(U1-Pad7)">
       <node ref="U1" pin="7" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="15" name="unconnected-(U1-Pad10)">
+    <net code="39" name="unconnected-(U1-Pad10)">
       <node ref="U1" pin="10" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="16" name="unconnected-(U1-Pad16)">
+    <net code="40" name="unconnected-(U1-Pad16)">
       <node ref="U1" pin="16" pinfunction="INTA" pintype="tri_state+no_connect"/>
-    </net>
-    <net code="17" name="unconnected-(U1-Pad17)">
-      <node ref="U1" pin="17" pinfunction="GPA0" pintype="bidirectional+no_connect"/>
-    </net>
-    <net code="18" name="unconnected-(U1-Pad18)">
-      <node ref="U1" pin="18" pinfunction="GPA1" pintype="bidirectional+no_connect"/>
-    </net>
-    <net code="19" name="unconnected-(U1-Pad19)">
-      <node ref="U1" pin="19" pinfunction="GPA2" pintype="bidirectional+no_connect"/>
-    </net>
-    <net code="20" name="unconnected-(U1-Pad20)">
-      <node ref="U1" pin="20" pinfunction="GPA3" pintype="bidirectional+no_connect"/>
-    </net>
-    <net code="21" name="unconnected-(U1-Pad21)">
-      <node ref="U1" pin="21" pinfunction="GPA4" pintype="bidirectional+no_connect"/>
-    </net>
-    <net code="22" name="unconnected-(U1-Pad22)">
-      <node ref="U1" pin="22" pinfunction="GPA5" pintype="bidirectional+no_connect"/>
-    </net>
-    <net code="23" name="unconnected-(U1-Pad23)">
-      <node ref="U1" pin="23" pinfunction="GPA6" pintype="bidirectional+no_connect"/>
-    </net>
-    <net code="24" name="unconnected-(U1-Pad24)">
-      <node ref="U1" pin="24" pinfunction="GPA7" pintype="bidirectional+no_connect"/>
     </net>
   </nets>
 </export>
