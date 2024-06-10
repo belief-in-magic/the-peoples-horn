@@ -11,6 +11,12 @@ easier for fab houses to process and manufacture, without dramatically increasin
 
 We might have to eventually reconsider using two separate projects for scale and cost purposes, but for dev work this seems to work fine.
 
+## Version:
+
+[VERSION 0.3] 
+SHA: e7d5517
+
+
 ## Preparing boards for manufacturing
 
 TODO
