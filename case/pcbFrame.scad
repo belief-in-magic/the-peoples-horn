@@ -1,14 +1,11 @@
 include <screws.scad>
+include <math.scad>
 include <dimensions.scad>
 
 /*
-
   Frame to hold an individual PCB. It's assumed here that both the IO board and main board
   have the same dimensions and mounting points.
-
 */
-
-
 module guideRail() {
 
     guideThickness = 8.0;
@@ -54,3 +51,15 @@ module guideRail() {
 
 
 guideRail();
+ 
+
+
+// Transformation to slot in mainBoard pcb into the frame
+use <mainBoard.scad>
+
+mainBoard_to_pcbFrame =
+    translate(v=[-pcbThickness,0, mainBoardX]) *
+    rotate(a=[0,90,0]);
+
+multmatrix(mainBoard_to_pcbFrame)
+*mainBoard(negative=true);

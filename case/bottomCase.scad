@@ -5,8 +5,6 @@ use <mainBoard.scad>
 use <ioBoard.scad>
 use <speaker.scad>
 
-
-
 mainBoardAssemblyTransform = identity;
 
 ioBoardAssemblyTransform =
