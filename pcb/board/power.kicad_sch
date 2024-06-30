@@ -1501,6 +1501,10 @@
     (uuid ff188a88-47c1-44ed-809d-0aa5f57db0bf)
   )
 
+  (text "set high to disable" (at 88.9 69.85 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 2aad32ab-4e73-476e-9a53-2fcf00b83eff)
+  )
   (text "TODO: iset may be too high\n" (at 107.95 85.09 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 4dbe12f3-211e-47d7-9caf-c1fd6e86f94d)

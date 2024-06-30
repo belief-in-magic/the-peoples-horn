@@ -16,17 +16,11 @@ operation given that we read from the SD card using SPI. For 20kb this takes aro
 #include <cstdint>
 #include <SD.h>
 #include <SPI.h>
+#include "interface.h"
 #include "sharedState.h"
 #include "soundPolicy.h"
 #include "input.h"
 #include "msg.h"
-
-// GPIO for sd card in spi mode (pico w tested only, you may need to change this depending on hardware)
-#define pSD_CS 25
-#define pSD_SCK 26
-#define pSD_MOSI 27
-#define pSD_MISO 24
-
 
 class Core1State {
 

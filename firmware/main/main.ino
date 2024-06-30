@@ -1,16 +1,16 @@
+
+
 #include <I2S.h>
 #include <SPI.h>
 #include <SD.h>
+#include <Wire.h>
+#include <Adafruit_MCP23X17.h>
 
+#include "interface.h"
 #include "input.h"
-
 #include "core0.h"
 #include "core1.h"
 
-// GPIO for speakers (I2S)
-#define pBCLK 18
-#define pWS (pBCLK+1)
-#define pDOUT 20
 
 const int sampleRate = 44100;
 
@@ -31,6 +31,7 @@ void setup() {
   Serial.println("BEGIN ****************************************************");
 
   Serial.println("core0 - starting setup");
+  delay(2000);
 
   rp2040.fifo.push(123);
   rp2040.fifo.pop(); // wait for the second core's setup to complete first
@@ -39,9 +40,9 @@ void setup() {
 
   Serial.println("core0 - waiting on other core done");
 
-  i2s.setBCLK(pBCLK);
-  i2s.setDATA(pDOUT);
-  i2s.setBitsPerSample(16);
+  i2s.setBCLK(SPEAKER_I2S_BCLK);
+  i2s.setDATA(SPEAKER_I2S_DOUT);
+  i2s.setBitsPerSample(I2S_BITS_PER_SAMPLE);
 
   // start I2S at the sample rate with 16-bits per sample
   if (!i2s.begin(sampleRate)) {
@@ -71,15 +72,16 @@ void loop() {
 
 
 int soundTriggered = 0;
+
 void loop1() {  
   core1State.loop();
 
-  // Manually trigger a sound, cuz the buttons are not working right now...
-  if (soundTriggered == 0) {
-    soundTriggered++;
+  /* // Manually trigger a sound, cuz the buttons are not working right now... */
+  /* if (soundTriggered == 0) { */
+  /*   soundTriggered++; */
 
-    // trigger sound "3" (ie 0011.wav) on buffer 0
-    core1State.triggerSound(0, 3);
-  }
+  /*   // trigger sound "3" (ie 0011.wav) on buffer 0 */
+  /*   core1State.triggerSound(0, 3); */
+  /* } */
 }
 

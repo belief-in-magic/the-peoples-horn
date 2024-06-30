@@ -19,10 +19,31 @@ InputState::InputState() {
 
 void InputState::setUpInputIO() {
 
-    pinMode(SOUND_S0, OUTPUT);
-    pinMode(SOUND_S1, OUTPUT);
-    pinMode(SOUND_S2, OUTPUT);
-    pinMode(SOUND_A, INPUT);
+    // pinMode(SOUND_S0, OUTPUT);
+    // pinMode(SOUND_S1, OUTPUT);
+    // pinMode(SOUND_S2, OUTPUT);
+    // pinMode(SOUND_A, INPUT);
+
+    Serial.println("Starting MCP23017 init");
+
+    IO_I2C_IF.setSDA(IO_I2C_SDA);
+    IO_I2C_IF.setSCL(IO_I2C_SCL);
+
+    IO_I2C_IF.begin();
+
+    if (!mcp.begin_I2C(MCP23XXX_ADDR, &IO_I2C_IF)) {
+      Serial.println("Error Init MCP23017");
+      while(1);
+    }
+
+    mcp.pinMode(8, INPUT_PULLUP);
+    mcp.pinMode(9, INPUT_PULLUP);
+    mcp.pinMode(10, INPUT_PULLUP);
+    mcp.pinMode(11, INPUT_PULLUP);
+
+    mcp.pinMode(12, INPUT_PULLUP);
+    mcp.pinMode(13, INPUT_PULLUP);
+    mcp.pinMode(14, INPUT_PULLUP);
 
 }
 
@@ -73,41 +94,34 @@ uint32_t InputState::pollSoundButtonsWithInactiveCooldown() {
 }
 
 bool InputState::pollSoundButton(int button) {
+
+
+    int pinId = IO_B0;
     
-    if (button == 0) {
-        digitalWrite(SOUND_S0, HIGH);
-        digitalWrite(SOUND_S1, LOW);
-        digitalWrite(SOUND_S2, LOW);
-    } else if (button == 1) {
-        digitalWrite(SOUND_S0, HIGH); // button 1 and 2 are swapped in the hardware, this is a bug
-        digitalWrite(SOUND_S1, HIGH);
-        digitalWrite(SOUND_S2, LOW);
-    } else if (button == 2) {
-        digitalWrite(SOUND_S0, LOW);
-        digitalWrite(SOUND_S1, HIGH);
-        digitalWrite(SOUND_S2, LOW);
-    } else if (button == 3) {
-        digitalWrite(SOUND_S0, LOW);
-        digitalWrite(SOUND_S1, LOW);
-        digitalWrite(SOUND_S2, HIGH);
+    switch (button) {
+
+    case 0:
+        pinId = IO_B0;
+        break;
+    case 1:
+        pinId = IO_B1;
+        break;
+    case 2:
+        pinId = IO_B2;
+        break;
+    case 3:
+        pinId = IO_B3;
+        break;
+     
     }
 
-    delay(2);
-
-    return digitalRead(SOUND_A) == SOUND_ACTIVE;
+    return mcp.digitalRead(pinId) == SOUND_ACTIVE;
 }
 
 
 bool InputState::pollMuteButton() {
-
-
-    digitalWrite(SOUND_S0, HIGH);
-    digitalWrite(SOUND_S1, HIGH);
-    digitalWrite(SOUND_S2, HIGH);
-    delay(2);
-
-    
-    return digitalRead(SOUND_A) == SOUND_ACTIVE;
+   
+    return mcp.digitalRead(IO_ROT_DOWN) == 0;
 }
 
 bool InputState::isMuted() {

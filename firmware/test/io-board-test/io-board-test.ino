@@ -1,25 +1,15 @@
 
-// Test program, usb-c xiao rp2040 + mcp23017 + sleep mode
+// Test program for I2C mcp23017 connectivity
 
+#include <Wire.h>
 #include <Adafruit_MCP23X17.h>
+// #include <MCP23017.h> // don't use this library, we current use the adafruit lib. 
 
-#include <MCP23017.h>
+#define IO_I2C_SDA 20
+#define IO_I2C_SCL 21
+#define IO_I2C_INT 22 /* Interrupt pin for lower power mode, not tied to any interface */
+#define IO_I2C_IF Wire
 
-#define MCP23017_I2C_ADDRESS 0x20
-
-// GPIO Pins
-#define RP2040_SDA_PIN 21
-#define RP2040_SCL_PIN 22
-// TODO: NOOOOO these are incorrect, they don't match with the default i2c interfaces
-
-#define RP2040_INT_PIN 23
-
-#define S1 8
-#define S2 9
-#define S3 10
-#define S4 11
-
-#define PICO_I2C_INSTANCE   i2c1
 
 Adafruit_MCP23X17 mcp;
 
@@ -28,15 +18,21 @@ void setup() {
 
     Serial.begin(115200);
     delay(4000);
-        
-    Serial.println("Starting MCP23017 Test");
-    
 
-    if (!mcp.begin_I2C()) {
+    Serial.println("Starting MCP23017 Test");
+
+    IO_I2C_IF.setSDA(IO_I2C_SDA);
+    IO_I2C_IF.setSCL(IO_I2C_SCL);
+
+    IO_I2C_IF.begin();
+
+    if (!mcp.begin_I2C(MCP23XXX_ADDR, &IO_I2C_IF)) {
       Serial.println("Error init mcp");
       while(1);
     }
 
+    
+    // mcp pins 8,9,10,11 are connected to the button switches
     mcp.pinMode(8, INPUT_PULLUP);
     mcp.pinMode(9, INPUT_PULLUP);
     mcp.pinMode(10, INPUT_PULLUP);

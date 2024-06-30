@@ -161,11 +161,11 @@ void Core1State::handleInboundMsgs() {
 void Core1State::setUpSD() {
     Serial.println("Initializing SD card...");
 
-    SPI1.setSCK(pSD_SCK);
-    SPI1.setRX(pSD_MISO);
-    SPI1.setTX(pSD_MOSI);
+    SD_SPI_IF.setSCK(SD_SPI_SCK);
+    SD_SPI_IF.setRX(SD_SPI_MISO);
+    SD_SPI_IF.setTX(SD_SPI_MOSI);
 
-    if (!SD.begin(pSD_CS, SPI1)) {
+    if (!SD.begin(SD_SPI_CS, SD_SPI_IF)) {
         Serial.println("initialization failed!");
         return;
     }
