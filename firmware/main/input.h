@@ -10,8 +10,6 @@
 #include "interface.h"
 #include "sharedState.h"
 
-Adafruit_MCP23X17 mcp;
-
 #define CHORD_WAIT_TIME_MS 50
 
 #define INACTIVE_COOLDOWN_MS 50
@@ -39,6 +37,8 @@ class InputState {
 
   private:
 
+    Adafruit_MCP23X17* mcp;
+
     uint64_t lastChange[NUM_SOUND_BUTTONS];
 
     bool isActive[NUM_SOUND_BUTTONS];
@@ -63,8 +63,12 @@ class InputState {
 
   public:
     InputState();
+    
     std::optional<uint32_t> getNextSound();
+
     bool isMuted();
+
+    void setMcp(Adafruit_MCP23X17 *mcp);
 
     void disableInput();
 };

@@ -38,7 +38,7 @@ class Core1State {
     void handleInboundMsgs();
 
   public:
-    void setup();
+    void setup(Adafruit_MCP23X17 *mcp);
     void triggerSound(uint8_t buf, uint32_t sound); // TODO temp add here for testing
 
     Core1State(SharedState* ss);

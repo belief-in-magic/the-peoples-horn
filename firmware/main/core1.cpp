@@ -4,16 +4,18 @@
 
 Core1State::Core1State(SharedState* ss) {
   sharedState = ss;
-}
-
-void Core1State::setup() {
 
   isMuted = false;
+}
+
+void Core1State::setup(Adafruit_MCP23X17* mcp) {
 
   for (int i = 0; i < MAX_CONCURRENT_SOUNDS; i++) {
     highestAckedSector[i] = 0;
     prepareNext[i] = 0;
   }
+
+  inputState.setMcp(mcp);
 
   setUpSD();
 }

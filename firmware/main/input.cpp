@@ -13,7 +13,11 @@ InputState::InputState() {
     lastMuted = 0;
     muteState = false;
     disable = false;
+    
+}
 
+void InputState::setMcp(Adafruit_MCP23X17 *mcpIf) {
+    mcp = mcpIf;
     setUpInputIO();
 }
 
@@ -31,19 +35,19 @@ void InputState::setUpInputIO() {
 
     IO_I2C_IF.begin();
 
-    if (!mcp.begin_I2C(MCP23XXX_ADDR, &IO_I2C_IF)) {
+    if (!mcp->begin_I2C(MCP23XXX_ADDR, &IO_I2C_IF)) {
       Serial.println("Error Init MCP23017");
       while(1);
     }
 
-    mcp.pinMode(8, INPUT_PULLUP);
-    mcp.pinMode(9, INPUT_PULLUP);
-    mcp.pinMode(10, INPUT_PULLUP);
-    mcp.pinMode(11, INPUT_PULLUP);
+    mcp->pinMode(8, INPUT_PULLUP);
+    mcp->pinMode(9, INPUT_PULLUP);
+    mcp->pinMode(10, INPUT_PULLUP);
+    mcp->pinMode(11, INPUT_PULLUP);
 
-    mcp.pinMode(12, INPUT_PULLUP);
-    mcp.pinMode(13, INPUT_PULLUP);
-    mcp.pinMode(14, INPUT_PULLUP);
+    mcp->pinMode(12, INPUT_PULLUP);
+    mcp->pinMode(13, INPUT_PULLUP);
+    mcp->pinMode(14, INPUT_PULLUP);
 
 }
 
@@ -115,13 +119,15 @@ bool InputState::pollSoundButton(int button) {
      
     }
 
-    return mcp.digitalRead(pinId) == SOUND_ACTIVE;
+    return mcp->digitalRead(pinId) == SOUND_ACTIVE;
+    //return false;
 }
 
 
 bool InputState::pollMuteButton() {
    
-    return mcp.digitalRead(IO_ROT_DOWN) == 0;
+    return mcp->digitalRead(IO_ROT_DOWN) == 0;
+    //return false;
 }
 
 bool InputState::isMuted() {

@@ -17,6 +17,8 @@ const int sampleRate = 44100;
 // Create the I2S port using a PIO state machine
 I2S i2s(OUTPUT);
 
+Adafruit_MCP23X17 mcp;
+
 SharedState sharedState;
 Core0State core0State(&sharedState, &i2s);
 Core1State core1State(&sharedState);
@@ -58,7 +60,7 @@ void setup() {
 void setup1() {
   rp2040.fifo.pop();
   Serial.println("core1 - starting setup");
-  core1State.setup();
+  core1State.setup(&mcp);
   Serial.println("core1 - setup done");
 
   rp2040.fifo.push(123);
@@ -76,12 +78,12 @@ int soundTriggered = 0;
 void loop1() {  
   core1State.loop();
 
-  /* // Manually trigger a sound, cuz the buttons are not working right now... */
-  /* if (soundTriggered == 0) { */
-  /*   soundTriggered++; */
+  // Manually trigger a sound, cuz the buttons are not working right now...
+  if (soundTriggered == 0) {
+    soundTriggered++;
 
-  /*   // trigger sound "3" (ie 0011.wav) on buffer 0 */
-  /*   core1State.triggerSound(0, 3); */
-  /* } */
+    // trigger sound "3" (ie 0011.wav) on buffer 0
+    core1State.triggerSound(0, 3);
+  }
 }
 
