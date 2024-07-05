@@ -54,11 +54,15 @@ guideRail();
  
 
 
-// Transformation to slot in mainBoard pcb into the frame
+// Transformation to slot in mainBoard/ioBoard pcb into the frame
 use <mainBoard.scad>
 
 mainBoard_to_pcbFrame =
-    translate(v=[-pcbThickness,0, mainBoardX]) *
+    translate(v=[-pcbThickness,0, pcbX]) *
+    rotate(a=[0,90,0]);
+
+ioBoard_to_pcbFrame =
+    translate(v=[-pcbThickness,0, pcbX]) *
     rotate(a=[0,90,0]);
 
 multmatrix(mainBoard_to_pcbFrame)

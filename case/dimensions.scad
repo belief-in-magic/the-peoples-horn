@@ -58,6 +58,9 @@ bottomCaseY =
     + mainBoardY
     + pcbSpacing;
 
+
+batteryExtraSpace = 18;
+
 // assumes that the speaker z value is not the largest
 bottomCaseZ =    
     + pcbThickness // from main board

@@ -3,7 +3,27 @@ include <screws.scad>
 include <dimensions.scad>
 
 
-speaker(negative=true);
+//speaker(negative=true);
+
+r1Dist = 0;
+r1 = 20;
+r2Dist = 3.4;
+r2 = 20;
+r3Dist = 13;
+r3 = 32.3;
+r4Dist = 0;
+r4 = 21.9;
+r5Dist = 19.9;
+r5 = 21.9;
+
+
+hull() {
+    cylinder(r=r1, h=eps);
+
+    translate(v=[0,0, -(r2Dist+r1Dist)])
+        cylinder(r=r2, h=eps);
+}
+
 
 module speaker(negative=false) {
 
@@ -12,7 +32,7 @@ module speaker(negative=false) {
 
 
     translate(v=[0,0,-speakerZ])
-    union() {
+        union() {
         difference() {
 
             cube(size=[speakerX, speakerY, speakerZ]);
