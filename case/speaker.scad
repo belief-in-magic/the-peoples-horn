@@ -3,64 +3,37 @@ include <screws.scad>
 include <dimensions.scad>
 
 
-//speaker(negative=true);
+/*
 
-r1Dist = 0;
-r1 = 20;
-r2Dist = 3.4;
-r2 = 20;
-r3Dist = 13;
-r3 = 32.3;
-r4Dist = 0;
-r4 = 21.9;
-r5Dist = 19.9;
-r5 = 21.9;
+  Dimensions and negative for a simple cylindrical speaker. This speaker should have a front "ridge"
+  that can be used to hold the speaker in place. 
 
+*/
 
-hull() {
-    cylinder(r=r1, h=eps);
+speakerRidgeR = 20;
 
-    translate(v=[0,0, -(r2Dist+r1Dist)])
-        cylinder(r=r2, h=eps);
-}
-
+speaker(negative=true);
 
 module speaker(negative=false) {
+    radiuses = [speakerRidgeR, speakerRidgeR, 18, 32.3/2, 21.9/2, 21.9/2];
+    dists = [0, 3.4, 3.4, 13, 0, 19.9];
 
-    speakerScrewSpacingX = (speakerX - speakerScrewHoleDx)/2;
-    speakerScrewSpacingY = (speakerY - speakerScrewHoleDy)/2;
+    for (i = [1:5]) {
 
+        hull() {
 
-    translate(v=[0,0,-speakerZ])
-        union() {
-        difference() {
+            cylinder(r=radiuses[i-1], h=eps);
 
-            cube(size=[speakerX, speakerY, speakerZ]);
-        
-            mirror4XY(p=[speakerScrewSpacingX,speakerScrewSpacingY,0], dx=speakerScrewHoleDx, dy=speakerScrewHoleDy)
-                cylinder(r=m3Radius, h=inf);
+            translate(v=[0,0, -(dists[i])])
+                cylinder(r=radiuses[i], h=eps);
         }
+    }
 
-        color([1,0,0])
-            if (negative) {
-
-                mirror4XY(p=[speakerScrewSpacingX,speakerScrewSpacingY,0], dx=speakerScrewHoleDx, dy=speakerScrewHoleDy)
-                    cylinder(r=m3RadiusSlacked, h=inf);
-
-                speakerHoleDx = 12.5; // 10-15?
-                speakerHoleDy = 2;
-                speakerHoleR = 13.5;
-                speakerHoleRdiff = 12;
-
-                translate(v=[speakerHoleDx+speakerHoleR, speakerHoleDy+speakerHoleR, 0])
-                    hull() {
-                    cylinder(r=speakerHoleR, h=inf);
-
-                    translate(v=[speakerHoleRdiff, 0, 0])
-                        cylinder(r=speakerHoleR, h=inf);
-                }
-        
-            }
+    
+    if (negative) {
+        color(c = [1,0,0])    
+            translate(v=[0,0, -20])
+            cylinder(r=radiuses[2], h=20);
     }
 
 }

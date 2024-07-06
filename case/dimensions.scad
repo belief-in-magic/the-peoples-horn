@@ -29,20 +29,7 @@ ioBoardY = pcbY;
 ioBoardHoles = pcbHoles;
 
 
-
-// Speaker values -  assumes a rectangular-ish speaker
-speakerX = 70;
-speakerY = 31;
-speakerZ = 16;
-
-speakerScrewHoleDx = 63;
-speakerScrewHoleDy = 24;
-
-speakerBackClearance = 2;
-
-
 // Case values
-
 wallThickness = 2;
 pcbSpacing = 3;
 
@@ -53,8 +40,6 @@ bottomCaseX =
 
 bottomCaseY =
     pcbSpacing
-    + speakerZ
-    + speakerBackClearance
     + mainBoardY
     + pcbSpacing;
 
