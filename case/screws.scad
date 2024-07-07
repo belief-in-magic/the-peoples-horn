@@ -93,20 +93,20 @@ module hexNut(screwType, center=true) {
   }
 }
 
-module hexNutPocket_N(screwType, openSide=false, backSpace=inf, bridgeFront=false, bridgeBack=false ) {
+module hexNutPocket_N(screwType, openSide=false, backSpace=inf, frontSpace=inf, bridgeFront=false, bridgeBack=false) {
 
   heightSlack = bridgeFront || bridgeBack ? overhangSlack: xySlack;
 
   if (screwType == "m3") {
-    hexNutPocketHelper_N(m3RadiusSlacked, (m3HexNutWidthAcrossCorners+xySlack) / 2, m3HexNutThickness + heightSlack, openSide=openSide, backSpace=backSpace, bridgeFront=bridgeFront, bridgeBack=bridgeBack);
+      hexNutPocketHelper_N(m3RadiusSlacked, (m3HexNutWidthAcrossCorners+xySlack) / 2, m3HexNutThickness + heightSlack, openSide=openSide, backSpace=backSpace, frontSpace=frontSpace, bridgeFront=bridgeFront, bridgeBack=bridgeBack);
   } else if (screwType == "m4") {
-    hexNutPocketHelper_N(m4RadiusSlacked, (m4HexNutWidthAcrossCorners+xySlack) / 2, m4HexNutThickness + heightSlack, openSide=openSide, backSpace=backSpace, bridgeFront=bridgeFront, bridgeBack=bridgeBack);
+    hexNutPocketHelper_N(m4RadiusSlacked, (m4HexNutWidthAcrossCorners+xySlack) / 2, m4HexNutThickness + heightSlack, openSide=openSide, backSpace=backSpace, frontSpace=frontSpace, bridgeFront=bridgeFront, bridgeBack=bridgeBack);
   } else {
     error("Unsupported screw type");
   }
 }
 
-module hexNutPocketHelper_N(innerRadius, widthAcrossCorners, thickness, openSide=true, backSpace=inf, bridgeFront=false, bridgeBack=false) {
+module hexNutPocketHelper_N(innerRadius, widthAcrossCorners, thickness, openSide=true, backSpace=inf, frontSpace=inf, bridgeFront=false, bridgeBack=false) {
 
   assert (!(bridgeFront && bridgeBack));
   assert (!(openSide && bridgeFront));
@@ -127,7 +127,7 @@ module hexNutPocketHelper_N(innerRadius, widthAcrossCorners, thickness, openSide
       translate(v = [0, 0, -backSpace])
       cylinder(r = innerRadius, h = backSpace, $fn = 32);
 
-      cylinder(r=innerRadius, h=inf, $fn=32);
+      cylinder(r = innerRadius, h = frontSpace, $fn = 32);
 
       if (bridgeFront) {
         union() {

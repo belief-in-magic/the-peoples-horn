@@ -12,7 +12,7 @@ include <dimensions.scad>
 
 speakerRidgeR = 20;
 
-speaker(negative=true);
+*speaker(negative=true);
 
 module speaker(negative=false) {
     radiuses = [speakerRidgeR, speakerRidgeR, 18, 32.3/2, 21.9/2, 21.9/2];
@@ -29,11 +29,14 @@ module speaker(negative=false) {
         }
     }
 
-    
-    if (negative) {
-        color(c = [1,0,0])    
+    color(c = [1,0,0])        
+        if (negative) {
             translate(v=[0,0, -20])
-            cylinder(r=radiuses[2], h=20);
-    }
+                cylinder(r=radiuses[2], h=20);
 
+            mirror(v=[0,0,1])
+            translate(v=[0,0, -20])
+                cylinder(r=radiuses[2], h=20);
+        }
+        
 }

@@ -31,13 +31,18 @@ module ioBoard(negative=false) {
 
     module cutouts() {
 
-        knobCutoutX = 22.00;
+        knobCutoutX = 21.00;
         knobCutoutZ = 12.00;
 
         knobCutoutDx = (ioBoardX-knobCutoutX)/2.00;
         knobCutoutDz = -15.00;
 
-        // keyswitch TODO
+        keySwitchCutoutX = 25.00;
+        keySwitchCutoutY = 78.50;
+
+        keySwitchCutoutDx = 5;
+        keySwitchCutoutDy = 14;
+
 
         color(c=[1,0,0]) {
             // knob
@@ -45,7 +50,9 @@ module ioBoard(negative=false) {
             cube(size=[knobCutoutX, inf, knobCutoutZ]);
 
             // key switches
-            // TODO
+            translate(v=[keySwitchCutoutDx, keySwitchCutoutDy, pcbThickness])
+            cube(size=[keySwitchCutoutX, keySwitchCutoutY, 20]);
+            
             
         }
     }

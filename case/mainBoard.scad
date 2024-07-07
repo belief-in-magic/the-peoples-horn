@@ -33,7 +33,7 @@ module mainBoard(negative=false) {
     module batteryHolder() {
         batteryY = 60.00;
         batteryX = mainBoardX;
-        batteryZ = 16.50;
+        batteryZ = 16.5;
 
         batteryDy = 9.80;
 
@@ -56,6 +56,13 @@ module mainBoard(negative=false) {
         sdCutoutDx = mainBoardX - 26.70;  // from edge of PCB to midpoint of SD card cutout
         sdCutoutDy = 0.00;
 
+        powerSwitchCutoutY = 16;
+        powerSwitchCutoutZ = 10;
+        powerSwitchCutoutDx = 25;
+        powerSwitchCutoutDy = 75;
+
+            
+
         color(c=[1,0,0]) {
 
             translate(v=[-usbCutoutX/2 + usbCutoutDx, -inf + usbCutoutDy, pcbThickness])
@@ -63,6 +70,10 @@ module mainBoard(negative=false) {
 
             translate(v=[-sdCutoutX/2 + sdCutoutDx, -inf + sdCutoutDy, pcbThickness])
                 cube(size=[sdCutoutX, inf, sdCutoutZ]);
+
+            translate(v=[powerSwitchCutoutDx, powerSwitchCutoutDy, pcbThickness])
+                cube(size=[inf, powerSwitchCutoutY, powerSwitchCutoutZ]);
+            
         }
     }
 
