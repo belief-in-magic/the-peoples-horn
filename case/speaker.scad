@@ -10,13 +10,13 @@ include <dimensions.scad>
 
 */
 
-speakerRidgeR = 20;
+speakerRidgeR = 20 + (xySlack/2);
 
-*speaker(negative=true);
+*speaker(negative=false);
 
 module speaker(negative=false) {
     radiuses = [speakerRidgeR, speakerRidgeR, 18, 32.3/2, 21.9/2, 21.9/2];
-    dists = [0, 3.4, 3.4, 13, 0, 19.9];
+    dists = [0, 3.4+xySlack, 3.4, 13, 0, 19.9];
 
     for (i = [1:5]) {
 

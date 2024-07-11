@@ -1,6 +1,7 @@
 include <screws.scad>
 include <math.scad>
 include <dimensions.scad>
+include <printConfig.scad>
 
 /*
   Frame to hold an individual PCB. It's assumed here that both the IO board and main board
@@ -32,7 +33,7 @@ module guideRail(expansion = 3, negative = false) {
 
                     // front wall
                     translate(v=[-pcbThickness - frontGuideThickness, -guideThickness/2, 0])
-                        cube(size=[frontGuideThickness, guideThickness, guideTopHeight + heightToScrew]);
+                        cube(size=[frontGuideThickness - xySlack, guideThickness, guideTopHeight + heightToScrew]);
 
                     // side wall
                     translate(v=[-pcbThickness-guideSideWallThickness-expansion+3, -guideThickness/2 - guideSideWallThickness,0])
