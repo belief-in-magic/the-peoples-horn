@@ -3,6 +3,7 @@ include <math.scad>
 include <screws.scad>
 
 
+// TODO: extract pcb shape as separate module, and use it as a negative in pcbFrame
 module mainBoard(negative=false) {
     
     difference() {

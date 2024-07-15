@@ -31,8 +31,8 @@ module speaker(negative=false) {
 
     color(c = [1,0,0])        
         if (negative) {
-            translate(v=[0,0, -20])
-                cylinder(r=radiuses[2], h=20);
+            translate(v=[0,0, -10])
+                cylinder(r=radiuses[2], h=10);
 
             mirror(v=[0,0,1])
             translate(v=[0,0, -20])

@@ -5,7 +5,7 @@ include <speaker.scad>
 
 include <pcbFrame.scad>
 use <mainBoard.scad>
-use <ioBoard.scad>
+include <ioBoard.scad>
 
 
 // Distance between the inner faces of the main pcb and io pcb.
@@ -17,30 +17,28 @@ bodyWidth = 45;
 assert(bodyWidth >= bodyWallThickness*2 + pcbX);
 
 // special wall thickness for the wall with the usb and sd card
-backWallThickness = 1;
+backWallThickness = 0.5; // TODO wtf?
 
-// Space from the top of the pcb to the lower mounting ridge in the switches. Hand-measured
-ioBoardToSwitchSpace = 5; // TODO: figure out how to fasten the switches in a nice way
 
 ioBoardExtraSpace = 8;
 
 
-bodyHeight = ioBoardToSwitchSpace + 2 * pcbThickness + pcbFaceDist + batteryExtraSpace + ioBoardExtraSpace;
+bodyHeight = ioBoardSwitchSpace + 2 * pcbThickness + pcbFaceDist + batteryExtraSpace + ioBoardExtraSpace;
 
 backWallToPcbDist = 2; // really just extra space
 backToForwardPlaneDistance = pcbY + backWallThickness+backWallToPcbDist;
 
 mainBoard_to_bodyShape = 
     rotate(a=[0,90,0]) *
-    translate(v=[-pcbX,0,-pcbThickness]);
+    translate(v=[-pcbX,-1,-pcbThickness]);
 
 ioBoard_to_bodyShape =
     translate(v=[pcbFaceDist+pcbThickness, 0, 0]) *
     rotate(a=[0,90,0]) *
-    translate(v=[-pcbX,0,-pcbThickness]);
+    translate(v=[-pcbX,-1,-pcbThickness]);
 
 speaker_to_bodyShape =
-    translate(v=[pcbFaceDist/2, 120, pcbX/2]) *
+    translate(v=[pcbFaceDist/2, 130, pcbX/2]) *
     rotate(a=[-90,0,0]) *
     identity;
 
@@ -56,7 +54,7 @@ module backConstructionPlane(shrink=0) {
 }
 
 module forwardConstructionPlane(shrink=0) {
-    translate(v=[-(batteryExtraSpace+pcbThickness+bodyWallThickness)+shrink/2, pcbY + 14, shrink/2-3.5])
+    translate(v=[-(batteryExtraSpace+pcbThickness+bodyWallThickness)+shrink/2, pcbY + 25, shrink/2-3.5])
         rotate(a=[90,0,0])
         cube(size=[bodyHeight-shrink, bodyWidth-shrink, eps]);
 }
@@ -69,35 +67,45 @@ intersection () {
 
     // shave off bits pointing out
     filledShape(shrink=20, r=10);
+
+    difference() {
     
-    union () {
-        multmatrix(mainBoardFrame_to_bodyShape)
-            guideRail(expansion=18);
-        multmatrix(ioBoardFrame_to_bodyShape)
-            guideRail(expansion=10);
+        union () {
+            multmatrix(mainBoardFrame_to_bodyShape)
+                guideRail(expansion=18);
+            multmatrix(ioBoardFrame_to_bodyShape)
+                guideRail(expansion=10);
+        
 
-        difference() {
+            difference() {
 
-            union() {
+
                 shell();
+                    
+                union() {
+                    multmatrix(mainBoardFrame_to_bodyShape)
+                        guideRail(negative=true, expansion=18);
+                    multmatrix(ioBoardFrame_to_bodyShape)
+                        guideRail(negative=true, expansion=10);
+
+                    multmatrix(mainBoard_to_bodyShape)
+                        mainBoard(negative=true);
+
+                    multmatrix(ioBoard_to_bodyShape)
+                        ioBoard(negative=true);
+
+                    multmatrix(speaker_to_bodyShape)
+                        speaker(negative=true);
+                }
             }
-            union() {
-                multmatrix(mainBoard_to_bodyShape)
-                    mainBoard(negative=true);
 
-                multmatrix(ioBoard_to_bodyShape)
-                    ioBoard(negative=true);
-
-                multmatrix(speaker_to_bodyShape)
-                    speaker(negative=true);
-
-
-                multmatrix(mainBoardFrame_to_bodyShape)
-                    guideRail(negative=true, expansion=18);
-                multmatrix(ioBoardFrame_to_bodyShape)
-                    guideRail(negative=true, expansion=10);
-            }
+        
         }
+        multmatrix(mainBoard_to_bodyShape)
+            mainBoard(negative=true);
+
+        multmatrix(ioBoard_to_bodyShape)
+            ioBoard(negative=true);
     }
 }
 
@@ -129,8 +137,8 @@ module shell() {
         filledShape(shrink=2*r, r=r);
 
         union() {
-            scale(v=[0.93,0.90,1])
-                translate(v=[1,2,2])
+            scale(v=[0.93,0.91,1])
+                translate(v=[1,1,2])
                 filledShape(shrink=2*r, r=r);
 
             translate(v=[-inf/2,-inf/2,20])

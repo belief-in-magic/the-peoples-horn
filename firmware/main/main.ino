@@ -27,13 +27,10 @@ void setup() {
 
   Serial.begin(115200);
 
-  delay(2000);
-
 
   Serial.println("BEGIN ****************************************************");
 
   Serial.println("core0 - starting setup");
-  delay(2000);
 
   rp2040.fifo.push(123);
   rp2040.fifo.pop(); // wait for the second core's setup to complete first
@@ -73,17 +70,8 @@ void loop() {
 }
 
 
-int soundTriggered = 0;
-
 void loop1() {  
   core1State.loop();
 
-  // Manually trigger a sound, cuz the buttons are not working right now...
-  if (soundTriggered == 0) {
-    soundTriggered++;
-
-    // trigger sound "3" (ie 0011.wav) on buffer 0
-    core1State.triggerSound(0, 3);
-  }
 }
 

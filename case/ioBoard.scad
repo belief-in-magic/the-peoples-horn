@@ -1,7 +1,9 @@
- include <dimensions.scad>
+include <dimensions.scad>
 include <math.scad>
 include <screws.scad>
 
+
+ioBoardSwitchSpace = 5;
 
 module ioBoard(negative=false) {
 
@@ -52,10 +54,13 @@ module ioBoard(negative=false) {
             // key switches
             translate(v=[keySwitchCutoutDx, keySwitchCutoutDy, pcbThickness])
             cube(size=[keySwitchCutoutX, keySwitchCutoutY, 20]);
+    
+            translate(v=[keySwitchCutoutDx, keySwitchCutoutDy, pcbThickness + ioBoardSwitchSpace])
+            cube(size=[keySwitchCutoutX, keySwitchCutoutY+8, 20]);
             
             
         }
     }
 }
 
-ioBoard(negative=true);
+*ioBoard(negative=true);

@@ -7,7 +7,7 @@ include <printConfig.scad>
   Frame to hold an individual PCB. It's assumed here that both the IO board and main board
   have the same dimensions and mounting points.
 */
-module guideRail(expansion = 3, negative = false) {
+module guideRail(expansion = 3, bottomExpansion = 10, negative = false) {
 
     guideThickness = 8.0;
     guideWidth = 7.0;
@@ -56,6 +56,10 @@ module guideRail(expansion = 3, negative = false) {
 
     translate(v=[0, pcbHoles[0][1], 0])
         guide(heightToScrew = 3.5);
+
+    // todo make this nicer
+    translate(v=[-(pcbThickness + frontGuideThickness), -(guideSideWallThickness+0.5), -(bottomExpansion+zSlack)])
+        cube(size=[guideWidth + pcbThickness + frontGuideThickness, 107, bottomExpansion+zSlack]);
     
 }
 
