@@ -19,7 +19,9 @@ The chorded input interface allows for 15 (2^4-1) sounds to be played.
 
 ## DEMO
 
-![demo video](/media/output.mp4)
+https://github.com/user-attachments/assets/fd60f254-f890-4aff-ada0-f0f0ac13cf6f
+
+
 
 ## Basic usage
 
