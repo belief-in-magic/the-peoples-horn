@@ -93,13 +93,17 @@ how fast they can manufacture a design and ship it out. I think it would normall
 
 ### Builds
 
-##### v1:
+##### v1 (very boxy):
 ![v1 test build (missing speaker)](/media/v1.jpeg)
 
 
-##### v2:
+##### v2 (rounder, more compact):
 ![v2 test build](/media/v2.jpeg)
 
-##### side by side
-
+##### side by side (note how v2 is much smaller and streamlined):
 ![side by side](/media/sidebyside.jpeg)
+
+
+## FIN
+
+Well that's all I can think of for now! Adios.

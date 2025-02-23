@@ -11,6 +11,11 @@ easier for fab houses to process and manufacture, without dramatically increasin
 
 We might have to eventually reconsider using two separate projects for scale and cost purposes, but for dev work this seems to work fine.
 
+
+![main board pcb](../media/pcbmain.jpeg)
+
+![io board pcb](../media/pcbio.jpeg)
+
 ## Version:
 
 [VERSION 0.3] 
