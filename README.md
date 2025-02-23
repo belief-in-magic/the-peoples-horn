@@ -1,7 +1,25 @@
+# HERE LIES
+
+This project is no longer actively developed. 
+
+I've decided to open-source all the components (pcb, case design, and firmware) for anyone interested. There are a couple of bits that may be useful
+for anyone trying to do something similar.
+
+Please see [EPILOGUE.md](/EPILOGUE.md) for more details
+
+
+
 # The People's Horn
 
 One word: WHIMSY.
 
+The People's Horn is a portable soundboard that can be operated with a single hand. 
+The chorded input interface allows for 15 (2^4-1) sounds to be played. 
+
+
+## DEMO
+
+![demo video](/media/demo.mp4)
 
 ## Basic usage
 
